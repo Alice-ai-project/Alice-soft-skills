@@ -1,0 +1,29 @@
+.env
+.env.*
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+# Virtual environments
+venv/
+.envvenv/
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# Build
+dist/
+build/
+# Editor
+.vscode/
+.DS_Store
+# Agents and skills
+.agents/
+# Docker
+*.log
+.claude
+.cortex
