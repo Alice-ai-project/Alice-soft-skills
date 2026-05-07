@@ -8,12 +8,15 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center">
-    <main class="max-w-xl w-full p-8 bg-slate-900 rounded-2xl shadow-xl border border-slate-800">
-      <h1 class="text-3xl font-bold text-cyan-400">Alice Platform</h1>
-      <p class="mt-4 text-slate-300">
-        Entorno base listo para frontend en HTML5 + JavaScript Vanilla + Tailwind CSS.
-      </p>
-      <div id="status" class="mt-6 text-sm text-slate-400"></div>
+    <main class="max-w-xl w-full p-8 bg-slate-900 rounded-2xl shadow-xl border border-slate-800 space-y-4">
+      <h1 class="text-3xl font-bold text-cyan-400">Alice Interview MVP</h1>
+      <p id="question" class="text-slate-200">Cargando entrevista...</p>
+      <div class="grid grid-cols-1 gap-2">
+        <button data-answer="opcion_a" disabled class="rounded bg-cyan-600 px-3 py-2 text-left">A) Respuesta 1</button>
+        <button data-answer="opcion_b" disabled class="rounded bg-cyan-600 px-3 py-2 text-left">B) Respuesta 2</button>
+        <button data-answer="opcion_c" disabled class="rounded bg-cyan-600 px-3 py-2 text-left">C) Respuesta 3</button>
+      </div>
+      <div id="status" class="text-sm text-slate-400"></div>
     </main>
 
     <script src="./js/main.js"></script>
