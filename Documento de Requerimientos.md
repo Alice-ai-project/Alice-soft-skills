@@ -1,51 +1,31 @@
-# Documento de Requerimientos del Proyecto
+He realizado cambios estratégicos en los requerimientos del proyecto 'Alice' y necesito que actualices el tablero de GitHub Projects y los Issues correspondientes:
 
-## 1. Información General
-- **Nombre del Proyecto:** Alice
-- **Objetivo Principal:** Automatizar la evaluación y el entrenamiento de habilidades blandas (soft skills) mediante retroalimentación inmediata y personalizada.
-- **Equipo de Desarrollo:** 5 integrantes (incluyendo un AI Engineer).
+Reestructuración del Diagnóstico:
 
-## 2. Definición del Problema
-- Evaluación manual de soft skills sin inmediatez ni personalización.
-- Falta de herramientas para medir progreso y generar rutas de mejora basadas en datos.
+La tarea de 'Diagnóstico inicial' ya no es un formulario simple. Actualízala para que sea una 'Entrevista Interactiva con Avatar'.
 
-## 3. Requisitos Funcionales (RF)
-### 3.1 Gestión de Usuarios y Seguridad
-- **Perfiles:** Empleado (usuario final) y Administrador (gestor).
-- **Autenticación:** Implementación inicial con Supabase Auth y posterior migración a Google OAuth.
+El Frontend debe mostrar las opciones de respuesta mientras el Avatar (D-ID) lee la pregunta.
 
-### 3.2 Panel Administrativo (CMS)
-- **Gestión de Contenido:** CRUD de cursos y preguntas de cuestionarios en la base de datos.
-- **Monitoreo:** Visualización de reportes de desempeño detallados por empleado.
+El Backend debe gestionar el flujo de preguntas secuenciales.
 
-### 3.3 Diagnóstico y Evaluación Inicial
-- **Pruebas:** Cuestionarios iniciales para identificar fortalezas y debilidades.
-- **Persistencia:** Almacenamiento de resultados en la base de datos a través de FastAPI.
+Integración de RAG (Retrieval-Augmented Generation):
 
-### 3.4 Automatización y Personalización (IA)
-- **Disparador:** Webhook desde FastAPI hacia n8n al guardar resultados.
-- **Generación de Ruta:** n8n procesa los datos y actualiza el roadmap del usuario mediante IA.
+Crea una nueva tarea técnica en el Sprint 1 para el rol de IA/n8n: 'Configurar base de datos vectorial y flujo RAG'.
 
-### 3.5 Interfaz de Progreso y Gamificación (UX)
-- **Roadmap Visual:** Visualización del camino de aprendizaje para el empleado.
-- **Habilitación Secuencial:** Cuestionarios obligatorios por módulo para desbloquear el siguiente paso.
+El objetivo es cargar documentación de soft-skills en Supabase (usando pgvector) para que n8n la consulte al generar consejos.
 
-### 3.6 Tutor de Entrenamiento IA (Avatar D-ID)
-- **Funciones:** Simulación de entrevistas, vocalización y resolución de casos en tiempo real.
-- **Interacción:** Verbal (micrófono) mediante agentes de streaming de D-ID.
-- **Memoria:** Volátil, limitada exclusivamente a la sesión activa (borrón y cuenta nueva).
+Actualización de Subtareas (Dailies):
 
-### 3.7 Reportes y Analítica
-- **Análisis Detallado:** Reportes cualitativos (tono, claridad, resolución de conflictos) generados por IA.
+Refactoriza las subtareas de los Issues afectados para incluir:
 
-## 4. Requisitos No Funcionales (RNF)
-- **Arquitectura:** Basada en eventos y microservicios comunicados vía Webhooks.
-- **Infraestructura:** Entorno estandarizado mediante contenedores Docker.
+IA/n8n: Diseño de prompts para el RAG y lógica de 'entrevistador' en n8n.
 
-## 5. Arquitectura Técnica (Stack)
-- **Frontend:** HTML5, JavaScript (Vanilla JS), Tailwind CSS.
-- **Backend:** FastAPI (Python).
-- **Persistencia:** PostgreSQL (Instancia local y Supabase).
-- **Automatización:** n8n (Instancia local).
-- **Infraestructura:** Docker & Docker Compose.
-- **Interfaz de IA:** Agentes de D-ID (API de streaming).
+Backend: Endpoints para servir preguntas una a una y recibir respuestas de la entrevista.
+
+Frontend: Lógica de sincronización entre el video del avatar y los botones de respuesta.
+
+Nota de Fine-Tuning:
+
+Agrega una tarea de investigación en el Sprint 2 (Prioridad Baja/Opcional): 'Evaluación de viabilidad para Fine-Tuning del modelo de lenguaje'.
+
+Por favor, modifica los títulos y descripciones de los Issues actuales para que reflejen esta nueva arquitectura basada en una experiencia conversacional
