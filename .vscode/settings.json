@@ -1,0 +1,9 @@
+{
+    "python.analysis.extraPaths": [
+        "./backend"
+    ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.autoComplete.extraPaths": [
+        "./backend"
+    ]
+}

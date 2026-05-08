@@ -36,6 +36,7 @@ export class AuthView {
 
                     <form id="login-form">
                         <div id="login-error" class="alert alert-danger d-none py-2 small" role="alert"></div>
+                        <div id="login-success" class="alert alert-success d-none py-2 small" role="alert"></div>
                         <div class="mb-3">
                             <label class="form-label small fw-semibold text-light-muted">Correo Electrónico</label>
                             <input type="email" name="email" class="form-control" placeholder="tu@ejemplo.com" required>
@@ -73,20 +74,18 @@ export class AuthView {
 
                     <form id="register-form">
                         <div id="register-error" class="alert alert-danger d-none py-2 small" role="alert"></div>
-                        <div class="row g-3 mb-3">
-                            <div class="col">
-                                <label class="form-label small fw-semibold text-light-muted">Nombre</label>
-                                <input type="text" name="firstname" class="form-control" placeholder="Alice" required>
-                            </div>
-                            <div class="col">
-                                <label class="form-label small fw-semibold text-light-muted">Apellido</label>
-                                <input type="text" name="lastname" class="form-control" placeholder="Smith" required>
-                            </div>
+                        <div id="register-success" class="alert alert-success d-none py-2 small" role="alert"></div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-light-muted">Documento de Identidad</label>
+                            <input type="text" name="document" class="form-control" placeholder="1234567890" required>
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label small fw-semibold text-light-muted">Correo Electrónico</label>
                             <input type="email" name="email" class="form-control" placeholder="tu@ejemplo.com" required>
                         </div>
+
                         <div class="mb-4">
                             <label class="form-label small fw-semibold text-light-muted">Contraseña</label>
                             <input type="password" name="password" class="form-control" placeholder="••••••••" required minlength="8">
@@ -131,7 +130,7 @@ export class AuthView {
         const btnId = mode === 'login' ? 'login-submit' : 'register-submit';
         const btn = document.getElementById(btnId);
         const spinner = btn.querySelector('.spinner-border');
-        
+
         if (isLoading) {
             btn.disabled = true;
             spinner.classList.remove('d-none');
@@ -143,14 +142,37 @@ export class AuthView {
 
     showError(mode, message) {
         const errorDivId = mode === 'login' ? 'login-error' : 'register-error';
+        const successDivId = mode === 'login' ? 'login-success' : 'register-success';
+
         const errorDiv = document.getElementById(errorDivId);
+        const successDiv = document.getElementById(successDivId);
+
         if (message) {
             errorDiv.textContent = message;
             errorDiv.classList.remove('d-none');
+            if (successDiv) successDiv.classList.add('d-none');
         } else {
             errorDiv.classList.add('d-none');
         }
     }
+
+    showSuccess(mode, message) {
+        const successDivId = mode === 'login' ? 'login-success' : 'register-success';
+        const errorDivId = mode === 'login' ? 'login-error' : 'register-error';
+
+        const successDiv = document.getElementById(successDivId);
+        const errorDiv = document.getElementById(errorDivId);
+
+        if (message) {
+            successDiv.textContent = message;
+            successDiv.classList.remove('d-none');
+            if (errorDiv) errorDiv.classList.add('d-none');
+        } else {
+            successDiv.classList.add('d-none');
+        }
+    }
+
+
 
     bindToggleMode(handler) {
         document.getElementById('to-register-btn').addEventListener('click', (e) => {

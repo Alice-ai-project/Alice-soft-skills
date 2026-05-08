@@ -23,26 +23,44 @@ export class AuthController {
         this.view.showError(mode, null);
         this.view.setLoading(mode, true);
 
-        try {
-            // Simulation of API Call (Task: Consumir API con fetch)
-            // In a real scenario, this would be: await fetch('http://localhost:8000/auth/login', ...)
-            console.log(`Submitting ${mode} data:`, data);
-            
-            await new Promise(resolve => setTimeout(resolve, 1500)); // Mock delay
+        const endpoint = mode === 'login' ? '/auth/login' : '/auth/register';
+        const baseUrl = 'http://localhost:8000'; // Ajusta esto si tu backend está en otra URL
 
-            if (mode === 'login') {
-                if (data.email === 'test@alice.com' && data.password === '123456') {
-                    this.model.setUser({ email: data.email, name: 'Alice User' });
-                    this.showDashboard();
-                } else {
-                    throw new Error('Credenciales incorrectas. Prueba con test@alice.com / 123456');
-                }
+        try {
+            console.log(`Submitting ${mode} to ${baseUrl}${endpoint}:`, data);
+            
+            const response = await fetch(`${baseUrl}${endpoint}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            console.log(`Backend response for ${mode}:`, result);
+
+            if (!response.ok) {
+                throw new Error(result.detail || `Error en el ${mode}`);
+            }
+
+            // Success
+            if (mode === 'register') {
+                this.view.showSuccess('register', '¡Cuenta creada con éxito! Por favor, inicia sesión.');
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                this.handleToggleMode('login');
             } else {
-                // Register mock
-                this.model.setUser({ email: data.email, name: data.firstname });
+                this.view.showSuccess('login', '¡Iniciando sesión con éxito!');
+                await new Promise(resolve => setTimeout(resolve, 1500)); 
+                this.model.setUser({ 
+                    email: result.email, 
+                    name: result.display_name || result.username || 'Usuario' 
+                });
                 this.showDashboard();
             }
+
         } catch (error) {
+            console.error(`Auth error (${mode}):`, error);
             this.view.showError(mode, error.message);
         } finally {
             this.view.setLoading(mode, false);
