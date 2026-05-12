@@ -28,7 +28,7 @@ async def register(user_data: UserRegister):
             raise HTTPException(status_code=400, detail="Error al crear usuario en Supabase Auth")
         
         user_id = auth_response.user.id
-        print(f"✅ Usuario creado con ID: {user_id}")
+        print(f" Usuario creado con ID: {user_id}")
 
         # 2. Guardar en la tabla 'profiles'
         profile_data = {
@@ -64,12 +64,12 @@ async def register(user_data: UserRegister):
         if not profile_res.data:
             raise Exception("La base de datos no devolvió ninguna información después de intentar guardar.")
 
-        print("✅ Registro completado exitosamente")
+        print(" Registro completado exitosamente")
         return profile_res.data[0]
         
     except Exception as e:
         error_msg = str(e)
-        print(f"💥 ERROR FINAL: {error_msg}")
+        print(f"ERROR FINAL: {error_msg}")
         raise HTTPException(status_code=500, detail=error_msg)
 
 @router.post("/login", response_model=UserResponse)
