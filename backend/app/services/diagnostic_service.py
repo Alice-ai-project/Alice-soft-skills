@@ -19,7 +19,7 @@ class DiagnosticService:
 
     async def create_diagnostic(self, user_id: str, payload: DiagnosticCreate) -> DiagnosticCreatedRead:
         qid = str(payload.questionnaire_id)
-        self._repo.ensure_profile(user_id)
+        self._repo.ensure_user(user_id)
         if not self._repo.questionnaire_exists(qid):
             raise DomainError("invalid_questionnaire", "Questionnaire does not exist")
 

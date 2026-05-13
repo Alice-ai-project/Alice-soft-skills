@@ -5,7 +5,6 @@ from fastapi.testclient import TestClient
 
 from app.api import diagnostics as diagnostics_api
 from app.core.auth import get_current_user
-from app.schemas.diagnostics import DiagnosticCreate, DimensionScore
 from app.services.diagnostic_service import DiagnosticService
 
 
@@ -61,6 +60,20 @@ def test_post_diagnostics_validation_error_400(client: TestClient) -> None:
     err = response.json()["error"]
     assert err["code"] == "invalid_payload"
     assert err["request_id"]
+
+
+def test_post_diagnostics_requires_bearer_token(client: TestClient) -> None:
+    response = client.post(
+        "/api/v1/diagnostics",
+        json={
+            "questionnaire_id": str(uuid4()),
+            "dimension_scores": [{"name": "communication", "value": 5}],
+            "answers": ["answer one"],
+        },
+    )
+    assert response.status_code == 401
+    err = response.json()["error"]
+    assert err["code"] == "unauthorized"
 
 
 def test_get_diagnostics_not_found(client: TestClient) -> None:

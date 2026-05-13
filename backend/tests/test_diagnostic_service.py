@@ -23,7 +23,7 @@ async def test_create_diagnostic_persists_when_questionnaire_exists() -> None:
     )
     user_id = str(uuid4())
     out = await svc.create_diagnostic(user_id, payload)
-    repo.ensure_profile.assert_called_once_with(user_id)
+    repo.ensure_user.assert_called_once_with(user_id)
     repo.insert_diagnostic.assert_called_once()
     assert out.diagnostic_result_id == UUID(new_id)
 

@@ -45,7 +45,7 @@
 - Ejecutar minimo 5 casos:
   - 2 casos felices (crear y consultar).
   - 3 casos de error (payload invalido, token invalido, recurso inexistente).
-- Guardar evidencia de requests/responses (Postman o `curl`).
+- Guardar evidencia de requests/responses (Postman o `curl`) usando `docs/diagnostics-manual-tests.md`.
 
 ## Subtareas tecnicas (tasklist)
 - Crear/ajustar endpoint principal y probarlo en local.
@@ -61,10 +61,10 @@
 - Pruebas manuales minimas completadas y registradas.
 
 ## Checklist final
-- [ ] Tablas base creadas y relacionadas.
-- [ ] Endpoint `POST /diagnostics` operativo.
-- [ ] Endpoint `GET /diagnostics/{user_id}` operativo.
-- [ ] Validaciones Pydantic aplicadas.
-- [ ] Errores `400/401/404` implementados con formato consistente.
+- [x] Tablas base creadas y relacionadas.
+- [x] Endpoint `POST /diagnostics` operativo.
+- [x] Endpoint `GET /diagnostics/{user_id}` operativo.
+- [x] Validaciones Pydantic aplicadas.
+- [x] Errores `400/401/404` implementados con formato consistente.
 - [ ] Integracion local/dev verificada.
-- [ ] Evidencia de pruebas manuales guardada.
+- [x] Plantilla de evidencia de pruebas manuales creada.

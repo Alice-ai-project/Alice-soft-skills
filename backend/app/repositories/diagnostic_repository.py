@@ -16,12 +16,12 @@ class DiagnosticRepository:
     def __init__(self, client: Client) -> None:
         self._client = client
 
-    def ensure_profile(self, user_id: str) -> None:
+    def ensure_user(self, user_id: str) -> None:
         try:
-            self._client.table("profiles").upsert({"id": user_id}).execute()
+            self._client.table("users").upsert({"id": user_id}).execute()
         except Exception as exc:
-            logger.exception("ensure_profile failed")
-            raise InfrastructureError("database_error", "Could not persist user profile") from exc
+            logger.exception("ensure_user failed")
+            raise InfrastructureError("database_error", "Could not persist user") from exc
 
     def questionnaire_exists(self, questionnaire_id: str) -> bool:
         try:

@@ -1,12 +1,14 @@
 from typing import Any
 
+from typing import Annotated
+
 from fastapi import HTTPException, Security
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from app.core.supabase_client import supabase_auth_client
 
 # Bearer token security scheme
-security_scheme = HTTPBearer()
+security_scheme = HTTPBearer(auto_error=False)
 
 
 def _get_value(source: Any, key: str) -> Any:
@@ -22,13 +24,16 @@ def _require_supabase_auth_client():
 
 
 def get_current_user(
-    credentials: HTTPAuthorizationCredentials = Security(security_scheme),
+    credentials: Annotated[HTTPAuthorizationCredentials | None, Security(security_scheme)] = None,
 ) -> dict[str, Any]:
     """
     Validate a Supabase access token and extract user information.
 
     Raises HTTPException with 401 status for invalid or missing tokens.
     """
+    if credentials is None:
+        raise HTTPException(status_code=401, detail="Missing bearer token")
+
     client = _require_supabase_auth_client()
     token = credentials.credentials
 
