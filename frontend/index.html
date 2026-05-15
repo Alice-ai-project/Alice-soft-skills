@@ -1,21 +1,174 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alice - Soft Skills</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./css/styles.css" />
-  </head>
-  <body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center">
-    <main class="max-w-xl w-full p-8 bg-slate-900 rounded-2xl shadow-xl border border-slate-800">
-      <h1 class="text-3xl font-bold text-cyan-400">Alice Platform</h1>
-      <p class="mt-4 text-slate-300">
-        Entorno base listo para frontend en HTML5 + JavaScript Vanilla + Tailwind CSS.
-      </p>
-      <div id="status" class="mt-6 text-sm text-slate-400"></div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alice Dashboard | Panel de Control</title>
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+    <aside id="sidebar">
+        <button class="sidebar-toggle" id="toggleBtn">
+            <i data-lucide="chevron-left" id="toggleIcon"></i>
+        </button>
+
+        <div class="sidebar-header">
+            <img src="./assets/logo.png" alt="Alice Logo" class="logo-img">
+            <span class="brand-name">Alice</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#" class="nav-item active" data-view="dashboard">
+                <div class="nav-icon"><i data-lucide="layout-dashboard"></i></div>
+                <span class="nav-text">Panel Principal</span>
+            </a>
+            <a href="#" class="nav-item" data-view="conversation">
+                <div class="nav-icon"><i data-lucide="message-square"></i></div>
+                <span class="nav-text">Conversación</span>
+            </a>
+            <a href="#" class="nav-item" data-view="courses">
+                <div class="nav-icon"><i data-lucide="graduation-cap"></i></div>
+                <span class="nav-text">Cursos</span>
+            </a>
+            <a href="#" class="nav-item" data-view="stats">
+                <div class="nav-icon"><i data-lucide="bar-chart-3"></i></div>
+                <span class="nav-text">Estadísticas</span>
+            </a>
+            <div style="flex: 1;"></div>
+            <a href="#" class="nav-item" data-view="config">
+                <div class="nav-icon"><i data-lucide="settings"></i></div>
+                <span class="nav-text">Configuración</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main>
+        <!-- Dashboard View -->
+        <div id="dashboard-view" class="view-container">
+            <div class="header-top">
+                <h1 class="brand-name">Resumen</h1>
+                <div class="user-profile" style="display: flex; align-items: center; gap: 1rem;">
+                    <span style="font-weight: 500; color: var(--text-secondary);">Hola, Usuario</span>
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--surface-hover);"></div>
+                </div>
+            </div>
+
+            <section class="avatar-card">
+                <div class="avatar-wrapper">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Alice" alt="Alice Avatar" class="avatar-img"
+                        id="alice-avatar">
+                </div>
+                <div class="avatar-info">
+                    <p class="avatar-quote" id="motivational-quote">"El éxito no es el final, el fracaso no es fatal: es el
+                        coraje para continuar lo que cuenta."</p>
+                    <p class="avatar-subtext">Tu asistente personal Alice está lista para ayudarte hoy.</p>
+                </div>
+            </section>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon-bg"><i data-lucide="book-open"></i></div>
+                        <span style="color: #10b981; font-size: 0.8rem; font-weight: 600;">+2 esta semana</span>
+                    </div>
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Cursos Completados</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon-bg"><i data-lucide="clock"></i></div>
+                        <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 600;">En progreso</span>
+                    </div>
+                    <div class="stat-value">12h</div>
+                    <div class="stat-label">Tiempo de Aprendizaje</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%;"></div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon-bg"><i data-lucide="award"></i></div>
+                        <span style="color: #f59e0b; font-size: 0.8rem; font-weight: 600;">Nivel 5</span>
+                    </div>
+                    <div class="stat-value">850</div>
+                    <div class="stat-label">Puntos de Habilidad</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-container">
+                <button class="cta-button" id="chat-cta">
+                    <i data-lucide="message-square"></i>
+                    Hablar conmigo
+                </button>
+            </div>
+        </div>
+
+        <!-- Conversation View -->
+        <div id="conversation-view" class="view-container" style="display: none;">
+            <div class="header-top">
+                <h1 class="brand-name">Conversación</h1>
+                <div class="user-profile" style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="back-btn" id="back-to-dash">
+                        <i data-lucide="arrow-left"></i> Volver
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-main">
+                <div class="alice-chat-container">
+                    <div class="alice-large-avatar">
+                        <div class="pulse-ring"></div>
+                        <div class="pulse-ring" style="animation-delay: 1s"></div>
+                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Alice" alt="Alice">
+                    </div>
+                    <div class="alice-status">
+                        <span class="status-dot"></span>
+                        <span id="ai-status-text">Lista para escucharte</span>
+                    </div>
+                    <div class="chat-bubble" id="chat-response">
+                        "Hola, soy Alice. Estoy aquí para escucharte y ayudarte a mejorar tus soft skills. ¿Sobre qué te gustaría hablar hoy?"
+                    </div>
+                </div>
+
+                <div class="voice-controls">
+                    <button class="voice-btn stop" id="stop-btn">
+                        <i data-lucide="square"></i>
+                    </button>
+                    <button class="voice-btn record active" id="mic-btn">
+                        <div class="mic-ripple"></div>
+                        <i data-lucide="mic"></i>
+                    </button>
+                    <button class="voice-btn mute" id="mute-btn">
+                        <i data-lucide="volume-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <script src="./js/main.js"></script>
-  </body>
+    <script src="./js/dashboard.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+
 </html>

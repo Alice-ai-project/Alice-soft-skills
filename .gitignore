@@ -30,7 +30,7 @@ env/
 .venv_path
 .python-version
 
-# Node (in case it's used later)
+# Node
 node_modules/
 npm-debug.log*
 yarn-debug.log*
