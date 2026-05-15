@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alice Dashboard | Panel de Control</title>
     <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/conversation.css">
+    <link rel="stylesheet" href="./css/courses.css">
+    <link rel="stylesheet" href="./css/stats.css">
+    <link rel="stylesheet" href="./css/config.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,7 +62,7 @@
             <div class="header-top">
                 <h1 class="brand-name">Resumen</h1>
                 <div class="user-profile" style="display: flex; align-items: center; gap: 1rem;">
-                    <span style="font-weight: 500; color: var(--text-secondary);">Hola, Usuario</span>
+                    <span style="font-weight: 500; color: var(--text-secondary);">Hola, <span id="header-user-name">Usuario</span></span>
                     <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--surface-hover);"></div>
                 </div>
             </div>
@@ -162,13 +166,355 @@
                 </div>
             </div>
         </div>
+
+        <!-- Courses View -->
+        <div id="courses-view" class="view-container" style="display: none;">
+            <div class="header-top">
+                <h1 class="brand-name">Cursos Disponibles</h1>
+                <div class="user-profile" style="display: flex; align-items: center; gap: 1rem;">
+                    <span style="font-weight: 500; color: var(--text-secondary);">Progreso General: 35%</span>
+                    <div class="progress-bar" style="width: 150px; margin-top: 0;">
+                        <div class="progress-fill" style="width: 35%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="courses-grid">
+                <!-- Course 1 -->
+                <div class="course-card course-red">
+                    <div class="course-icon"><i data-lucide="users"></i></div>
+                    <h3 class="course-title">Liderazgo Empático</h3>
+                    <p class="course-desc">Aprende a guiar equipos con inteligencia emocional y empatía.</p>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>75%</span>
+                            <div class="p-bar"><div class="p-fill" style="width: 75%;"></div></div>
+                        </div>
+                        <button class="course-btn">Continuar</button>
+                    </div>
+                </div>
+                <!-- Course 2 -->
+                <div class="course-card course-blue">
+                    <div class="course-icon"><i data-lucide="message-circle"></i></div>
+                    <h3 class="course-title">Comunicación Asertiva</h3>
+                    <p class="course-desc">Domina el arte de expresar tus ideas con claridad y respeto.</p>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>40%</span>
+                            <div class="p-bar"><div class="p-fill" style="width: 40%;"></div></div>
+                        </div>
+                        <button class="course-btn">Continuar</button>
+                    </div>
+                </div>
+                <!-- Course 3 -->
+                <div class="course-card course-orange">
+                    <div class="course-icon"><i data-lucide="lightbulb"></i></div>
+                    <h3 class="course-title">Creatividad e Innovación</h3>
+                    <p class="course-desc">Desbloquea tu potencial creativo para resolver problemas.</p>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>10%</span>
+                            <div class="p-bar"><div class="p-fill" style="width: 10%;"></div></div>
+                        </div>
+                        <button class="course-btn">Empezar</button>
+                    </div>
+                </div>
+                <!-- Course 4 -->
+                <div class="course-card course-green">
+                    <div class="course-icon"><i data-lucide="brain"></i></div>
+                    <h3 class="course-title">Pensamiento Crítico</h3>
+                    <p class="course-desc">Mejora tu capacidad de análisis y toma de decisiones.</p>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>0%</span>
+                            <div class="p-bar"><div class="p-fill" style="width: 0%;"></div></div>
+                        </div>
+                        <button class="course-btn">Empezar</button>
+                    </div>
+                </div>
+                <!-- Course 5 -->
+                <div class="course-card course-purple">
+                    <div class="course-icon"><i data-lucide="heart"></i></div>
+                    <h3 class="course-title">Inteligencia Emocional</h3>
+                    <p class="course-desc">Gestiona tus emociones para un mejor bienestar personal.</p>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>90%</span>
+                            <div class="p-bar"><div class="p-fill" style="width: 90%;"></div></div>
+                        </div>
+                        <button class="course-btn">Continuar</button>
+                    </div>
+                </div>
+                <!-- Course 6 -->
+                <div class="course-card course-yellow">
+                    <div class="course-icon"><i data-lucide="user-plus"></i></div>
+                    <h3 class="course-title">Trabajo en Equipo</h3>
+                    <p class="course-desc">Colabora de manera efectiva para alcanzar objetivos comunes.</p>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>25%</span>
+                            <div class="p-bar"><div class="p-fill" style="width: 25%;"></div></div>
+                        </div>
+                        <button class="course-btn">Continuar</button>
+                    </div>
+                </div>
+                <!-- Course 7 -->
+                <div class="course-card course-cyan">
+                    <div class="course-icon"><i data-lucide="timer"></i></div>
+                    <h3 class="course-title">Gestión del Tiempo</h3>
+                    <p class="course-desc">Optimiza tu productividad y reduce el estrés laboral.</p>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>55%</span>
+                            <div class="p-bar"><div class="p-fill" style="width: 55%;"></div></div>
+                        </div>
+                        <button class="course-btn">Continuar</button>
+                    </div>
+                </div>
+                <!-- Course 8 -->
+                <div class="course-card course-magenta">
+                    <div class="course-icon"><i data-lucide="shield"></i></div>
+                    <h3 class="course-title">Resiliencia</h3>
+                    <p class="course-desc">Fortalece tu capacidad para superar la adversidad.</p>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>0%</span>
+                            <div class="p-bar"><div class="p-fill" style="width: 0%;"></div></div>
+                        </div>
+                        <button class="course-btn">Empezar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics View -->
+        <div id="stats-view" class="view-container" style="display: none;">
+            <div class="header-top">
+                <h1 class="brand-name">Tus Estadísticas</h1>
+                <div class="user-profile">
+                    <button class="back-btn" onclick="document.querySelector('[data-view=\'dashboard\']').click()">
+                        <i data-lucide="arrow-left"></i> Volver
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <!-- Summary Highlights -->
+                <div class="stats-summary">
+                    <div class="summary-card">
+                        <div class="summary-icon"><i data-lucide="award"></i></div>
+                        <div class="summary-info">
+                            <h4>Cursos Completados</h4>
+                            <div class="value">12</div>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon"><i data-lucide="messages-square"></i></div>
+                        <div class="summary-info">
+                            <h4>Sesiones de Chat</h4>
+                            <div class="value">48</div>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon"><i data-lucide="zap"></i></div>
+                        <div class="summary-info">
+                            <h4>Racha Actual</h4>
+                            <div class="value">5 días</div>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon"><i data-lucide="trending-up"></i></div>
+                        <div class="summary-info">
+                            <h4>Nivel Alice</h4>
+                            <div class="value">Oro</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Breakdown -->
+                <div class="details-grid">
+                    <!-- Activity Chart -->
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h3>Actividad Semanal</h3>
+                            <select style="background: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); border-radius: 8px; padding: 0.25rem 0.5rem; font-size: 0.8rem;">
+                                <option>Esta Semana</option>
+                                <option>Mes Pasado</option>
+                            </select>
+                        </div>
+                        <div class="bar-chart">
+                            <div class="bar-group">
+                                <div class="bar" style="height: 60%;" data-value="12"></div>
+                                <span class="bar-label">Lun</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 85%;" data-value="18"></div>
+                                <span class="bar-label">Mar</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 45%;" data-value="9"></div>
+                                <span class="bar-label">Mie</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 100%;" data-value="22"></div>
+                                <span class="bar-label">Jue</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 70%;" data-value="14"></div>
+                                <span class="bar-label">Vie</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 30%;" data-value="6"></div>
+                                <span class="bar-label">Sab</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 50%;" data-value="10"></div>
+                                <span class="bar-label">Dom</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills Improvement -->
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h3>Habilidades en Mejora</h3>
+                        </div>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Comunicación</span>
+                                    <span class="skill-perc">85%</span>
+                                </div>
+                                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Liderazgo</span>
+                                    <span class="skill-perc">60%</span>
+                                </div>
+                                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 60%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Resiliencia</span>
+                                    <span class="skill-perc">45%</span>
+                                </div>
+                                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 45%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Empatía</span>
+                                    <span class="skill-perc">92%</span>
+                                </div>
+                                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 92%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Feed -->
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h3>Actividad Reciente</h3>
+                    </div>
+                    <div class="activity-log">
+                        <div class="log-item">
+                            <div class="log-icon icon-course"><i data-lucide="check-circle"></i></div>
+                            <div class="log-content">
+                                <div class="log-title">Completaste el curso: <strong>Liderazgo Empático</strong></div>
+                                <div class="log-time">Hace 2 horas</div>
+                            </div>
+                        </div>
+                        <div class="log-item">
+                            <div class="log-icon icon-chat"><i data-lucide="message-circle"></i></div>
+                            <div class="log-content">
+                                <div class="log-title">Sesión de práctica con Alice: <strong>Gestión de Conflictos</strong></div>
+                                <div class="log-time">Hoy, 10:30 AM</div>
+                            </div>
+                        </div>
+                        <div class="log-item">
+                            <div class="log-icon icon-chat"><i data-lucide="message-circle"></i></div>
+                            <div class="log-content">
+                                <div class="log-title">Sesión de práctica con Alice: <strong>Escucha Activa</strong></div>
+                                <div class="log-time">Ayer, 4:15 PM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Configuration View -->
+        <div id="config-view" class="view-container" style="display: none;">
+            <div class="header-top">
+                <h1 class="brand-name">Configuración</h1>
+            </div>
+
+            <div class="config-container">
+                <!-- User Profile Settings -->
+                <section class="config-section">
+                    <h3><i data-lucide="user"></i> Perfil de Usuario</h3>
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label for="username-input">Nombre de Usuario</label>
+                            <input type="text" id="username-input" class="form-control" value="Usuario">
+                        </div>
+                        <div class="form-group">
+                            <label for="email-input">Correo Electrónico</label>
+                            <input type="email" id="email-input" class="form-control" value="usuario@ejemplo.com" readonly>
+                        </div>
+                        <button type="submit" class="save-btn">Guardar Cambios</button>
+                    </form>
+                </section>
+
+                <!-- Preferences Settings -->
+                <section class="config-section">
+                    <h3><i data-lucide="sliders"></i> Preferencias</h3>
+                    <div class="settings-grid">
+                        <div class="setting-toggle">
+                            <div class="toggle-info">
+                                <h4>Modo Oscuro</h4>
+                                <p>Alternar entre tema claro y oscuro</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="theme-toggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-toggle">
+                            <div class="toggle-info">
+                                <h4>Notificaciones</h4>
+                                <p>Recibir alertas de nuevos cursos</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-toggle">
+                            <div class="toggle-info">
+                                <h4>Efectos de Sonido</h4>
+                                <p>Sonidos en la interfaz</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Security Section -->
+                <section class="config-section">
+                    <h3><i data-lucide="lock"></i> Seguridad</h3>
+                    <button class="form-control" style="text-align: left; background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2); color: #ef4444;">
+                        Cerrar Sesión
+                    </button>
+                </section>
+            </div>
+        </div>
     </main>
 
-    <script src="./js/dashboard.js"></script>
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-    </script>
+    <script type="module" src="./js/main.js"></script>
 </body>
 
 </html>
