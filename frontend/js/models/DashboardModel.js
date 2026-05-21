@@ -12,7 +12,64 @@ export class DashboardModel {
             username: 'Cargando...',
             theme: 'dark'
         };
-        this.courses = [];
+        this.courses = [
+            {
+                title: "Liderazgo Empático",
+                description: "Aprende a guiar equipos con inteligencia emocional y empatía.",
+                icon: "users",
+                color: "red",
+                progress: 75
+            },
+            {
+                title: "Comunicación Asertiva",
+                description: "Domina el arte de expresar tus ideas con claridad y respeto.",
+                icon: "message-circle",
+                color: "blue",
+                progress: 40
+            },
+            {
+                title: "Creatividad e Innovación",
+                description: "Desbloquea tu potencial creativo para resolver problemas.",
+                icon: "lightbulb",
+                color: "orange",
+                progress: 10
+            },
+            {
+                title: "Pensamiento Crítico",
+                description: "Mejora tu capacidad de análisis y toma de decisiones.",
+                icon: "brain",
+                color: "green",
+                progress: 0
+            },
+            {
+                title: "Inteligencia Emocional",
+                description: "Gestiona tus emociones para un mejor bienestar personal.",
+                icon: "heart",
+                color: "purple",
+                progress: 90
+            },
+            {
+                title: "Trabajo en Equipo",
+                description: "Colabora de manera efectiva para alcanzar objetivos comunes.",
+                icon: "user-plus",
+                color: "yellow",
+                progress: 25
+            },
+            {
+                title: "Gestión del Tiempo",
+                description: "Optimiza tu productividad y reduce el estrés laboral.",
+                icon: "timer",
+                color: "cyan",
+                progress: 55
+            },
+            {
+                title: "Resiliencia",
+                description: "Fortalece tu capacidad para superar la adversidad.",
+                icon: "shield",
+                color: "magenta",
+                progress: 0
+            }
+        ];
         this.stats = {
             completed: 0,
             chatSessions: 0,
@@ -50,13 +107,17 @@ export class DashboardModel {
         try {
             const response = await fetch(`${this.API_URL}/courses/`);
             if (response.ok) {
-                this.courses = await response.json();
-                return this.courses;
+                const apiCourses = await response.json();
+                if (apiCourses && apiCourses.length > 0) {
+                    this.courses = apiCourses;
+                    return this.courses;
+                }
             }
         } catch (error) {
             console.error('Error loading courses:', error);
         }
-        return [];
+        // Fallback to static mock courses
+        return this.courses;
     }
 
     getRandomQuote() {

@@ -21,6 +21,7 @@ export class DashboardController {
             () => this.handleViewChange('dashboard')
         );
         this.view.bindProfileUpdate(this.handleProfileUpdate.bind(this));
+        this.view.bindDashboardTabs((tabName) => this.view.switchDashboardTab(tabName));
         this.view.setupAvatarAnimations();
 
         // Initial render
