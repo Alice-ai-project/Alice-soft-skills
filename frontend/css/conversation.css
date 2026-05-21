@@ -26,15 +26,75 @@
     justify-content: center;
 }
 
-.alice-large-avatar img {
+.voice-visualizer {
     width: 160px;
     height: 160px;
     border-radius: 50%;
+    background: var(--surface-color);
     border: 4px solid var(--accent-color);
     box-shadow: 0 0 40px var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     z-index: 2;
-    background: var(--surface-color);
+    padding: 0 20px;
+    transition: all 0.3s ease;
 }
+
+.voice-bar {
+    width: 6px;
+    height: 15px;
+    background-color: var(--accent-color);
+    border-radius: 3px;
+    animation: voice-bounce 1.2s ease-in-out infinite alternate;
+}
+
+/* Stagger animations for a natural wave effect */
+.voice-bar:nth-child(1) { animation-delay: 0.1s; height: 10px; }
+.voice-bar:nth-child(2) { animation-delay: 0.3s; height: 25px; }
+.voice-bar:nth-child(3) { animation-delay: 0.6s; height: 40px; }
+.voice-bar:nth-child(4) { animation-delay: 0.2s; height: 50px; }
+.voice-bar:nth-child(5) { animation-delay: 0.4s; height: 35px; }
+.voice-bar:nth-child(6) { animation-delay: 0.7s; height: 20px; }
+.voice-bar:nth-child(7) { animation-delay: 0.3s; height: 10px; }
+
+@keyframes voice-bounce {
+    0% {
+        transform: scaleY(0.3);
+    }
+    100% {
+        transform: scaleY(1.3);
+    }
+}
+
+/* Small Avatar Version for Dashboard Card */
+.voice-visualizer.small-avatar {
+    width: 100px;
+    height: 100px;
+    border-width: 3px;
+    gap: 4px;
+    padding: 0 10px;
+    border-radius: 50%;
+    background: var(--surface-color);
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 0 20px var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.voice-visualizer.small-avatar .voice-bar {
+    width: 4px;
+}
+
+.voice-visualizer.small-avatar .voice-bar:nth-child(1) { height: 8px; }
+.voice-visualizer.small-avatar .voice-bar:nth-child(2) { height: 18px; }
+.voice-visualizer.small-avatar .voice-bar:nth-child(3) { height: 30px; }
+.voice-visualizer.small-avatar .voice-bar:nth-child(4) { height: 25px; }
+.voice-visualizer.small-avatar .voice-bar:nth-child(5) { height: 12px; }
 
 .pulse-ring {
     position: absolute;
@@ -77,8 +137,7 @@
 }
 
 .chat-bubble {
-    background: rgba(30, 41, 59, 0.5);
-    backdrop-filter: blur(8px);
+    background: var(--surface-color);
     border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 1.5rem 2rem;
@@ -86,7 +145,7 @@
     font-size: 1.2rem;
     line-height: 1.6;
     color: var(--text-primary);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
 .voice-controls {

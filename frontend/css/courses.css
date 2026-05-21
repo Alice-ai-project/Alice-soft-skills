@@ -8,9 +8,8 @@
 }
 
 .course-card {
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 1.5rem;
     display: flex;
@@ -95,7 +94,7 @@
 .p-bar {
     width: 100%;
     height: 6px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.05);
     border-radius: 3px;
     overflow: hidden;
 }
@@ -126,51 +125,51 @@
 
 /* Color Themes for Courses */
 .course-red {
-    --course-color: #ff4d4d;
-    --course-color-bg: rgba(255, 77, 77, 0.1);
-    --course-glow: rgba(255, 77, 77, 0.2);
+    --course-color: #ef4444;
+    --course-color-bg: rgba(239, 68, 68, 0.08);
+    --course-glow: rgba(239, 68, 68, 0.15);
 }
 
 .course-blue {
-    --course-color: #4d94ff;
-    --course-color-bg: rgba(77, 148, 255, 0.1);
-    --course-glow: rgba(77, 148, 255, 0.2);
+    --course-color: #2563eb;
+    --course-color-bg: rgba(37, 99, 235, 0.08);
+    --course-glow: rgba(37, 99, 235, 0.15);
 }
 
 .course-orange {
-    --course-color: #ff944d;
-    --course-color-bg: rgba(255, 148, 77, 0.1);
-    --course-glow: rgba(255, 148, 77, 0.2);
+    --course-color: #ea580c;
+    --course-color-bg: rgba(234, 88, 12, 0.08);
+    --course-glow: rgba(234, 88, 12, 0.15);
 }
 
 .course-green {
-    --course-color: #4dff88;
-    --course-color-bg: rgba(77, 255, 136, 0.1);
-    --course-glow: rgba(77, 255, 136, 0.2);
+    --course-color: #16a34a;
+    --course-color-bg: rgba(22, 163, 74, 0.08);
+    --course-glow: rgba(22, 163, 74, 0.15);
 }
 
 .course-purple {
-    --course-color: #944dff;
-    --course-color-bg: rgba(148, 77, 255, 0.1);
-    --course-glow: rgba(148, 77, 255, 0.2);
+    --course-color: #7c3aed;
+    --course-color-bg: rgba(124, 58, 237, 0.08);
+    --course-glow: rgba(124, 58, 237, 0.15);
 }
 
 .course-yellow {
-    --course-color: #ffff4d;
-    --course-color-bg: rgba(255, 255, 77, 0.1);
-    --course-glow: rgba(255, 255, 77, 0.2);
+    --course-color: #ca8a04;
+    --course-color-bg: rgba(202, 138, 4, 0.08);
+    --course-glow: rgba(202, 138, 4, 0.15);
 }
 
 .course-cyan {
-    --course-color: #4dffff;
-    --course-color-bg: rgba(77, 255, 255, 0.1);
-    --course-glow: rgba(77, 255, 255, 0.2);
+    --course-color: #0891b2;
+    --course-color-bg: rgba(8, 145, 178, 0.08);
+    --course-glow: rgba(8, 145, 178, 0.15);
 }
 
 .course-magenta {
-    --course-color: #ff4dff;
-    --course-color-bg: rgba(255, 77, 255, 0.1);
-    --course-glow: rgba(255, 77, 255, 0.2);
+    --course-color: #db2777;
+    --course-color-bg: rgba(219, 39, 119, 0.08);
+    --course-glow: rgba(219, 39, 119, 0.15);
 }
 
 /* Responsive grid */

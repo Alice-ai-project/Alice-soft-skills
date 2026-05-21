@@ -94,9 +94,13 @@ export class DashboardView {
 
                 <div id="overview-content">
                     <section class="avatar-card">
-                        <div class="avatar-wrapper">
-                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Alice" alt="Alice Avatar" class="avatar-img" id="alice-avatar">
-                        </div>
+                            <div class="voice-visualizer small-avatar" id="alice-avatar">
+                                <span class="voice-bar"></span>
+                                <span class="voice-bar"></span>
+                                <span class="voice-bar"></span>
+                                <span class="voice-bar"></span>
+                                <span class="voice-bar"></span>
+                            </div>
                         <div class="avatar-info">
                             <p class="avatar-quote" id="motivational-quote">"El éxito no es el final, el fracaso no es fatal: es el coraje para continuar lo que cuenta."</p>
                             <p class="avatar-subtext">Tu asistente personal Alice está lista para ayudarte hoy.</p>
@@ -195,7 +199,15 @@ export class DashboardView {
                         <div class="alice-large-avatar">
                             <div class="pulse-ring"></div>
                             <div class="pulse-ring" style="animation-delay: 1s"></div>
-                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Alice" alt="Alice">
+                            <div class="voice-visualizer">
+                                <span class="voice-bar"></span>
+                                <span class="voice-bar"></span>
+                                <span class="voice-bar"></span>
+                                <span class="voice-bar"></span>
+                                <span class="voice-bar"></span>
+                                <span class="voice-bar"></span>
+                                <span class="voice-bar"></span>
+                            </div>
                         </div>
                         <div class="alice-status">
                             <span class="status-dot"></span>

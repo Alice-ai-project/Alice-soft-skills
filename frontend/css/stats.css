@@ -13,9 +13,8 @@
 }
 
 .summary-card {
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 1.5rem;
     display: flex;
@@ -32,7 +31,7 @@
 .summary-icon {
     width: 50px;
     height: 50px;
-    background: rgba(192, 132, 252, 0.1);
+    background: rgba(37, 99, 235, 0.08);
     border-radius: 14px;
     display: flex;
     align-items: center;
@@ -66,9 +65,8 @@
 }
 
 .chart-card {
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
     border-radius: 24px;
     padding: 2rem;
 }
@@ -106,7 +104,7 @@
 .bar {
     width: 100%;
     max-width: 40px;
-    background: linear-gradient(to top, var(--accent-color), #9333ea);
+    background: linear-gradient(to top, var(--accent-color), #3b82f6);
     border-radius: 8px 8px 4px 4px;
     transition: height 1s ease-out;
     position: relative;
@@ -171,14 +169,14 @@
 
 .skill-bar-bg {
     height: 8px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.05);
     border-radius: 4px;
     overflow: hidden;
 }
 
 .skill-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--accent-color), #9333ea);
+    background: linear-gradient(90deg, var(--accent-color), #3b82f6);
     border-radius: 4px;
 }
 
@@ -194,15 +192,15 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.01);
     border-radius: 12px;
-    border: 1px solid transparent;
+    border: 1px solid var(--border-color);
     transition: all 0.2s;
 }
 
 .log-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: var(--surface-hover);
+    border-color: var(--accent-color);
 }
 
 .log-icon {
