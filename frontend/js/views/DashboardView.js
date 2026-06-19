@@ -1,9 +1,21 @@
 /**
  * Dashboard View
  */
+import { ChatView } from './ChatView.js';
+import { CoursesView } from './CoursesView.js';
+import { StatsView } from './StatsView.js';
+import { ConfigView } from './ConfigView.js';
+
 export class DashboardView {
     constructor() {
         this.renderLayout();
+        
+        // Initialize sub-views
+        this.chatView = new ChatView();
+        this.coursesView = new CoursesView();
+        this.statsView = new StatsView();
+        this.configView = new ConfigView();
+
         this.elements = {
             sidebar: document.getElementById('sidebar'),
             toggleBtn: document.getElementById('toggleBtn'),
@@ -14,6 +26,7 @@ export class DashboardView {
                 'dashboard': document.getElementById('dashboard-view'),
                 'conversation': document.getElementById('conversation-view'),
                 'courses': document.getElementById('courses-view'),
+                'course-detail': document.getElementById('course-detail-view'),
                 'stats': document.getElementById('stats-view'),
                 'config': document.getElementById('config-view')
             },
@@ -113,10 +126,10 @@ export class DashboardView {
                                 <div class="stat-icon-bg"><i data-lucide="book-open"></i></div>
                                 <span style="color: #10b981; font-size: 0.8rem; font-weight: 600;">+2 esta semana</span>
                             </div>
-                            <div class="stat-value">4</div>
+                            <div class="stat-value" id="stat-completed-courses">4</div>
                             <div class="stat-label">Cursos Completados</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 80%;"></div>
+                                <div class="progress-fill" id="stat-completed-fill" style="width: 80%;"></div>
                             </div>
                         </div>
 
@@ -125,7 +138,7 @@ export class DashboardView {
                                 <div class="stat-icon-bg"><i data-lucide="clock"></i></div>
                                 <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 600;">En progreso</span>
                             </div>
-                            <div class="stat-value">12h</div>
+                            <div class="stat-value" id="stat-learning-time">12h</div>
                             <div class="stat-label">Tiempo de Aprendizaje</div>
                             <div class="progress-bar">
                                 <div class="progress-fill" style="width: 65%;"></div>
@@ -137,10 +150,10 @@ export class DashboardView {
                                 <div class="stat-icon-bg"><i data-lucide="award"></i></div>
                                 <span style="color: #f59e0b; font-size: 0.8rem; font-weight: 600;">Nivel 5</span>
                             </div>
-                            <div class="stat-value">850</div>
-                            <div class="stat-label">Puntos de Habilidad</div>
+                            <div class="stat-value" id="stat-avg-score">85%</div>
+                            <div class="stat-label">Calificación Promedio</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 45%;"></div>
+                                <div class="progress-fill" style="width: 85%;"></div>
                             </div>
                         </div>
                     </div>
@@ -195,7 +208,7 @@ export class DashboardView {
                 </div>
 
                 <div class="chat-main">
-                    <div class="alice-chat-container">
+                    <div class="alice-chat-container" id="chat-container">
                         <div class="alice-large-avatar">
                             <div class="pulse-ring"></div>
                             <div class="pulse-ring" style="animation-delay: 1s"></div>
@@ -219,7 +232,7 @@ export class DashboardView {
                     </div>
 
                     <div class="voice-controls">
-                        <button class="voice-btn stop" id="stop-btn">
+                        <button class="voice-btn stop" id="stop-btn" style="display: none;">
                             <i data-lucide="square"></i>
                         </button>
                         <button class="voice-btn record active" id="mic-btn">
@@ -250,6 +263,22 @@ export class DashboardView {
                 </div>
             </div>
 
+            <!-- Course Detail View (RAG Template) -->
+            <div id="course-detail-view" class="view-container" style="display: none;">
+                <div class="header-top">
+                    <h1 class="brand-name" id="course-detail-title">Cargando Curso...</h1>
+                    <div class="user-profile">
+                        <button class="back-btn" id="back-to-courses-btn">
+                            <i data-lucide="arrow-left"></i> Volver a Cursos
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="course-detail-container" id="course-detail-container">
+                    <!-- RAG Content will load here dynamically -->
+                </div>
+            </div>
+
             <!-- Statistics View -->
             <div id="stats-view" class="view-container" style="display: none;">
                 <div class="header-top">
@@ -267,28 +296,28 @@ export class DashboardView {
                             <div class="summary-icon"><i data-lucide="award"></i></div>
                             <div class="summary-info">
                                 <h4>Cursos Completados</h4>
-                                <div class="value">12</div>
+                                <div class="value" id="stat-total-courses">4</div>
                             </div>
                         </div>
                         <div class="summary-card">
                             <div class="summary-icon"><i data-lucide="messages-square"></i></div>
                             <div class="summary-info">
                                 <h4>Sesiones de Chat</h4>
-                                <div class="value">48</div>
+                                <div class="value">12</div>
                             </div>
                         </div>
                         <div class="summary-card">
                             <div class="summary-icon"><i data-lucide="zap"></i></div>
                             <div class="summary-info">
                                 <h4>Racha Actual</h4>
-                                <div class="value">5 días</div>
+                                <div class="value">3 días</div>
                             </div>
                         </div>
                         <div class="summary-card">
                             <div class="summary-icon"><i data-lucide="trending-up"></i></div>
                             <div class="summary-info">
                                 <h4>Nivel Alice</h4>
-                                <div class="value">Oro</div>
+                                <div class="value">Plata</div>
                             </div>
                         </div>
                     </div>
@@ -297,10 +326,6 @@ export class DashboardView {
                         <div class="chart-card">
                             <div class="card-header">
                                 <h3>Actividad Semanal</h3>
-                                <select style="background: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); border-radius: 8px; padding: 0.25rem 0.5rem; font-size: 0.8rem;">
-                                    <option>Esta Semana</option>
-                                    <option>Mes Pasado</option>
-                                </select>
                             </div>
                             <div class="bar-chart">
                                 <div class="bar-group">
@@ -370,35 +395,6 @@ export class DashboardView {
                             </div>
                         </div>
                     </div>
-
-                    <div class="chart-card">
-                        <div class="card-header">
-                            <h3>Actividad Reciente</h3>
-                        </div>
-                        <div class="activity-log">
-                            <div class="log-item">
-                                <div class="log-icon icon-course"><i data-lucide="check-circle"></i></div>
-                                <div class="log-content">
-                                    <div class="log-title">Completaste el curso: <strong>Liderazgo Empático</strong></div>
-                                    <div class="log-time">Hace 2 horas</div>
-                                </div>
-                            </div>
-                            <div class="log-item">
-                                <div class="log-icon icon-chat"><i data-lucide="message-circle"></i></div>
-                                <div class="log-content">
-                                    <div class="log-title">Sesión de práctica con Alice: <strong>Gestión de Conflictos</strong></div>
-                                    <div class="log-time">Hoy, 10:30 AM</div>
-                                </div>
-                            </div>
-                            <div class="log-item">
-                                <div class="log-icon icon-chat"><i data-lucide="message-circle"></i></div>
-                                <div class="log-content">
-                                    <div class="log-title">Sesión de práctica con Alice: <strong>Escucha Activa</strong></div>
-                                    <div class="log-time">Ayer, 4:15 PM</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -437,34 +433,7 @@ export class DashboardView {
                                     <span class="slider"></span>
                                 </label>
                             </div>
-                            <div class="setting-toggle">
-                                <div class="toggle-info">
-                                    <h4>Notificaciones</h4>
-                                    <p>Recibir alertas de nuevos cursos</p>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                            <div class="setting-toggle">
-                                <div class="toggle-info">
-                                    <h4>Efectos de Sonido</h4>
-                                    <p>Sonidos en la interfaz</p>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
                         </div>
-                    </section>
-
-                    <section class="config-section">
-                        <h3><i data-lucide="lock"></i> Seguridad</h3>
-                        <button class="form-control" style="text-align: left; background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2); color: #ef4444;">
-                            Cerrar Sesión
-                        </button>
                     </section>
                 </div>
             </div>
@@ -474,11 +443,59 @@ export class DashboardView {
         document.body.appendChild(glow2);
         document.body.appendChild(sidebar);
         document.body.appendChild(main);
+
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    }
+
+    renderActiveView(viewName) {
+        console.log('Rendering active view:', viewName);
+        
+        // Hide all views
+        Object.keys(this.elements.views).forEach(key => {
+            if (this.elements.views[key]) {
+                this.elements.views[key].style.display = 'none';
+            }
+        });
+
+        // Show active view
+        if (this.elements.views[viewName]) {
+            this.elements.views[viewName].style.display = 'block';
+        }
+
+        // Update active sidebar nav link
+        this.elements.navItems.forEach(item => {
+            if (item.getAttribute('data-view') === viewName) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
+    updateSidebarUI(isCollapsed) {
+        if (isCollapsed) {
+            this.elements.sidebar.classList.add('collapsed');
+            this.elements.toggleIcon.setAttribute('data-lucide', 'chevron-right');
+        } else {
+            this.elements.sidebar.classList.remove('collapsed');
+            this.elements.toggleIcon.setAttribute('data-lucide', 'chevron-left');
+        }
+        if (window.lucide) lucide.createIcons();
+    }
+
+    updateMicUI(isRecording, statusText) {
+        this.chatView.updateMicUI(isRecording, statusText);
+    }
+
+    updateQuoteUI(quote) {
+        if (this.elements.motivationalQuote) {
+            this.elements.motivationalQuote.textContent = `"${quote}"`;
+        }
     }
 
     switchDashboardTab(tabName) {
-        if (!this.elements.overviewContent || !this.elements.goalsContent) return;
-
         if (tabName === 'overview') {
             this.elements.overviewContent.style.display = 'block';
             this.elements.goalsContent.style.display = 'none';
@@ -498,163 +515,57 @@ export class DashboardView {
         if (window.lucide) lucide.createIcons();
     }
 
+    // Courses View delegations
     renderCourses(courses) {
-        const grid = this.elements.coursesGrid;
-        if (!grid) {
-            console.error('Courses grid element not found!');
-            return;
-        }
-        
-        console.log('View: renderCourses called with', courses?.length, 'courses');
-        
-        if (!courses || !Array.isArray(courses) || courses.length === 0) {
-            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 3rem;">' +
-                             '<i data-lucide="search-x" style="width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.5;"></i>' +
-                             '<p>No hay cursos disponibles en este momento.</p></div>';
-            if (window.lucide) lucide.createIcons();
-            return;
-        }
-
-        // Clear existing content
-        grid.innerHTML = '';
-
-        const colors = ['red', 'blue', 'orange', 'green', 'purple', 'yellow', 'cyan', 'magenta'];
-        const iconMap = {
-            'Liderazgo': 'users',
-            'Comunicación': 'message-circle',
-            'Construcción': 'user-plus',
-            'Desarrollo': 'user',
-            'Flexibilidad': 'refresh-cw',
-            'Gestión del Tiempo': 'timer',
-            'Gestión Emocional': 'heart',
-            'Resistencia': 'shield',
-            'Resolución': 'brain'
-        };
-        
-        courses.forEach((course, index) => {
-            try {
-                const colorClass = course.color ? `course-${course.color}` : `course-${colors[index % colors.length]}`;
-                const progress = course.progress !== undefined ? course.progress : Math.floor(Math.random() * 50);
-                
-                let iconName = course.icon || 'graduation-cap';
-                if (!course.icon) {
-                    for (const [key, icon] of Object.entries(iconMap)) {
-                        if ((course.category && course.category.includes(key)) || (course.title && course.title.includes(key))) {
-                            iconName = icon;
-                            break;
-                        }
-                    }
-                }
-                
-                const card = document.createElement('div');
-                card.className = `course-card ${colorClass}`;
-                
-                card.innerHTML = `
-                    <div class="course-icon"><i data-lucide="${iconName}"></i></div>
-                    <h3 class="course-title">${course.title || 'Sin título'}</h3>
-                    <p class="course-desc">${course.description || ''}</p>
-                    <div class="course-footer">
-                        <div class="course-progress">
-                            <span>${progress}%</span>
-                            <div class="p-bar"><div class="p-fill" style="width: ${progress}%;"></div></div>
-                        </div>
-                        <button class="course-btn">${progress > 0 ? 'Continuar' : 'Empezar'}</button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            } catch (err) {
-                console.error('Error rendering course card:', err);
-            }
-        });
-
-        if (window.lucide) {
-            lucide.createIcons();
-            console.log('Lucide icons created for dynamic cards');
-        }
+        this.coursesView.renderCourses(courses);
     }
 
+    bindCourseSelection(handler) {
+        this.coursesView.bindCourseSelection(handler);
+    }
+
+    bindBackToCourses(handler) {
+        this.coursesView.bindBackToCourses(handler);
+    }
+
+    renderCourseDetail(courseData, onCourseComplete) {
+        this.coursesView.renderCourseDetail(courseData, onCourseComplete);
+    }
+
+    // Config View delegations
     updateSettingsUI(settings) {
-        if (this.elements.usernameInput) {
-            this.elements.usernameInput.value = settings.username;
-        }
-        if (this.elements.headerUserName) {
-            this.elements.headerUserName.textContent = settings.username;
-        }
+        this.configView.updateSettingsUI(settings);
     }
 
+    bindProfileUpdate(handler) {
+        this.configView.bindProfileUpdate(handler);
+    }
+
+    // Stats View delegations
     updateStatsUI(stats) {
-        // Update summary cards on main dashboard
-        const statValues = document.querySelectorAll('.stat-value');
-        if (statValues.length >= 2) {
-            statValues[0].textContent = stats.completed || 0;
-            // stats.chatSessions or learning time could go here
-        }
+        this.statsView.updateStatsUI(stats);
     }
 
-    renderActiveView(viewName) {
-        this.elements.navItems.forEach(item => {
-            if (item.getAttribute('data-view') === viewName) {
-                item.classList.add('active');
-                item.style.transform = 'scale(0.95)';
-                setTimeout(() => item.style.transform = 'scale(1)', 100);
-            } else {
-                item.classList.remove('active');
-            }
-        });
-
-        Object.keys(this.elements.views).forEach(key => {
-            const viewEl = this.elements.views[key];
-            if (viewEl) {
-                viewEl.style.display = (key === viewName) ? 'block' : 'none';
-            }
-        });
-
-        if (window.lucide) lucide.createIcons();
+    // Chat View delegations
+    displayAIMessage(message) {
+        this.chatView.displayAIMessage(message);
     }
 
-    updateSidebarUI(isCollapsed) {
-        if (isCollapsed) {
-            this.elements.sidebar.classList.add('collapsed');
-            this.elements.toggleIcon.setAttribute('data-lucide', 'chevron-right');
-        } else {
-            this.elements.sidebar.classList.remove('collapsed');
-            this.elements.toggleIcon.setAttribute('data-lucide', 'chevron-left');
-        }
-        if (window.lucide) lucide.createIcons();
+    displayUserMessage(message) {
+        this.chatView.displayUserMessage(message);
     }
 
-    updateQuoteUI(quote) {
-        if (this.elements.motivationalQuote) {
-            this.elements.motivationalQuote.textContent = `"${quote}"`;
-        }
+    bindMicControls(startHandler, stopHandler) {
+        this.chatView.bindMicControls(startHandler, stopHandler);
     }
 
-    updateMicUI(isRecording, statusText) {
-        if (this.elements.micBtn) {
-            if (isRecording) {
-                this.elements.micBtn.classList.add('active');
-            } else {
-                this.elements.micBtn.classList.remove('active');
-            }
-        }
-        if (this.elements.aiStatusText) {
-            this.elements.aiStatusText.textContent = statusText;
-        }
-    }
-
-    bindDashboardTabs(handler) {
-        this.elements.tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                handler(btn.getAttribute('data-tab'));
-            });
-        });
-    }
-
+    // Event binders
     bindViewChange(handler) {
         this.elements.navItems.forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
-                handler(item.getAttribute('data-view'));
+                const viewName = item.getAttribute('data-view');
+                handler(viewName);
             });
         });
     }
@@ -662,15 +573,6 @@ export class DashboardView {
     bindSidebarToggle(handler) {
         if (this.elements.toggleBtn) {
             this.elements.toggleBtn.addEventListener('click', handler);
-        }
-    }
-
-    bindMicControls(startHandler, stopHandler) {
-        if (this.elements.micBtn) {
-            this.elements.micBtn.addEventListener('click', startHandler);
-        }
-        if (this.elements.stopBtn) {
-            this.elements.stopBtn.addEventListener('click', stopHandler);
         }
     }
 
@@ -683,13 +585,13 @@ export class DashboardView {
         }
     }
 
-    bindProfileUpdate(handler) {
-        if (this.elements.profileForm) {
-            this.elements.profileForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                handler(this.elements.usernameInput.value);
+    bindDashboardTabs(handler) {
+        this.elements.tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabName = btn.getAttribute('data-tab');
+                handler(tabName);
             });
-        }
+        });
     }
 
     setupAvatarAnimations() {

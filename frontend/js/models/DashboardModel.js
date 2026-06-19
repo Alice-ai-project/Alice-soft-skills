@@ -109,7 +109,30 @@ export class DashboardModel {
             if (response.ok) {
                 const apiCourses = await response.json();
                 if (apiCourses && apiCourses.length > 0) {
-                    this.courses = apiCourses;
+                    // Create a mapping of key prefixes to local mock details
+                    const mockMap = {};
+                    this.courses.forEach(c => {
+                        const key = c.title.split(' ')[0].toLowerCase();
+                        mockMap[key] = c;
+                    });
+
+                    // Load saved progress from localStorage
+                    const savedProgress = JSON.parse(localStorage.getItem('alice_course_progress') || '{}');
+
+                    this.courses = apiCourses.map(ac => {
+                        const key = ac.title.split(' ')[0].toLowerCase();
+                        const mock = mockMap[key] || {};
+                        const title = ac.title === 'Liderazgo' ? 'Liderazgo Empático' : ac.title;
+                        const progress = savedProgress[title] !== undefined ? savedProgress[title] : (ac.progress !== undefined ? ac.progress : (mock.progress !== undefined ? mock.progress : 0));
+                        return {
+                            ...ac,
+                            title,
+                            description: ac.description || mock.description || 'Desarrolla tus habilidades blandas y crece profesionalmente.',
+                            icon: mock.icon || 'graduation-cap',
+                            color: mock.color || 'blue',
+                            progress
+                        };
+                    });
                     return this.courses;
                 }
             }
@@ -118,6 +141,18 @@ export class DashboardModel {
         }
         // Fallback to static mock courses
         return this.courses;
+    }
+
+    saveCourseProgress(courseTitle, progress) {
+        const course = this.courses.find(c => c.title === courseTitle);
+        if (course) {
+            course.progress = progress;
+        }
+        
+        // Save to localStorage
+        const savedProgress = JSON.parse(localStorage.getItem('alice_course_progress') || '{}');
+        savedProgress[courseTitle] = progress;
+        localStorage.setItem('alice_course_progress', JSON.stringify(savedProgress));
     }
 
     getRandomQuote() {

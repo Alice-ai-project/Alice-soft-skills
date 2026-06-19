@@ -1,6 +1,4 @@
-/**
- * Alice - Main Entry Point
- */
+// Alice - Main Entry Point
 import { DashboardModel } from './models/DashboardModel.js';
 import { DashboardView } from './views/DashboardView.js';
 import { DashboardController } from './controllers/DashboardController.js';
@@ -8,7 +6,7 @@ import { DashboardController } from './controllers/DashboardController.js';
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Dashboard
     const dashboardApp = new DashboardController(
-        new DashboardModel(), 
+        new DashboardModel(),
         new DashboardView()
     );
 
