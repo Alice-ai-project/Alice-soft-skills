@@ -1,48 +1,43 @@
-const statusEl = document.getElementById("status");
-const questionEl = document.getElementById("question");
-const optionButtons = Array.from(document.querySelectorAll("[data-answer]"));
+import { AuthModel } from './models/AuthModel.js';
+import { AuthView } from './views/AuthView.js';
+import { AuthController } from './controllers/AuthController.js';
+import { DashboardModel } from './models/DashboardModel.js';
+import { DashboardView } from './views/DashboardView.js';
+import { DashboardController } from './controllers/DashboardController.js';
 
-let sessionId = null;
+document.addEventListener('DOMContentLoaded', () => {
+    const appModel = new AuthModel();
+    const appView = new AuthView();
+    const appController = new AuthController(appModel, appView);
 
-async function startInterview() {
-  const response = await fetch("/api/interview/start", { method: "POST" });
-  const data = await response.json();
-  sessionId = data.session_id;
-  questionEl.textContent = data.first_question;
-  statusEl.textContent = "Avatar leyendo pregunta...";
-  setTimeout(() => {
-    statusEl.textContent = "Selecciona una respuesta";
-    optionButtons.forEach((btn) => (btn.disabled = false));
-  }, 1200);
-}
+    // Override showDashboard to load the full dashboard
+    const originalShowDashboard = appController.showDashboard.bind(appController);
+    appController.showDashboard = function() {
+        const user = this.model.getUser();
+        if (!user) return;
 
-async function submitAnswer(answer) {
-  optionButtons.forEach((btn) => (btn.disabled = true));
-  statusEl.textContent = "Procesando turno...";
+        const appContainer = document.getElementById('auth-app');
+        appContainer.innerHTML = '';
 
-  const response = await fetch("/api/interview/answer", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ session_id: sessionId, answer }),
-  });
-  const data = await response.json();
+        // Load dashboard CSS
+        const cssFiles = ['dashboard.css', 'conversation.css', 'courses.css', 'stats.css', 'config.css'];
+        cssFiles.forEach(css => {
+            if (!document.querySelector(`link[href="./css/${css}"]`)) {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = `./css/${css}`;
+                document.head.appendChild(link);
+            }
+        });
 
-  if (data.finished) {
-    questionEl.textContent = "Entrevista finalizada";
-    statusEl.textContent = "Resultados enviados al motor de recomendaciones.";
-    return;
-  }
+        // Initialize Dashboard MVC
+        const dashboardModel = new DashboardModel();
+        dashboardModel.userSettings = { ...dashboardModel.userSettings, username: user.name, email: user.email };
+        const dashboardView = new DashboardView();
+        const dashboardController = new DashboardController(dashboardModel, dashboardView);
 
-  questionEl.textContent = data.next_question;
-  statusEl.textContent = "Avatar leyendo pregunta...";
-  setTimeout(() => {
-    statusEl.textContent = "Selecciona una respuesta";
-    optionButtons.forEach((btn) => (btn.disabled = false));
-  }, 1200);
-}
+        console.log('Alice Dashboard loaded for user:', user.name);
+    };
 
-optionButtons.forEach((btn) => {
-  btn.addEventListener("click", () => submitAnswer(btn.dataset.answer));
+    console.log('Alice SPA initialized with MVC pattern.');
 });
-
-document.addEventListener("DOMContentLoaded", startInterview);

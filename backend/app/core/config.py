@@ -1,17 +1,22 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
-
+import os
+from pydantic_settings import BaseSettings
+from typing import Optional
 
 class Settings(BaseSettings):
-    app_name: str = "Alice API"
-    app_version: str = "0.2.0"
+    # Estas variables deben estar en el archivo .env
+    supabase_url: str = ""
+    supabase_anon_key: str = ""
+    supabase_service_key: str = ""
 
-    database_url: str = "postgresql://alice_user:alice_password@db:5432/alice_db"
-    n8n_webhook_url: str = "http://n8n:5678/webhook/alice-diagnostic"
+    class Config:
+        env_file = ".env"
+        case_sensitive = False
 
-    rag_collection_name: str = "softskills_docs"
-    rag_top_k: int = 4
-
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
-
-
+# Instancia global de configuración
 settings = Settings()
+
+# Validación simple para ayudar al diagnóstico
+if not settings.supabase_url:
+    print(" ADVERTENCIA: SUPABASE_URL no detectada. Revisa tu archivo .env")
+if not settings.supabase_service_key and not settings.supabase_anon_key:
+    print(" ADVERTENCIA: No se detectaron llaves de Supabase. Revisa tu archivo .env")
