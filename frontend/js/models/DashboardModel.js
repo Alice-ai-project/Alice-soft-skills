@@ -4,12 +4,12 @@
 export class DashboardModel {
     constructor() {
         this.API_URL = 'http://localhost:8000';
-        this.userId = '896989ee-0df4-4353-b544-ae3394df6fc5'; // Real user from DB
+        this.userId = null;
         this.activeView = 'dashboard';
         this.isSidebarCollapsed = false;
         this.isRecording = false;
         this.userSettings = {
-            username: 'Cargando...',
+            username: 'Usuario',
             theme: 'dark'
         };
         this.courses = [];
@@ -27,30 +27,37 @@ export class DashboardModel {
         ];
     }
 
+    setUserId(userId) {
+        this.userId = userId;
+    }
+
     async loadProfile(userId) {
         if (userId) this.userId = userId;
+        if (!this.userId) {
+            console.warn('No userId available');
+            return null;
+        }
         try {
-            const response = await fetch(`${this.API_URL}/profiles/${this.userId}`);
+            const response = await fetch(`${this.API_URL}/api/v1/profiles/${this.userId}`);
             if (response.ok) {
                 const data = await response.json();
-                this.userSettings.username = data.display_name || data.username;
+                this.userSettings.username = data.display_name || data.username || this.userSettings.username;
                 return data;
             } else {
                 console.warn('Profile not found, using default data');
-                this.userSettings.username = 'Invitado';
             }
         } catch (error) {
             console.error('Error loading profile:', error);
-            this.userSettings.username = 'Invitado';
         }
         return null;
     }
 
     async loadCourses() {
         try {
-            const response = await fetch(`${this.API_URL}/courses/`);
+            const response = await fetch(`${this.API_URL}/api/v1/courses/`);
             if (response.ok) {
-                this.courses = await response.json();
+                const data = await response.json();
+                this.courses = Array.isArray(data) ? data : [];
                 return this.courses;
             }
         } catch (error) {

@@ -38,3 +38,6 @@ try:
 except Exception as error:
     # Log error but don't crash the app on startup
     print(f"Warning: Could not initialize Supabase client: {error}")
+
+# Alias for backward compatibility (endpoints expect 'supabase')
+supabase = supabase_client

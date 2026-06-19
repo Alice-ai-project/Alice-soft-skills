@@ -8,13 +8,19 @@ export class DashboardView {
             toggleBtn: document.getElementById('toggleBtn'),
             toggleIcon: document.getElementById('toggleIcon'),
             motivationalQuote: document.getElementById('motivational-quote'),
-            navItems: document.querySelectorAll('.nav-item'),
+            navItems: document.querySelectorAll('.nav-subitem, .nav-main-item'),
+            navSections: document.querySelectorAll('.nav-section'),
+            navSectionHeaders: document.querySelectorAll('.nav-section-header'),
             views: {
                 'dashboard': document.getElementById('dashboard-view'),
                 'conversation': document.getElementById('conversation-view'),
                 'courses': document.getElementById('courses-view'),
+                'course-detail': document.getElementById('course-detail-view'),
                 'stats': document.getElementById('stats-view'),
-                'config': document.getElementById('config-view')
+                'config': document.getElementById('config-view'),
+                'goals': document.getElementById('goals-view'),
+                'resources': document.getElementById('resources-view'),
+                'diagnostico': document.getElementById('diagnostico-view')
             },
             micBtn: document.getElementById('mic-btn'),
             stopBtn: document.getElementById('stop-btn'),
@@ -49,96 +55,47 @@ export class DashboardView {
         // Clear existing content
         grid.innerHTML = '';
 
-        const colors = ['red', 'blue', 'orange', 'green', 'purple', 'yellow', 'cyan', 'magenta'];
-        const iconMap = {
-            'Liderazgo': 'users',
-            'Comunicación': 'message-circle',
-            'Construcción': 'user-plus',
-            'Desarrollo': 'user',
-            'Flexibilidad': 'refresh-cw',
-            'Gestión del Tiempo': 'timer',
-            'Gestión Emocional': 'heart',
-            'Resistencia': 'shield',
-            'Resolución': 'brain'
-        };
-        
-        courses.forEach((course, index) => {
-            try {
-                const colorClass = `course-${colors[index % colors.length]}`;
-                const progress = Math.floor(Math.random() * 50);
-                
-                let iconName = 'graduation-cap';
-                for (const [key, icon] of Object.entries(iconMap)) {
-                    if ((course.category && course.category.includes(key)) || (course.title && course.title.includes(key))) {
-                        iconName = icon;
-                        break;
-                    }
-                }
-                
-                const card = document.createElement('div');
-                card.className = `course-card ${colorClass}`;
-                
-                card.innerHTML = `
-                    <div class="course-icon"><i data-lucide="${iconName}"></i></div>
-                    <h3 class="course-title">${course.title || 'Sin título'}</h3>
-                    <p class="course-desc">${course.description || ''}</p>
-                    <div class="course-footer">
-                        <div class="course-progress">
-                            <span>${progress}%</span>
-                            <div class="p-bar"><div class="p-fill" style="width: ${progress}%;"></div></div>
-                        </div>
-                        <button class="course-btn">${progress > 0 ? 'Continuar' : 'Empezar'}</button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            } catch (err) {
-                console.error('Error rendering course card:', err);
-            }
-        });
-
-        if (window.lucide) {
-            lucide.createIcons();
-            console.log('Lucide icons created for dynamic cards');
-        }
-    }
-
-    updateSettingsUI(settings) {
-        if (this.elements.usernameInput) {
-            this.elements.usernameInput.value = settings.username;
-        }
-        if (this.elements.headerUserName) {
-            this.elements.headerUserName.textContent = settings.username;
-        }
-    }
-
-    updateStatsUI(stats) {
-        // Update summary cards on main dashboard
-        const statValues = document.querySelectorAll('.stat-value');
-        if (statValues.length >= 2) {
-            statValues[0].textContent = stats.completed || 0;
-            // stats.chatSessions or learning time could go here
-        }
-    }
-
-    renderActiveView(viewName) {
-        this.elements.navItems.forEach(item => {
-            if (item.getAttribute('data-view') === viewName) {
-                item.classList.add('active');
-                item.style.transform = 'scale(0.95)';
-                setTimeout(() => item.style.transform = 'scale(1)', 100);
-            } else {
-                item.classList.remove('active');
-            }
-        });
-
-        Object.keys(this.elements.views).forEach(key => {
-            const viewEl = this.elements.views[key];
-            if (viewEl) {
-                viewEl.style.display = (key === viewName) ? 'block' : 'none';
-            }
+        // Render courses
+        courses.forEach(course => {
+            const card = document.createElement('div');
+            card.className = `course-card ${course.color || ''}`;
+            card.setAttribute('data-course-id', course.id || course.slug);
+            
+            const progress = course.progress || 0;
+            
+            card.innerHTML = `
+                <div class="course-icon"><i data-lucide="${course.icon || 'book'}"></i></div>
+                <h3 class="course-title">${course.name}</h3>
+                <p class="course-desc">${course.description || ''}</p>
+                <div class="course-progress">
+                    <span>${progress}%</span>
+                    <div class="p-bar"><div class="p-fill" style="width: ${progress}%;"></div></div>
+                </div>
+                <button class="course-btn">${progress > 0 ? 'Continuar' : 'Empezar'}</button>
+            `;
+            
+            grid.appendChild(card);
         });
 
         if (window.lucide) lucide.createIcons();
+    }
+
+    bindViewChange(handler) {
+        this.elements.navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const viewName = item.getAttribute('data-view');
+                if (viewName) {
+                    handler(viewName);
+                }
+            });
+        });
+    }
+
+    bindSidebarToggle(handler) {
+        if (this.elements.toggleBtn) {
+            this.elements.toggleBtn.addEventListener('click', handler);
+        }
     }
 
     updateSidebarUI(isCollapsed) {
@@ -152,76 +109,106 @@ export class DashboardView {
         if (window.lucide) lucide.createIcons();
     }
 
-    updateQuoteUI(quote) {
-        if (this.elements.motivationalQuote) {
-            this.elements.motivationalQuote.textContent = `"${quote}"`;
+    renderActiveView(viewName) {
+        this.elements.navItems.forEach(item => {
+            if (item.getAttribute('data-view') === viewName) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+
+        this.elements.navSections.forEach(section => {
+            const sectionItems = section.querySelectorAll('.nav-subitem');
+            const hasActive = Array.from(sectionItems).some(item => 
+                item.getAttribute('data-view') === viewName
+            );
+            if (hasActive) {
+                section.classList.add('active');
+            }
+        });
+
+        Object.keys(this.elements.views).forEach(key => {
+            const viewEl = this.elements.views[key];
+            if (viewEl) {
+                viewEl.style.display = (key === viewName) ? 'block' : 'none';
+            }
+        });
+
+        if (window.lucide) lucide.createIcons();
+    }
+
+    bindMicControls(onStart, onStop) {
+        if (this.elements.micBtn) {
+            this.elements.micBtn.addEventListener('mousedown', onStart);
+            this.elements.micBtn.addEventListener('mouseup', onStop);
+            this.elements.micBtn.addEventListener('mouseleave', onStop);
+        }
+        if (this.elements.stopBtn) {
+            this.elements.stopBtn.addEventListener('click', onStop);
         }
     }
 
     updateMicUI(isRecording, statusText) {
-        if (this.elements.micBtn) {
-            if (isRecording) {
-                this.elements.micBtn.classList.add('active');
-            } else {
-                this.elements.micBtn.classList.remove('active');
-            }
+        if (isRecording) {
+            this.elements.micBtn?.classList.add('recording');
+            this.elements.stopBtn?.style.setProperty('display', 'flex');
+        } else {
+            this.elements.micBtn?.classList.remove('recording');
+            this.elements.stopBtn?.style.setProperty('display', 'none');
         }
         if (this.elements.aiStatusText) {
             this.elements.aiStatusText.textContent = statusText;
         }
     }
 
-    bindViewChange(handler) {
-        this.elements.navItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                handler(item.getAttribute('data-view'));
-            });
-        });
-    }
-
-    bindSidebarToggle(handler) {
-        if (this.elements.toggleBtn) {
-            this.elements.toggleBtn.addEventListener('click', handler);
+    updateQuoteUI(quote) {
+        if (this.elements.motivationalQuote) {
+            this.elements.motivationalQuote.textContent = `"${quote}"`;
         }
     }
 
-    bindMicControls(startHandler, stopHandler) {
-        if (this.elements.micBtn) {
-            this.elements.micBtn.addEventListener('click', startHandler);
-        }
-        if (this.elements.stopBtn) {
-            this.elements.stopBtn.addEventListener('click', stopHandler);
-        }
-    }
-
-    bindExtraActions(chatCtaHandler, backBtnHandler) {
+    bindExtraActions(onChat, onDash) {
         if (this.elements.chatCta) {
-            this.elements.chatCta.addEventListener('click', chatCtaHandler);
+            this.elements.chatCta.addEventListener('click', onChat);
         }
         if (this.elements.backBtn) {
-            this.elements.backBtn.addEventListener('click', backBtnHandler);
+            this.elements.backBtn.addEventListener('click', onDash);
         }
+    }
+
+    setupAvatarAnimations() {
+        // Placeholder for avatar animation logic
+    }
+
+    bindCourseButtons(handler) {
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('course-btn')) {
+                const card = e.target.closest('.course-card');
+                if (card) {
+                    const title = card.querySelector('.course-title')?.textContent;
+                    if (title) handler(title);
+                }
+            }
+        });
     }
 
     bindProfileUpdate(handler) {
         if (this.elements.profileForm) {
             this.elements.profileForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                handler(this.elements.usernameInput.value);
+                const newUsername = this.elements.usernameInput?.value;
+                if (newUsername) handler(newUsername);
             });
         }
     }
 
-    setupAvatarAnimations() {
-        if (this.elements.aliceAvatar) {
-            this.elements.aliceAvatar.addEventListener('mouseover', () => {
-                this.elements.aliceAvatar.style.transform = 'scale(1.1) rotate(5deg)';
-                this.elements.aliceAvatar.style.transition = 'transform 0.3s ease';
-            });
-            this.elements.aliceAvatar.addEventListener('mouseout', () => {
-                this.elements.aliceAvatar.style.transform = 'scale(1) rotate(0deg)';
-            });
+    updateSettingsUI(settings) {
+        if (this.elements.usernameInput && settings.username) {
+            this.elements.usernameInput.value = settings.username;
+        }
+        if (this.elements.headerUserName && settings.username) {
+            this.elements.headerUserName.textContent = settings.username;
         }
     }
 }
