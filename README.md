@@ -8,6 +8,7 @@ Alice es una plataforma web interactiva para el **diagnóstico, entrenamiento y 
 Alice-soft-skills/
 ├── backend/                    # API REST (Python 3.11 / FastAPI)
 │   ├── app/
+│   │   ├── main.py            # Entrada FastAPI
 │   │   ├── api/               # Endpoints REST
 │   │   │   ├── auth.py        # Autenticación (login/register/me)
 │   │   │   ├── diagnostics.py # API de diagnósticos
@@ -18,22 +19,23 @@ Alice-soft-skills/
 │   │   │   ├── auth.py        # Middleware de autenticación JWT
 │   │   │   ├── errors.py      # Manejo centralizado de errores
 │   │   │   └── request_id.py  # Middleware de request tracking
-│   │   ├── modules/           # Módulos de dominio
-│   │   │   └── diagnosis/     # Sistema de diagnóstico
 │   │   ├── schemas/           # Modelos Pydantic
 │   │   ├── services/          # Lógica de negocio
 │   │   └── repositories/      # Acceso a datos
-│   └── tests/                 # Suite de pruebas
+│   ├── Dockerfile
+│   └── requirements.txt
 ├── frontend/                   # Cliente web SPA
+│   ├── index.html             # Página principal
+│   ├── Dockerfile
 │   ├── css/                   # Estilos modulares
 │   ├── js/                    # Arquitectura MVC
 │   │   ├── models/            # Modelos de estado
 │   │   ├── views/             # Renderizado del DOM
-│   │   └── controllers/       # Orquestación
+│   │   ├── controllers/       # Orquestación
+│   │   └── data/              # Datos estáticos (cursos, diagnósticos)
+│   ├── docs/                  # Documentación y cursos PDF
 │   └── assets/                # Recursos estáticos
-├── supabase/                   # Migraciones de base de datos
-├── docs/                      # Documentación y cursos PDF
-└── scripts/                   # Scripts de utilidad
+└── supabase/                   # Migraciones de base de datos
 ```
 
 ## Stack Tecnológico
@@ -56,7 +58,7 @@ Alice-soft-skills/
 
 ### Dashboard
 - Panel principal con estadísticas
-- Vista de cursos disponibles (8 cursos de soft skills)
+- Vista de cursos disponibles (11 cursos de soft skills)
 - Conversación con avatar de IA
 - Estadísticas de progreso
 - Configuración de usuario
@@ -68,10 +70,11 @@ Alice-soft-skills/
 - Persistencia de resultados
 
 ### Cursos de Soft Skills
-- 10 cursos en PDF:
+- 11 cursos en PDF:
   - Comunicación Asertiva
   - Construcción Colectiva
   - Desarrollo de Sí Mismo
+  - El Arte de la Guerra (Sun Tzu)
   - Flexibilidad y Adaptabilidad
   - Gestión del Tiempo
   - Gestión Emocional
@@ -114,9 +117,8 @@ curl http://localhost:8000/health
 - `GET /auth/me` - Obtener usuario actual
 
 ### Diagnósticos
-- `GET /api/v1/diagnostics/courses` - Listar cursos
-- `GET /api/v1/diagnostics/questionnaires/{course_id}` - Obtener cuestionarios
-- `POST /api/v1/diagnostics/submit` - Enviar respuestas
+- `POST /api/v1/diagnostics` - Crear diagnóstico
+- `GET /api/v1/diagnostics/{user_id}` - Obtener diagnóstico de usuario
 
 ### Cursos y Perfiles
 - `GET /api/v1/courses/` - Listar cursos
@@ -137,7 +139,7 @@ POSTGRES_USER=alice_user
 POSTGRES_PASSWORD=alice_password
 
 # Supabase
-SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_URL=https://your-project-ref.supabase.co
 SUPABASE_ANON_KEY=your_anon_key
 SUPABASE_SERVICE_KEY=your_service_role_key
 
@@ -196,12 +198,8 @@ pytest
 
 ## Documentación
 
-- `definicion_conceptual.md` - Qué es y qué no es Alice
-- `metodologia.md` - Metodología del producto
-- `docs/diagnostico_guia.md` - Instrumento de diagnóstico Goleman
-- `docs/preguntas_cursos.md` - Preguntas por curso
-- `backlog.md` - Product Backlog completo
-- `Documento de Requerimientos.md` - Requisitos del proyecto
+- `frontend/docs/diagnostico_guia.md` - Instrumento de diagnóstico Goleman
+- `frontend/docs/preguntas_cursos.md` - Preguntas por curso
 
 ## Licencia
 
