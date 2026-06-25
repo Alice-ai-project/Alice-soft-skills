@@ -94,7 +94,9 @@ async function handleLogin(e) {
         localStorage.setItem('alice_user', JSON.stringify({
             user_id: result.user?.user_id || result.user_id,
             email: result.email || result.user?.email,
-            name: result.user?.first_name || result.first_name || 'Usuario'
+            name: result.user?.first_name || result.first_name || 'Usuario',
+            access_token: result.access_token,
+            refresh_token: result.refresh_token
         }));
         
         initDashboard();
@@ -144,13 +146,23 @@ function initDashboard() {
     lucide.createIcons();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const user = localStorage.getItem('alice_user');
-    if (user) {
-        initDashboard();
-    } else {
-        showLogin();
+document.addEventListener('DOMContentLoaded', async () => {
+    const user = JSON.parse(localStorage.getItem('alice_user'));
+    if (user?.access_token) {
+        try {
+            const response = await fetch('http://localhost:8000/auth/me', {
+                headers: { 'Authorization': `Bearer ${user.access_token}` }
+            });
+            if (response.ok) {
+                initDashboard();
+                console.log('Alice Application Initialized');
+                return;
+            }
+        } catch (e) {
+            console.warn('Session validation failed:', e);
+        }
     }
-    
+    localStorage.removeItem('alice_user');
+    showLogin();
     console.log('Alice Application Initialized');
 });
