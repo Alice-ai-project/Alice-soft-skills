@@ -2,9 +2,10 @@ from fastapi import FastAPI, HTTPException
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.admin import router as admin_router
 from app.api.auth import router as auth_router
 from app.api.diagnostics import router as diagnostics_router
-from app.api.endpoints import profiles, courses
+from app.api.endpoints import profiles, courses, chat as chat_endpoint
 from app.core.errors import AppError, app_error_handler, http_exception_handler, validation_exception_handler
 from app.core.request_id import RequestIdMiddleware
 from app.core.supabase_client import supabase_client, supabase_auth_client
@@ -17,9 +18,9 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 app.add_middleware(RequestIdMiddleware)
@@ -32,6 +33,8 @@ app.include_router(auth_router)
 app.include_router(diagnostics_router, prefix="/api/v1")
 app.include_router(profiles.router, prefix="/api/v1/profiles", tags=["Profiles"])
 app.include_router(courses.router, prefix="/api/v1/courses", tags=["Courses"])
+app.include_router(chat_endpoint.router, prefix="/api/v1/chat", tags=["Chat"])
+app.include_router(admin_router)
 
 
 @app.get("/health", tags=["Health"])

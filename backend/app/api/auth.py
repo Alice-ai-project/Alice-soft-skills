@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.core.auth import get_current_user
 from app.core.supabase_client import supabase_auth_client
-from app.schemas.auth import AuthLogin, AuthMeResponse, AuthRegister, AuthSessionRead, AuthUserRead
+from app.schemas.auth import AuthLogin, AuthMeResponse, AuthRefresh, AuthRegister, AuthSessionRead, AuthUserRead
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -28,6 +28,7 @@ def _build_user_read(user: Any) -> AuthUserRead:
         email=_get_value(user, "email"),
         first_name=metadata.get("first_name"),
         last_name=metadata.get("last_name"),
+        role=metadata.get("role"),
     )
 
 
@@ -98,6 +99,24 @@ async def register(payload: AuthRegister) -> AuthSessionRead:
     return _build_session_read(response)
 
 
+@router.post("/refresh", response_model=AuthSessionRead)
+async def refresh_token(payload: AuthRefresh) -> AuthSessionRead:
+    try:
+        response = _auth_client().auth.refresh_session(payload.refresh_token)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired refresh token",
+        )
+    session_read = _build_session_read(response)
+    if not session_read.access_token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not refresh session",
+        )
+    return session_read
+
+
 @router.get("/me", response_model=AuthMeResponse)
 async def get_current_user_endpoint(user: dict = Depends(get_current_user)) -> AuthMeResponse:
     """
@@ -111,4 +130,5 @@ async def get_current_user_endpoint(user: dict = Depends(get_current_user)) -> A
         email=user["email"],
         first_name=metadata.get("first_name"),
         last_name=metadata.get("last_name"),
+        role=metadata.get("role"),
     )

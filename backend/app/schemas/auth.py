@@ -19,6 +19,7 @@ class AuthUserRead(BaseModel):
     email: EmailStr
     first_name: str | None = None
     last_name: str | None = None
+    role: str | None = None
 
 
 class AuthSessionRead(BaseModel):
@@ -35,3 +36,8 @@ class AuthMeResponse(BaseModel):
     email: EmailStr
     first_name: str | None = None
     last_name: str | None = None
+    role: str | None = None
+
+
+class AuthRefresh(BaseModel):
+    refresh_token: str

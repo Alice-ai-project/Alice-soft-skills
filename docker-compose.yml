@@ -1,9 +1,27 @@
 services:
+  # New Next.js frontend (active development)
+  frontend-next:
+    build:
+      context: ./frontend-next
+      dockerfile: Dockerfile
+      args:
+        # NEXT_PUBLIC_* vars are baked in at build time; use the host-accessible URL
+        NEXT_PUBLIC_API_URL: http://localhost:8000
+    container_name: alice-frontend-next
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - alice-network
+    restart: unless-stopped
+
+  # Legacy vanilla-JS frontend — kept during migration, will be removed
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: alice-frontend
+    container_name: alice-frontend-legacy
     ports:
       - "8080:80"
     depends_on:
