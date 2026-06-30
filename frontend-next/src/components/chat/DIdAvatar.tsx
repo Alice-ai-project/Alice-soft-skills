@@ -20,7 +20,7 @@ export default function DIdAvatar() {
     // Create and append D-ID script
     const script = document.createElement("script");
     script.type = "module";
-    script.src = "https://agent.d-id.com/v2/index.js";
+    script.src = `https://agent.d-id.com/v2/index.js?v=${Date.now()}`;
     script.dataset.mode = "full";
     script.dataset.clientKey = "ck_8uTOwtpJmLM0_Qll8MxZn";
     script.dataset.agentId = "v2_agt_ZxB1x5jg";
