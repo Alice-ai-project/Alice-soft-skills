@@ -7,11 +7,15 @@ export default function DIdAvatar() {
   const scriptRef = useRef<HTMLScriptElement | null>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Clear any leftover D-ID elements from previous mount
+    container.innerHTML = "";
 
     // Create unique target id
     const targetId = `did-agent-${Date.now()}`;
-    containerRef.current.id = targetId;
+    container.id = targetId;
 
     // Create and append D-ID script
     const script = document.createElement("script");
@@ -24,13 +28,17 @@ export default function DIdAvatar() {
     script.dataset.monitor = "true";
     script.dataset.targetId = targetId;
 
-    containerRef.current.appendChild(script);
+    container.appendChild(script);
     scriptRef.current = script;
 
     return () => {
-      // Cleanup on unmount
-      if (scriptRef.current && scriptRef.current.parentNode) {
+      // Remove script
+      if (scriptRef.current?.parentNode) {
         scriptRef.current.parentNode.removeChild(scriptRef.current);
+      }
+      // Remove ALL D-ID created elements (iframe, shadow DOM, etc.)
+      if (container) {
+        container.innerHTML = "";
       }
     };
   }, []);
