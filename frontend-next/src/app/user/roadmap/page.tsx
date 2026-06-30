@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
-import { loadDiagnosticResult } from "@/utils/roadmap";
+import { loadDiagnosticResult, saveDiagnosticResult } from "@/utils/roadmap";
 import type { SavedDiagnosticResult } from "@/utils/roadmap";
 import { COURSE_NAMES } from "@/data/courses-data";
+import { recommendRoadmap } from "@/services/roadmapService";
+import { dimensionsToRoadmapInput } from "@/types/roadmap";
+import type { RoadmapCourse } from "@/types/roadmap";
+import { useAuth } from "@/contexts/AuthContext";
 
 // RIWI-palette level styles
 const LEVEL_STYLE: Record<string, { color: string; bg: string; border: string }> = {
@@ -23,13 +27,39 @@ const card: React.CSSProperties = {
 };
 
 export default function RoadmapPage() {
-  const [result,  setResult]  = useState<SavedDiagnosticResult | null>(null);
-  const [mounted, setMounted] = useState(false);
+  const { session } = useAuth();
+  const [result,  setResult]  = useState<SavedDiagnosticResult | null>(loadDiagnosticResult);
+  const mounted = useMemo(() => true, []);
+  const [regenerating, setRegenerating] = useState(false);
 
-  useEffect(() => {
-    setResult(loadDiagnosticResult());
-    setMounted(true);
-  }, []);
+  async function handleRegenerate() {
+    if (!result || !session?.access_token) return;
+    setRegenerating(true);
+    try {
+      const response = await recommendRoadmap(
+        dimensionsToRoadmapInput(
+          result.dimensions,
+          result.overallLevel,
+          result.totalScore,
+          result.maxScore,
+        ),
+        session.access_token,
+      );
+      if (response.success && response.roadmap.length > 0) {
+        const newRecs = response.roadmap.map((r: RoadmapCourse) => ({
+          course: r.course,
+          reason: r.reason,
+        }));
+        const updated = { ...result, recommendedCourses: newRecs };
+        saveDiagnosticResult(updated);
+        setResult(updated);
+      }
+    } catch {
+      // Keep existing recommendations
+    } finally {
+      setRegenerating(false);
+    }
+  }
 
   if (!mounted) return null;
 
@@ -216,6 +246,19 @@ export default function RoadmapPage() {
         >
           Explorar todos los cursos
         </Link>
+        <button
+          onClick={handleRegenerate}
+          disabled={regenerating}
+          className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+          style={{
+            background: regenerating ? "rgba(107,92,255,0.05)" : "rgba(107,92,255,0.1)",
+            border:     "1px solid rgba(107,92,255,0.25)",
+            color:      regenerating ? "rgba(249,250,252,0.3)" : "rgba(249,250,252,0.75)",
+            cursor:     regenerating ? "not-allowed" : "pointer",
+          }}
+        >
+          {regenerating ? "Regenerando..." : "Regenerar roadmap"}
+        </button>
         <Link
           href="/user/diagnostic"
           className="px-4 py-2 rounded-lg text-sm font-medium transition-all"

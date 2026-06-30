@@ -16,21 +16,21 @@ const AiParticleWormholeBackground = dynamic(
 const FEATURES = [
   {
     icon: "🎯",
-    title: "Personalized Diagnosis",
+    title: "Diagnóstico Personalizado",
     description:
-      "Assess your emotional intelligence across six dimensions with science-based questionnaires.",
+      "Evalúa tu inteligencia emocional en seis dimensiones con cuestionarios basados en la ciencia.",
   },
   {
     icon: "📚",
-    title: "Guided Courses",
+    title: "Cursos Guiados",
     description:
-      "Access curated soft-skills courses — leadership, communication, resilience, and more.",
+      "Accede a cursos de habilidades blandas seleccionados — liderazgo, comunicación, resiliencia y más.",
   },
   {
     icon: "🤖",
-    title: "AI Assistant",
+    title: "Asistente de IA",
     description:
-      "Chat with Alice, your personal AI coach, for tailored guidance and actionable steps.",
+      "Chatea con Alice, tu coach personal de IA, para orientación personalizada y pasos accionables.",
   },
 ];
 
@@ -71,28 +71,15 @@ export default function HeroSection() {
               <span className="text-white font-semibold text-lg tracking-tight">Alice</span>
             </div>
 
-            <nav className="flex items-center gap-2" aria-label="Main navigation">
+            <nav className="flex items-center gap-2" aria-label="Navegación principal">
               <Link href="/login">
                 <Button
                   variant="ghost"
                   size="sm"
                   className="text-white/70 hover:text-white font-medium"
-                  aria-label="Sign in to your account"
+                  aria-label="Iniciar sesión en tu cuenta"
                 >
-                  Sign In
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button
-                  size="sm"
-                  className="font-semibold"
-                  style={{
-                    background: "linear-gradient(135deg,#6B5CFF,#8b7bff)",
-                    color: "#ffffff",
-                  }}
-                  aria-label="Sign in to your account"
-                >
-                  Get Started
+                  Iniciar Sesión
                 </Button>
               </Link>
             </nav>
@@ -117,7 +104,7 @@ export default function HeroSection() {
                 style={{ background: "#5ACCA4", boxShadow: "0 0 6px #5ACCA4" }}
                 aria-hidden="true"
               />
-              AI-powered soft skills platform
+              Plataforma de habilidades blandas con IA
             </div>
 
             {/* Headline */}
@@ -125,7 +112,7 @@ export default function HeroSection() {
               className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6"
               style={{ color: "#F9FAFC", maxWidth: 720 }}
             >
-              Train your soft skills with{" "}
+              Entrena tus habilidades blandas con{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -133,18 +120,18 @@ export default function HeroSection() {
                     "linear-gradient(90deg,#6B5CFF 0%,#EAA2FC 50%,#5ACCA4 100%)",
                 }}
               >
-                intelligent guidance
+                orientación inteligente
               </span>
             </h1>
 
             {/* Description */}
             <p
-              className="text-base sm:text-lg leading-relaxed mb-10"
-              style={{ color: "rgba(249,250,252,0.55)", maxWidth: 540 }}
+              className="text-base sm:text-lg leading-relaxed mb-10 font-bold"
+              style={{ color: "#F9FAFC", maxWidth: 540 }}
             >
-              Discover your strengths, receive personalized recommendations,
-              and improve your communication, leadership, and decision-making
-              skills through an AI-assisted learning experience.
+              Descubre tus fortalezas, recibe recomendaciones personalizadas
+              y mejora tus habilidades de comunicación, liderazgo y toma de decisiones
+              a través de una experiencia de aprendizaje asistida por IA.
             </p>
 
             {/* CTAs */}
@@ -157,24 +144,9 @@ export default function HeroSection() {
                     background: "linear-gradient(135deg,#6B5CFF 0%,#8b7bff 100%)",
                     boxShadow: "0 0 24px rgba(107,92,255,0.35)",
                   }}
-                  aria-label="Sign in to your account"
+                  aria-label="Comenzar ahora"
                 >
-                  Get started
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto px-8 font-medium"
-                  style={{
-                    borderColor: "rgba(255,255,255,0.18)",
-                    color: "rgba(249,250,252,0.75)",
-                    background: "rgba(255,255,255,0.04)",
-                  }}
-                  aria-label="View a demo — sign in"
-                >
-                  View demo
+                  Comenzar
                 </Button>
               </Link>
             </div>
@@ -194,7 +166,7 @@ export default function HeroSection() {
             className="text-center text-2xl sm:text-3xl font-bold mb-12"
             style={{ color: "#F9FAFC" }}
           >
-            Everything you need to grow
+            Todo lo que necesitas para crecer
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
@@ -238,7 +210,7 @@ export default function HeroSection() {
           color: "rgba(249,250,252,0.3)",
         }}
       >
-        © {new Date().getFullYear()} Alice Soft Skills · All rights reserved
+        © {new Date().getFullYear()} Alice Soft Skills · Todos los derechos reservados
       </footer>
     </>
   );

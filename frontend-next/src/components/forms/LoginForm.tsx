@@ -26,7 +26,7 @@ export default function LoginForm() {
     const errs: FieldErrors = {};
     const emailErr = validateEmail(email);
     if (emailErr) errs.email = emailErr;
-    if (!password) errs.password = "Password is required.";
+    if (!password) errs.password = "La contraseña es requerida.";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   }
@@ -41,7 +41,7 @@ export default function LoginForm() {
       const session = await loginUser({ email, password });
       if (!session.access_token) {
         throw new ApiClientError(
-          "Email confirmation is required before login.",
+          "Se requiere confirmación de correo electrónico antes de iniciar sesión.",
           401,
           "email_not_confirmed",
         );
@@ -60,7 +60,7 @@ export default function LoginForm() {
       if (err instanceof ApiClientError) {
         setGlobalError(err.message);
       } else {
-        setGlobalError("An unexpected error occurred. Please try again.");
+        setGlobalError("Ocurrió un error inesperado. Por favor, intenta de nuevo.");
       }
     } finally {
       setIsSubmitting(false);
@@ -83,20 +83,20 @@ export default function LoginForm() {
         </div>
       )}
 
-      <Field label="Email" error={errors.email}>
+      <Field label="Correo electrónico" error={errors.email}>
         <input
           id="login-email"
           type="email"
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
+          placeholder="tu@ejemplo.com"
           disabled={isSubmitting}
           className={inputCls(!!errors.email)}
         />
       </Field>
 
-      <Field label="Password" error={errors.password}>
+      <Field label="Contraseña" error={errors.password}>
         <input
           id="login-password"
           type="password"
@@ -117,10 +117,10 @@ export default function LoginForm() {
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">
-            <Spinner size="sm" /> Signing in...
+            <Spinner size="sm" /> Iniciando sesión...
           </span>
         ) : (
-          "Sign In"
+          "Iniciar Sesión"
         )}
       </button>
 
@@ -130,7 +130,7 @@ export default function LoginForm() {
           className="text-xs transition-colors"
           style={{ color: "rgba(249,250,252,0.3)" }}
         >
-          ← Back to home
+          ← Volver al inicio
         </Link>
       </p>
     </form>

@@ -23,10 +23,10 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { label: "Dashboard",      href: "/user",            icon: "home",      exact: true },
   { label: "Diagnóstico",    href: "/user/diagnostic", icon: "clipboard" },
-  { label: "Cursos",         href: "/user/courses",    icon: "book"      },
   { label: "Roadmap",        href: "/user/roadmap",    icon: "map"       },
-{ label: "Recursos",       href: "/user/resources",  icon: "library"   },
-  { label: "Chat con Alice", href: "/user/chat",       icon: "chat"      },
+  { label: "Cursos",         href: "/user/courses",    icon: "book"      },
+  { label: "Recursos",       href: "/user/resources",  icon: "library"   },
+  { label: "Practica con Alice (IA)", href: "/user/chat",       icon: "chat"      },
   { label: "Estadísticas",   href: "/user/statistics", icon: "chart"     },
   { label: "Mi Perfil",      href: "/user/profile",    icon: "user"      },
 ];

@@ -4,16 +4,15 @@ import Link from "next/link";
 import { COURSES_DATA, COURSE_NAMES } from "@/data/courses-data";
 
 const COURSE_EMOJIS: Record<string, string> = {
-  "Liderazgo":                     "🎯",
-  "Comunicación Asertiva":         "💬",
+  "Comunicacion Asertiva":         "💬",
+  "Construccion Colectiva":        "👥",
+  "Desarrollo de Si mismo":        "✨",
   "Flexibilidad y Adaptabilidad":  "🌿",
-  "Resolución de Conflictos":      "🤝",
-  "Gestión Emocional":             "❤️",
-  "Construcción Colectiva":        "👥",
-  "Agilidad y Gestión del Tiempo": "⏱️",
-  "Tolerancia a la Frustración":   "🌱",
-  "Argumentación":                 "🧠",
-  "Desarrollo de Sí mismo":        "✨",
+  "Gestion del Tiempo":            "⏱️",
+  "Gestion Emocional":             "❤️",
+  "Liderazgo":                     "🎯",
+  "Resistencia a la Frustracion":  "🌱",
+  "Resolucion de Conflictos":      "🤝",
 };
 
 const ACCENTS = [

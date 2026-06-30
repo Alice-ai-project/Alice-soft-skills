@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable react-hooks/purity */
+
 import { useMemo } from "react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
@@ -31,7 +33,7 @@ const QUICK_ACTIONS = [
     href:  "/user/chat",
     icon:  "💬",
     color: "#EAA2FC",
-    title: "Chat con Alice IA",
+    title: "Practica con Alice (IA)",
     desc:  "Obtén orientación personalizada y responde tus dudas con la asistente inteligente.",
   },
   {
@@ -175,7 +177,7 @@ export default function UserPage() {
           Frase del día
         </p>
         <p className="text-sm leading-relaxed italic" style={{ color: "rgba(249,250,252,0.75)" }}>
-          "{quote}"
+          &ldquo;{quote}&rdquo;
         </p>
       </section>
 

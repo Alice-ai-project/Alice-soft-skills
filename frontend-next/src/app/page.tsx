@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import HeroSection from "@/components/landing/HeroSection";
 
 export const metadata: Metadata = {
-  title: "Alice Soft Skills — AI-Powered Soft Skills Platform",
+  title: "Alice Soft Skills — Plataforma de Habilidades Blandas con IA",
   description:
-    "Discover your strengths, receive personalized recommendations, and improve your communication, leadership, and decision-making skills through an AI-assisted learning experience.",
+    "Descubre tus fortalezas, recibe recomendaciones personalizadas y mejora tus habilidades de comunicación, liderazgo y toma de decisiones a través de una experiencia de aprendizaje asistida por IA.",
 };
 
 export default function LandingPage() {

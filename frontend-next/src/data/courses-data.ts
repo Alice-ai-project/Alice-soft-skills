@@ -1,140 +1,7 @@
 import type { CoursesData } from "@/types/courses";
 
 export const COURSES_DATA: CoursesData = {
-  "Liderazgo": {
-    description:
-      "Desarrolla habilidades de liderazgo basadas en la empatía, la comunicación efectiva y la inteligencia emocional para guiar equipos de forma inspiradora.",
-    icon: "users",
-    color: "course-red",
-    content: {
-      title: "Contenido del Curso",
-      sections: [
-        {
-          heading: "Definición de Liderazgo",
-          text: "El liderazgo es la capacidad de influir positivamente en otras personas para alcanzar objetivos comunes. No se trata solo de ocupar un cargo, sino de generar un impacto positivo en el equipo y la organización. Un líder empático escucha activamente, comprende las necesidades de su equipo y adapta su estilo según las circunstancias.",
-        },
-        {
-          heading: "Las 10 Habilidades Clave",
-          text: "Todo líder eficaz desarrolla un conjunto de habilidades esenciales: iniciativa, proactividad, innovación, creatividad, toma de decisiones bajo presión, comunicación asertiva, delegación efectiva, gestión de conflictos, motivación y reconocimiento, y adaptabilidad al cambio. Estas competencias permiten anticiparse a los cambios y guiar al equipo con visión de futuro.",
-        },
-        {
-          heading: "Proceso de Toma de Decisiones",
-          text: "La indecisión es uno de los principales obstáculos del liderazgo. Un líder debe aprender a analizar situaciones, evaluar alternativas y tomar decisiones oportunas. El proceso incluye: identificar el problema, generar opciones, evaluar riesgos y comprometerse con la acción. El análisis de tipos de problemas y decisiones permite abordar cada situación con criterio.",
-        },
-        {
-          heading: "Comunicación Organizacional",
-          text: "La comunicación es el vehículo del liderazgo. En el ámbito organizacional existen distintos tipos: formal, informal, descendente, ascendente y lateral. Dominar los modelos clásicos de comunicación permite transmitir ideas con claridad, elaborar documentos efectivos (memorandos, notas informativas) y generar confianza en el equipo.",
-        },
-        {
-          heading: "Inteligencia Emocional Aplicada",
-          text: "El líder debe desarrollar inteligencia emocional: conciencia de sí mismo, autorregulación, motivación, empatía y habilidades sociales. Esto permite conducir las propias emociones, gestionar el estrés laboral, planificar efectivamente y evitar los ladrones del tiempo como la procrastinación. El descanso activo es clave para mantener la productividad.",
-        },
-        {
-          heading: "Trabajo en Equipo y Toma de Decisiones",
-          text: "Un equipo eficaz se define por su capacidad de colaboración, confianza mutua y roles claros. El líder debe fomentar la creatividad en el equipo, seguir pasos para ser eficaz y eficiente, y tomar decisiones fundamentadas. La toma de decisiones en la empresa requiere un proceso estructurado que incluye identificar alternativas, evaluar consecuencias y comprometerse con la implementación.",
-        },
-      ],
-    },
-    resources: [
-      { type: "pdf", name: "Manual de Prácticas de Liderazgo", file: "curso_liderazgo.pdf" },
-      { type: "youtube", name: "Liderazgo Empático - Conceptos Clave", url: "https://www.youtube.com/watch?v=QV0lgVHOx2s" },
-      { type: "youtube", name: "Las 10 Habilidades de un Líder", url: "https://www.youtube.com/watch?v=2fQBVqHVn_s" },
-      { type: "youtube", name: "Inteligencia Emocional en el Liderazgo", url: "https://www.youtube.com/watch?v=5D2ILg5qTcc" },
-    ],
-    evaluation: {
-      title: "Evaluación de Liderazgo Empático",
-      passScore: 70,
-      questions: [
-        {
-          question: "¿Cuál es la diferencia principal entre un jefe y un líder?",
-          options: [
-            "El jefe tiene autoridad formal, el líder tiene influencia e inspiración",
-            "El jefe es más inteligente que el líder",
-            "El líder siempre tiene más poder",
-            "No hay diferencia",
-          ],
-          correct: 0,
-        },
-        {
-          question: "¿Cuál de estas NO es una habilidad clave del liderazgo?",
-          options: [
-            "Iniciativa y proactividad",
-            "Control absoluto del equipo",
-            "Comunicación asertiva",
-            "Gestión de conflictos",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Qué es la inteligencia emocional en el liderazgo?",
-          options: [
-            "Ser el más inteligente del equipo",
-            "Capacidad de reconocer y gestionar emociones propias y ajenas",
-            "No mostrar emociones en el trabajo",
-            "Imponer decisiones sin consultar",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Cuál es el primer paso en el proceso de toma de decisiones?",
-          options: [
-            "Elegir la primera opción que surja",
-            "Consultar con todos los miembros del equipo",
-            "Identificar y definir el problema",
-            "Dejar que otros decidan",
-          ],
-          correct: 2,
-        },
-        {
-          question: "¿Qué tipo de comunicación fluye de los superiores a los subordinados?",
-          options: [
-            "Comunicación ascendente",
-            "Comunicación lateral",
-            "Comunicación descendente",
-            "Comunicación informal",
-          ],
-          correct: 2,
-        },
-        {
-          question: "¿Cómo se define el liderazgo en el manual?",
-          options: [
-            "El cargo o posición jerárquica que una persona ocupa",
-            "El proceso de dirigir la conducta de otros hacia el alcance de algún objetivo",
-            "La capacidad de dar órdenes sin cuestionamientos",
-            "Un conjunto de habilidades innatas que no se pueden aprender",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Cuál de las siguientes NO es una de las 10 habilidades que todo buen líder debe tener?",
-          options: ["Compromiso", "Persuasión", "Autoritarismo", "Empatía"],
-          correct: 2,
-        },
-        {
-          question: "¿En qué consiste la proactividad?",
-          options: [
-            "Esperar a que otros resuelvan los problemas",
-            "Anticiparse de forma activa a los eventos o problemas futuros",
-            "Reaccionar únicamente cuando ocurre un problema",
-            "Seguir las instrucciones sin cuestionar",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Qué es un problema según la definición administrativa?",
-          options: [
-            "Una situación que nunca tiene solución",
-            "La brecha existente entre el Estado Actual y el Estado Deseado",
-            "Un error que cometió un empleado",
-            "Algo que solo afecta a los subordinados",
-          ],
-          correct: 1,
-        },
-      ],
-    },
-  },
-
-  "Comunicación Asertiva": {
+  "Comunicacion Asertiva": {
     description:
       "Domina el arte de expresar tus ideas con claridad, respeto y confianza. Aprende a comunicarte de forma efectiva en cualquier situación.",
     icon: "message-circle",
@@ -258,6 +125,232 @@ export const COURSES_DATA: CoursesData = {
             "Creatividad, Constancia y Confianza",
           ],
           correct: 1,
+        },
+      ],
+    },
+  },
+
+  "Construccion Colectiva": {
+    description:
+      "Colabora de manera efectiva para alcanzar objetivos comunes. Aprende a construir equipos cohesionados y productivos.",
+    icon: "user-plus",
+    color: "course-yellow",
+    content: {
+      title: "Contenido del Curso",
+      sections: [
+        {
+          heading: "La Construcción Colectiva del Conocimiento",
+          text: "La construcción colectiva es un proceso de enseñanza y aprendizaje donde los aprendices son sujetos activos que transforman y conservan la cultura mediante la interacción social. Los intercambios estimulantes y activos entre maestro y alumno son fundamentales para aprender a pensar.",
+        },
+        {
+          heading: "Aprendizaje Colaborativo",
+          text: "Las actividades grupales constituyen uno de los medios más acertados para aprender a pensar sobre el pensamiento, y de esta forma tener alumnos independientes capaces de construir juicios. Los intercambios dentro del salón deben estimular el aprendizaje de contenidos y enseñar a pensar.",
+        },
+        {
+          heading: "Dinámicas de Equipo",
+          text: "Los equipos pasan por fases de desarrollo: formación, tormenta, normación y desempeño. Comprender estas fases permite al equipo navegar los conflictos y alcanzar un alto rendimiento. La confianza mutua, los roles definidos y la comunicación efectiva son pilares del trabajo en equipo exitoso.",
+        },
+        {
+          heading: "Comunicación y Colaboración",
+          text: "La comunicación es el pegamento del equipo. Sin comunicación efectiva, los equipos se fragmentan. Aprender a escuchar activamente, dar feedback constructivo y alinear expectativas es fundamental para la colaboración.",
+        },
+        {
+          heading: "Construcción Colectiva en la Organización",
+          text: "En el ámbito organizacional, la construcción colectiva implica crear conocimiento compartido a través de la interacción social. Las comunidades de práctica y aprendizaje permiten que los miembros compartan experiencias, resuelvan problemas juntos y generen soluciones innovadoras.",
+        },
+      ],
+    },
+    resources: [
+      { type: "pdf", name: "La Construcción Colectiva del Conocimiento", file: "curso_construccion_colectiva.pdf" },
+      { type: "youtube", name: "Trabajo en Equipo Efectivo", url: "https://www.youtube.com/watch?v=8BvJq1gDb3M" },
+      { type: "youtube", name: "Fases del Desarrollo de un Equipo", url: "https://www.youtube.com/watch?v=Uz7Sfz1cFMg" },
+      { type: "youtube", name: "Aprendizaje Colaborativo", url: "https://www.youtube.com/watch?v=vLHxjKv4Jn8" },
+    ],
+    evaluation: {
+      title: "Evaluación de Trabajo en Equipo",
+      passScore: 70,
+      questions: [
+        {
+          question: "¿Qué es la construcción colectiva del conocimiento?",
+          options: [
+            "Copiar el trabajo de otros",
+            "Un proceso donde el conocimiento se crea a través de la interacción social",
+            "Estudiar solo",
+            "Memorizar información",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Cuáles son las fases del desarrollo de un equipo?",
+          options: [
+            "Inicio, desarrollo, cierre",
+            "Formación, tormenta, normación, desempeño",
+            "Planeación, ejecución, control",
+            "Ninguna de las anteriores",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Por qué es importante la comunicación en el equipo?",
+          options: [
+            "No es importante",
+            "Es el pegamento que mantiene unido al equipo",
+            "Solo para repartir tareas",
+            "Para que todos opinen lo mismo",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Qué diferencia hay entre aprendizaje individual y colaborativo?",
+          options: [
+            "No hay diferencia",
+            "El colaborativo es más lento pero más rico en perspectivas",
+            "El individual es siempre mejor",
+            "El colaborativo es solo para niños",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Qué son las comunidades de práctica?",
+          options: [
+            "Grupos de estudio tradicionales",
+            "Grupos donde los miembros comparten experiencias y resuelven problemas juntos",
+            "Clases en línea",
+            "Redes sociales",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Qué es la construcción colectiva en el ámbito educativo?",
+          options: [
+            "Cuando cada estudiante trabaja individualmente",
+            "Un proceso donde maestro y alumnos se relacionan interactivamente para transformar y reconstruir conocimiento",
+            "La acumulación de trabajos individuales de los alumnos",
+            "Un método donde solo el maestro explica",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Por qué las actividades grupales son importantes para aprender a pensar?",
+          options: [
+            "Porque son más fáciles que las individuales",
+            "Porque permiten construir juicios y desarrollar habilidades de razonamiento de manera independiente",
+            "Porque reducen el tiempo de enseñanza",
+            "Porque evitan los conflictos en el aula",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Cuál es la doble tarea del maestro en la construcción colectiva?",
+          options: [
+            "Enseñar contenido y calificar exámenes",
+            'El "pensar sobre el tema" y el "pensar sobre el pensamiento"',
+            "Dar clases y vigilar el salón",
+            "Explicar y repetir los mismos contenidos",
+          ],
+          correct: 1,
+        },
+        {
+          question: '¿Qué sucede cuando un maestro reduce el intercambio interactivo a solo algunos alumnos?',
+          options: [
+            "Se mejora la calidad de la enseñanza",
+            'El resto del grupo queda en calidad de "espectadores"',
+            "Se logra un aprendizaje más profundo",
+            "Los alumnos aprenden más rápido",
+          ],
+          correct: 1,
+        },
+      ],
+    },
+  },
+
+  "Desarrollo de Si mismo": {
+    description:
+      "Explora el autoconocimiento, la autoestima y el crecimiento personal como base para el desempeño profesional y el bienestar integral.",
+    icon: "user",
+    color: "course-teal",
+    content: {
+      title: "Contenido del Curso",
+      sections: [
+        {
+          heading: "Autoconocimiento: el punto de partida",
+          text: "El autoconocimiento es la capacidad de reconocer nuestras emociones, pensamientos, fortalezas, debilidades, valores y motivaciones. Es la base del desarrollo personal y profesional. Conocerse a uno mismo permite tomar decisiones más alineadas con quiénes somos y qué queremos, y nos hace más auténticos en las relaciones.",
+        },
+        {
+          heading: "Autoestima y autoimagen",
+          text: "La autoestima es la valoración que hacemos de nosotros mismos. Una autoestima saludable no significa creer que somos perfectos, sino aceptarnos con nuestras virtudes y áreas de mejora. La autoimagen influye en cómo nos relacionamos, cómo enfrentamos retos y cómo respondemos a la crítica. Cultivarla requiere práctica y autocompasión.",
+        },
+        {
+          heading: "Valores y propósito personal",
+          text: "Los valores son los principios que guían nuestras decisiones y comportamientos. Identificar los propios valores ayuda a vivir de forma coherente y a encontrar sentido en el trabajo y la vida. El propósito personal —el 'para qué' de lo que hacemos— es un motor de motivación profunda y sostenida que va más allá de los objetivos inmediatos.",
+        },
+        {
+          heading: "Hábitos y disciplina personal",
+          text: "El desarrollo personal requiere constancia. Los hábitos son rutinas automatizadas que, bien elegidas, nos llevan gradualmente hacia nuestros objetivos. La disciplina no es rigidez: es la capacidad de mantener el rumbo incluso cuando la motivación fluctúa. La planificación, el autocuidado y la gestión del tiempo son pilares de la disciplina personal.",
+        },
+        {
+          heading: "Crecimiento continuo y mentalidad de desarrollo",
+          text: "La mentalidad de crecimiento (growth mindset) es la creencia de que nuestras habilidades pueden desarrollarse con esfuerzo y aprendizaje. Contrasta con la mentalidad fija, que asume que las capacidades son estáticas. Adoptar una mentalidad de crecimiento nos hace más resilientes ante el fracaso, más curiosos ante los retos y más abiertos al aprendizaje permanente.",
+        },
+      ],
+    },
+    resources: [
+      { type: "pdf", name: "Desarrollo de Sí Mismo", file: "curso_desarrollo_de_si_mismo.pdf" },
+      { type: "youtube", name: "Cómo desarrollarte como persona — Claves prácticas", url: "https://www.youtube.com/watch?v=M1CHPnZfFmU" },
+    ],
+    evaluation: {
+      title: "Evaluación de Desarrollo de Sí mismo",
+      passScore: 70,
+      questions: [
+        {
+          question: "¿Qué es el autoconocimiento?",
+          options: [
+            "Conocer las debilidades de los demás para compararlas con las propias",
+            "La capacidad de reconocer nuestras emociones, fortalezas y valores",
+            "El proceso de imitar a personas exitosas",
+            "Memorizar teorías psicológicas sobre la personalidad",
+          ],
+          correct: 1,
+        },
+        {
+          question: "Una autoestima saludable implica:",
+          options: [
+            "Creer que uno es superior a los demás",
+            "Nunca cometer errores ni tener dudas",
+            "Aceptarse con virtudes y áreas de mejora",
+            "Depender de la validación externa para sentirse bien",
+          ],
+          correct: 2,
+        },
+        {
+          question: "¿Qué es la mentalidad de crecimiento (growth mindset)?",
+          options: [
+            "Creer que el talento es innato y no se puede cambiar",
+            "Enfocarse solo en las metas económicas",
+            "La creencia de que las habilidades se desarrollan con esfuerzo y aprendizaje",
+            "Evitar todo tipo de fracaso para proteger la autoestima",
+          ],
+          correct: 2,
+        },
+        {
+          question: "¿Para qué sirve identificar los propios valores?",
+          options: [
+            "Para imponerlos a los demás",
+            "Para vivir de forma coherente y encontrar sentido en lo que hacemos",
+            "Para evitar tomar decisiones difíciles",
+            "No tienen impacto en el desarrollo profesional",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Cuál es la diferencia entre disciplina y rigidez?",
+          options: [
+            "No existe diferencia, ambas implican seguir reglas estrictas",
+            "La disciplina requiere ausencia total de descanso",
+            "La disciplina es mantener el rumbo con flexibilidad; la rigidez no se adapta al cambio",
+            "La rigidez es más efectiva para lograr objetivos a largo plazo",
+          ],
+          correct: 2,
         },
       ],
     },
@@ -392,141 +485,131 @@ export const COURSES_DATA: CoursesData = {
     },
   },
 
-  "Resolución de Conflictos": {
+  "Gestion del Tiempo": {
     description:
-      "Mejora tu capacidad de análisis, evaluación y toma de decisiones basada en evidencia y razonamiento lógico.",
-    icon: "brain",
-    color: "course-green",
+      "Optimiza tu productividad y reduce el estrés laboral mediante técnicas efectivas de organización y planificación del tiempo.",
+    icon: "timer",
+    color: "course-cyan",
     content: {
       title: "Contenido del Curso",
       sections: [
         {
-          heading: "Gestión y Resolución de Conflictos",
-          text: "Encarar los conflictos de manera creativa y propositiva o destructiva depende de cómo nos hayamos preparado. La comprensión tradicional se refleja en disposiciones directivas que atañen al arbitraje o juicio, dejando poco espacio al desarrollo de habilidades para negociar y resolver autogestivamente nuestras diferencias.",
+          heading: "Las Razones del Éxito",
+          text: "La gestión eficaz del tiempo es una de las razones del éxito personal y profesional. Los pilares son: saber qué queremos (claridad de objetivos), establecer un plan de acción, concentrar esfuerzos en lo que realmente importa, y comprender que hacer bien lo que se hace es más importante que hacer muchas cosas.",
         },
         {
-          heading: "Capacidades Personales e Interpersonales",
-          text: "El desarrollo de capacidades personales, interpersonales e interinstitucionales permite la búsqueda y el logro de soluciones autogestionadas de los conflictos. Esto implica aprender a analizar situaciones, evaluar argumentos, identificar sesgos cognitivos y tomar decisiones fundamentadas.",
+          heading: "Autocontrol de Pensamientos",
+          text: "La dispersión de pensamiento, la procrastinación y la falta de prioridades son los principales ladrones de tiempo. El autocontrol permite anticipar el esfuerzo y costo de cada actividad. La anticipación de esfuerzo y costo, la falta de previsión y supervisión, y la postergación son patrones que debemos identificar y modificar.",
         },
         {
-          heading: "Identificación de Sesgos Cognitivos",
-          text: "Los sesgos cognitivos son patrones sistemáticos de desviación del juicio racional. Entre los más comunes están el sesgo de confirmación (buscar información que confirme nuestras creencias), el efecto ancla (depender excesivamente de la primera información recibida) y la falacia del superviviente.",
+          heading: "Planificación y Programación",
+          text: "La planificación define QUÉ queremos lograr, la programación define CÓMO y CUÁNDO lo haremos. Las normas para programar el tiempo incluyen: establecer prioridades, definir plazos realistas, asignar recursos y prever obstáculos. Las técnicas como la matriz de Eisenhower, el time blocking y la regla 80/20 son herramientas fundamentales.",
         },
         {
-          heading: "Técnicas de Análisis y Argumentación",
-          text: "La argumentación lógica, el análisis DAFO (Debilidades, Amenazas, Fortalezas, Oportunidades), el pensamiento lateral y la resolución creativa de conflictos son herramientas fundamentales. Un argumento válido requiere premises verdaderas, razonamiento válido y evidencia que lo respalde.",
+          heading: "Leyes del Tiempo y Ladrones de Tiempo",
+          text: "Existen leyes naturales del tiempo que debemos respetar: la ley de Parkinson (el trabajo se expande para llenar el tiempo disponible), la ley de los rendimientos marginales decrecientes y la ley del caos. Los ladrones de tiempo incluyen interrupciones, teléfono, reuniones innecesarios y falta de objetivos claros.",
         },
         {
-          heading: "Toma de Decisiones Basada en Evidencia",
-          text: "La toma de decisiones informada requiere recopilar evidencia, evaluar alternativas y prever consecuencias. En el ámbito organizacional, las decisiones basadas en datos reducen el riesgo y mejoran los resultados. El proceso incluye: definir el problema, generar alternativas, evaluar opciones, elegir la mejor alternativa y planificar la implementación.",
+          heading: "Gestión Anticipativa y Reactiva",
+          text: "La gestión anticipativa implica planificar y prevenir problemas antes de que ocurran. La gestión reactiva responde a situaciones ya presentes. El equilibrio entre ambas es clave: debemos ser proactivos sin perder la capacidad de respuesta. La gestión eficaz del tiempo reduce el estrés y mejora la productividad.",
         },
       ],
     },
     resources: [
-      { type: "pdf", name: "Manual de Gestión y Resolución de Conflictos", file: "curso_resolucion_de_conflictos.pdf" },
-      { type: "youtube", name: "¿Qué es el Pensamiento Crítico?", url: "https://www.youtube.com/watch?v=eP1TKLjsE5g" },
-      { type: "youtube", name: "Sesgos Cognitivos Explicados", url: "https://www.youtube.com/watch?v=kF_X1M_kC_Y" },
-      { type: "youtube", name: "Resolución de Conflictos Laborales", url: "https://www.youtube.com/watch?v=3aCChRGyWbI" },
+      { type: "pdf", name: "Gestión Eficaz del Tiempo", file: "curso_gestion_del_tiempo.pdf" },
+      { type: "youtube", name: "Técnica Pomodoro Explicada", url: "https://www.youtube.com/watch?v=Fk2KLqTK1hU" },
+      { type: "youtube", name: "Matriz de Eisenhower", url: "https://www.youtube.com/watch?v=7FJLrY3z3eY" },
+      { type: "youtube", name: "Cómo Vencer la Procrastinación", url: "https://www.youtube.com/watch?v=mhFQW4ebRcQ" },
     ],
     evaluation: {
-      title: "Evaluación de Pensamiento Crítico",
+      title: "Evaluación de Gestión del Tiempo",
       passScore: 70,
       questions: [
         {
-          question: "¿Qué es el pensamiento crítico?",
+          question: "¿Cuáles son los pilares de la gestión eficaz del tiempo?",
           options: [
-            "Ser negativo con todo",
-            "Analizar información de manera objetiva y tomar decisiones fundamentadas",
-            "No estar de acuerdo con nadie",
-            "Pensar rápido",
+            "Trabajar más horas",
+            "Claridad de objetivos, plan de acción, concentrar esfuerzos, hacer bien lo que se hace",
+            "Hacer muchas cosas a la vez",
+            "No descansar",
           ],
           correct: 1,
         },
         {
-          question: "¿Qué es el sesgo de confirmación?",
+          question: "¿Qué es la técnica Pomodoro?",
           options: [
-            "Confirmar que tenemos razón",
-            "Buscar solo información que confirme nuestras creencias previas",
-            "Preguntar para confirmar datos",
-            "Un tipo de análisis estadístico",
+            "Una receta de cocina",
+            "Trabajar en intervalos de 25 minutos con descansos",
+            "Una forma de medir el tiempo",
+            "Un tipo de reunión",
           ],
           correct: 1,
         },
         {
-          question: "¿Qué significa DAFO?",
+          question: "¿Qué dice la Ley de Parkinson?",
           options: [
-            "Debilidades, Amenazas, Fortalezas, Oportunidades",
-            "Datos, Análisis, Factores, Objetivos",
-            "Derechos, Actitudes, Funciones, Opciones",
-            "Ninguna de las anteriores",
+            "El tiempo vuela cuando te diviertes",
+            "El trabajo se expande para llenar el tiempo disponible",
+            "Más tiempo = mejor resultado",
+            "No hay leyes del tiempo",
           ],
-          correct: 0,
+          correct: 1,
         },
         {
-          question: "¿Cuál es el primer paso en la toma de decisiones basada en evidencia?",
+          question: "¿Qué es la gestión anticipativa?",
           options: [
-            "Elegir la opción más fácil",
-            "Recopilar toda la información disponible",
-            "Definir y comprender el problema",
-            "Consultar con un superior",
+            "Esperar a que pasen las cosas",
+            "Planificar y prevenir problemas antes de que ocurran",
+            "Reaccionar rápidamente",
+            "No planificar nada",
           ],
+          correct: 1,
+        },
+        {
+          question: "¿Cuál de estos es un ladrón de tiempo?",
+          options: [
+            "Planificar el día",
+            "Interrupciones frecuentes",
+            "Establecer prioridades",
+            "Descansar adecuadamente",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Cuál es la diferencia entre eficiencia y eficacia?",
+          options: [
+            "Son conceptos exactamente iguales",
+            "La eficiencia hace bien lo que se hace; la eficacia hace lo que se debe hacer",
+            "La eficacia se centra en el método; la eficiencia en el fin",
+            "La eficiencia es más importante que la eficacia",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Qué dice la Ley de Parkinson sobre las tareas?",
+          options: [
+            "Las tareas se completan más rápido de lo esperado",
+            "Toda tarea se dilata indefinidamente hasta ocupar todo el tiempo disponible",
+            "Las tareas importantes siempre se hacen primero",
+            "El tiempo no afecta la calidad del trabajo",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Cuál es el porcentaje máximo de tiempo que se recomienda programar?",
+          options: ["El 100% del tiempo", "El 50% del tiempo", "El 70% del tiempo", "El 90% del tiempo"],
           correct: 2,
         },
         {
-          question: "¿Qué es la falacia del superviviente?",
-          options: [
-            "Cuando alguien se rinde fácilmente",
-            "Generalizar basándose solo en casos exitosos ignorando los fracasos",
-            "Un error de razonamiento lógico",
-            "Una táctica de debate",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Qué es el conflicto según la definición presentada en el manual?",
-          options: [
-            "Una pelea física entre dos o más personas",
-            "Cualquier situación en la que dos o más entidades sociales perciben que tienen objetivos incompatibles",
-            "Un desacuerdo que siempre termina en violencia",
-            "Un problema que solo se resuelve con arbitraje externo",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Cuáles son los cinco estilos para responder al conflicto según el modelo de Ron Kraybill?",
-          options: [
-            "Directivo, Evitador, Negociador, Armonizador, Cooperador",
-            "Pasivo, Agresivo, Asertivo, Colaborativo, Competitivo",
-            "Líder, Seguidor, Mediador, Arbitro, Observador",
-            "Racional, Emocional, Impulsivo, Reflexivo, Neutro",
-          ],
-          correct: 0,
-        },
-        {
-          question: "¿Qué tipo de conflicto se refiere a las diferencias de criterio al evaluar ideas o comportamientos?",
-          options: [
-            "Conflicto de datos",
-            "Conflicto de intereses",
-            "Conflicto de valores",
-            "Conflicto estructural",
-          ],
-          correct: 2,
-        },
-        {
-          question: "¿Cuál es el primer paso para comprender y manejar un conflicto?",
-          options: [
-            "Aplicar una sanción inmediata",
-            "Tomar distancia del problema para conocer sus componentes",
-            "Buscar un tercero que decida por las partes",
-            "Ignorar el conflicto hasta que desaparezca",
-          ],
-          correct: 1,
+          question: "¿Cuál es el criterio correcto para establecer prioridades?",
+          options: ["Lo más fácil de hacer", "Lo más corto", "Lo más urgente", "Lo más importante"],
+          correct: 3,
         },
       ],
     },
   },
 
-  "Gestión Emocional": {
+  "Gestion Emocional": {
     description:
       "Gestiona tus emociones para un mejor bienestar personal y profesional. Aprende a reconocer, comprender y regular tus emociones.",
     icon: "heart",
@@ -660,265 +743,140 @@ export const COURSES_DATA: CoursesData = {
     },
   },
 
-  "Construcción Colectiva": {
+  "Liderazgo": {
     description:
-      "Colabora de manera efectiva para alcanzar objetivos comunes. Aprende a construir equipos cohesionados y productivos.",
-    icon: "user-plus",
-    color: "course-yellow",
+      "Desarrolla habilidades de liderazgo basadas en la empatía, la comunicación efectiva y la inteligencia emocional para guiar equipos de forma inspiradora.",
+    icon: "users",
+    color: "course-red",
     content: {
       title: "Contenido del Curso",
       sections: [
         {
-          heading: "La Construcción Colectiva del Conocimiento",
-          text: "La construcción colectiva es un proceso de enseñanza y aprendizaje donde los aprendices son sujetos activos que transforman y conservan la cultura mediante la interacción social. Los intercambios estimulantes y activos entre maestro y alumno son fundamentales para aprender a pensar.",
+          heading: "Definición de Liderazgo",
+          text: "El liderazgo es la capacidad de influir positivamente en otras personas para alcanzar objetivos comunes. No se trata solo de ocupar un cargo, sino de generar un impacto positivo en el equipo y la organización. Un líder empático escucha activamente, comprende las necesidades de su equipo y adapta su estilo según las circunstancias.",
         },
         {
-          heading: "Aprendizaje Colaborativo",
-          text: "Las actividades grupales constituyen uno de los medios más acertados para aprender a pensar sobre el pensamiento, y de esta forma tener alumnos independientes capaces de construir juicios. Los intercambios dentro del salón deben estimular el aprendizaje de contenidos y enseñar a pensar.",
+          heading: "Las 10 Habilidades Clave",
+          text: "Todo líder eficaz desarrolla un conjunto de habilidades esenciales: iniciativa, proactividad, innovación, creatividad, toma de decisiones bajo presión, comunicación asertiva, delegación efectiva, gestión de conflictos, motivación y reconocimiento, y adaptabilidad al cambio. Estas competencias permiten anticiparse a los cambios y guiar al equipo con visión de futuro.",
         },
         {
-          heading: "Dinámicas de Equipo",
-          text: "Los equipos pasan por fases de desarrollo: formación, tormenta, normación y desempeño. Comprender estas fases permite al equipo navegar los conflictos y alcanzar un alto rendimiento. La confianza mutua, los roles definidos y la comunicación efectiva son pilares del trabajo en equipo exitoso.",
+          heading: "Proceso de Toma de Decisiones",
+          text: "La indecisión es uno de los principales obstáculos del liderazgo. Un líder debe aprender a analizar situaciones, evaluar alternativas y tomar decisiones oportunas. El proceso incluye: identificar el problema, generar opciones, evaluar riesgos y comprometerse con la acción. El análisis de tipos de problemas y decisiones permite abordar cada situación con criterio.",
         },
         {
-          heading: "Comunicación y Colaboración",
-          text: "La comunicación es el pegamento del equipo. Sin comunicación efectiva, los equipos se fragmentan. Aprender a escuchar activamente, dar feedback constructivo y alinear expectativas es fundamental para la colaboración.",
+          heading: "Comunicación Organizacional",
+          text: "La comunicación es el vehículo del liderazgo. En el ámbito organizacional existen distintos tipos: formal, informal, descendente, ascendente y lateral. Dominar los modelos clásicos de comunicación permite transmitir ideas con claridad, elaborar documentos efectivos (memorandos, notas informativas) y generar confianza en el equipo.",
         },
         {
-          heading: "Construcción Colectiva en la Organización",
-          text: "En el ámbito organizacional, la construcción colectiva implica crear conocimiento compartido a través de la interacción social. Las comunidades de práctica y aprendizaje permiten que los miembros compartan experiencias, resuelvan problemas juntos y generen soluciones innovadoras.",
+          heading: "Inteligencia Emocional Aplicada",
+          text: "El líder debe desarrollar inteligencia emocional: conciencia de sí mismo, autorregulación, motivación, empatía y habilidades sociales. Esto permite conducir las propias emociones, gestionar el estrés laboral, planificar efectivamente y evitar los ladrones del tiempo como la procrastinación. El descanso activo es clave para mantener la productividad.",
+        },
+        {
+          heading: "Trabajo en Equipo y Toma de Decisiones",
+          text: "Un equipo eficaz se define por su capacidad de colaboración, confianza mutua y roles claros. El líder debe fomentar la creatividad en el equipo, seguir pasos para ser eficaz y eficiente, y tomar decisiones fundamentadas. La toma de decisiones en la empresa requiere un proceso estructurado que incluye identificar alternativas, evaluar consecuencias y comprometerse con la implementación.",
         },
       ],
     },
     resources: [
-      { type: "pdf", name: "La Construcción Colectiva del Conocimiento", file: "curso_construccion_colectiva.pdf" },
-      { type: "youtube", name: "Trabajo en Equipo Efectivo", url: "https://www.youtube.com/watch?v=8BvJq1gDb3M" },
-      { type: "youtube", name: "Fases del Desarrollo de un Equipo", url: "https://www.youtube.com/watch?v=Uz7Sfz1cFMg" },
-      { type: "youtube", name: "Aprendizaje Colaborativo", url: "https://www.youtube.com/watch?v=vLHxjKv4Jn8" },
+      { type: "pdf", name: "Manual de Prácticas de Liderazgo", file: "curso_liderazgo.pdf" },
+      { type: "youtube", name: "Liderazgo Empático - Conceptos Clave", url: "https://www.youtube.com/watch?v=QV0lgVHOx2s" },
+      { type: "youtube", name: "Las 10 Habilidades de un Líder", url: "https://www.youtube.com/watch?v=2fQBVqHVn_s" },
+      { type: "youtube", name: "Inteligencia Emocional en el Liderazgo", url: "https://www.youtube.com/watch?v=5D2ILg5qTcc" },
     ],
     evaluation: {
-      title: "Evaluación de Trabajo en Equipo",
+      title: "Evaluación de Liderazgo Empático",
       passScore: 70,
       questions: [
         {
-          question: "¿Qué es la construcción colectiva del conocimiento?",
+          question: "¿Cuál es la diferencia principal entre un jefe y un líder?",
           options: [
-            "Copiar el trabajo de otros",
-            "Un proceso donde el conocimiento se crea a través de la interacción social",
-            "Estudiar solo",
-            "Memorizar información",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Cuáles son las fases del desarrollo de un equipo?",
-          options: [
-            "Inicio, desarrollo, cierre",
-            "Formación, tormenta, normación, desempeño",
-            "Planeación, ejecución, control",
-            "Ninguna de las anteriores",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Por qué es importante la comunicación en el equipo?",
-          options: [
-            "No es importante",
-            "Es el pegamento que mantiene unido al equipo",
-            "Solo para repartir tareas",
-            "Para que todos opinen lo mismo",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Qué diferencia hay entre aprendizaje individual y colaborativo?",
-          options: [
+            "El jefe tiene autoridad formal, el líder tiene influencia e inspiración",
+            "El jefe es más inteligente que el líder",
+            "El líder siempre tiene más poder",
             "No hay diferencia",
-            "El colaborativo es más lento pero más rico en perspectivas",
-            "El individual es siempre mejor",
-            "El colaborativo es solo para niños",
           ],
-          correct: 1,
+          correct: 0,
         },
         {
-          question: "¿Qué son las comunidades de práctica?",
+          question: "¿Cuál de estas NO es una habilidad clave del liderazgo?",
           options: [
-            "Grupos de estudio tradicionales",
-            "Grupos donde los miembros comparten experiencias y resuelven problemas juntos",
-            "Clases en línea",
-            "Redes sociales",
+            "Iniciativa y proactividad",
+            "Control absoluto del equipo",
+            "Comunicación asertiva",
+            "Gestión de conflictos",
           ],
           correct: 1,
         },
         {
-          question: "¿Qué es la construcción colectiva en el ámbito educativo?",
+          question: "¿Qué es la inteligencia emocional en el liderazgo?",
           options: [
-            "Cuando cada estudiante trabaja individualmente",
-            "Un proceso donde maestro y alumnos se relacionan interactivamente para transformar y reconstruir conocimiento",
-            "La acumulación de trabajos individuales de los alumnos",
-            "Un método donde solo el maestro explica",
+            "Ser el más inteligente del equipo",
+            "Capacidad de reconocer y gestionar emociones propias y ajenas",
+            "No mostrar emociones en el trabajo",
+            "Imponer decisiones sin consultar",
           ],
           correct: 1,
         },
         {
-          question: "¿Por qué las actividades grupales son importantes para aprender a pensar?",
+          question: "¿Cuál es el primer paso en el proceso de toma de decisiones?",
           options: [
-            "Porque son más fáciles que las individuales",
-            "Porque permiten construir juicios y desarrollar habilidades de razonamiento de manera independiente",
-            "Porque reducen el tiempo de enseñanza",
-            "Porque evitan los conflictos en el aula",
+            "Elegir la primera opción que surja",
+            "Consultar con todos los miembros del equipo",
+            "Identificar y definir el problema",
+            "Dejar que otros decidan",
           ],
-          correct: 1,
-        },
-        {
-          question: "¿Cuál es la doble tarea del maestro en la construcción colectiva?",
-          options: [
-            "Enseñar contenido y calificar exámenes",
-            'El "pensar sobre el tema" y el "pensar sobre el pensamiento"',
-            "Dar clases y vigilar el salón",
-            "Explicar y repetir los mismos contenidos",
-          ],
-          correct: 1,
-        },
-        {
-          question: '¿Qué sucede cuando un maestro reduce el intercambio interactivo a solo algunos alumnos?',
-          options: [
-            "Se mejora la calidad de la enseñanza",
-            'El resto del grupo queda en calidad de "espectadores"',
-            "Se logra un aprendizaje más profundo",
-            "Los alumnos aprenden más rápido",
-          ],
-          correct: 1,
-        },
-      ],
-    },
-  },
-
-  "Agilidad y Gestión del Tiempo": {
-    description:
-      "Optimiza tu productividad y reduce el estrés laboral mediante técnicas efectivas de organización y planificación del tiempo.",
-    icon: "timer",
-    color: "course-cyan",
-    content: {
-      title: "Contenido del Curso",
-      sections: [
-        {
-          heading: "Las Razones del Éxito",
-          text: "La gestión eficaz del tiempo es una de las razones del éxito personal y profesional. Los pilares son: saber qué queremos (claridad de objetivos), establecer un plan de acción, concentrar esfuerzos en lo que realmente importa, y comprender que hacer bien lo que se hace es más importante que hacer muchas cosas.",
-        },
-        {
-          heading: "Autocontrol de Pensamientos",
-          text: "La dispersión de pensamiento, la procrastinación y la falta de prioridades son los principales ladrones de tiempo. El autocontrol permite anticipar el esfuerzo y costo de cada actividad. La anticipación de esfuerzo y costo, la falta de previsión y supervisión, y la postergación son patrones que debemos identificar y modificar.",
-        },
-        {
-          heading: "Planificación y Programación",
-          text: "La planificación define QUÉ queremos lograr, la programación define CÓMO y CUÁNDO lo haremos. Las normas para programar el tiempo incluyen: establecer prioridades, definir plazos realistas, asignar recursos y prever obstáculos. Las técnicas como la matriz de Eisenhower, el time blocking y la regla 80/20 son herramientas fundamentales.",
-        },
-        {
-          heading: "Leyes del Tiempo y Ladrones de Tiempo",
-          text: "Existen leyes naturales del tiempo que debemos respetar: la ley de Parkinson (el trabajo se expande para llenar el tiempo disponible), la ley de los rendimientos marginales decrecientes y la ley del caos. Los ladrones de tiempo incluyen interrupciones, teléfono, reuniones innecesarios y falta de objetivos claros.",
-        },
-        {
-          heading: "Gestión Anticipativa y Reactiva",
-          text: "La gestión anticipativa implica planificar y prevenir problemas antes de que ocurran. La gestión reactiva responde a situaciones ya presentes. El equilibrio entre ambas es clave: debemos ser proactivos sin perder la capacidad de respuesta. La gestión eficaz del tiempo reduce el estrés y mejora la productividad.",
-        },
-      ],
-    },
-    resources: [
-      { type: "pdf", name: "Gestión Eficaz del Tiempo", file: "curso_gestion_del_tiempo.pdf" },
-      { type: "youtube", name: "Técnica Pomodoro Explicada", url: "https://www.youtube.com/watch?v=Fk2KLqTK1hU" },
-      { type: "youtube", name: "Matriz de Eisenhower", url: "https://www.youtube.com/watch?v=7FJLrY3z3eY" },
-      { type: "youtube", name: "Cómo Vencer la Procrastinación", url: "https://www.youtube.com/watch?v=mhFQW4ebRcQ" },
-    ],
-    evaluation: {
-      title: "Evaluación de Gestión del Tiempo",
-      passScore: 70,
-      questions: [
-        {
-          question: "¿Cuáles son los pilares de la gestión eficaz del tiempo?",
-          options: [
-            "Trabajar más horas",
-            "Claridad de objetivos, plan de acción, concentrar esfuerzos, hacer bien lo que se hace",
-            "Hacer muchas cosas a la vez",
-            "No descansar",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Qué es la técnica Pomodoro?",
-          options: [
-            "Una receta de cocina",
-            "Trabajar en intervalos de 25 minutos con descansos",
-            "Una forma de medir el tiempo",
-            "Un tipo de reunión",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Qué dice la Ley de Parkinson?",
-          options: [
-            "El tiempo vuela cuando te diviertes",
-            "El trabajo se expande para llenar el tiempo disponible",
-            "Más tiempo = mejor resultado",
-            "No hay leyes del tiempo",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Qué es la gestión anticipativa?",
-          options: [
-            "Esperar a que pasen las cosas",
-            "Planificar y prevenir problemas antes de que ocurran",
-            "Reaccionar rápidamente",
-            "No planificar nada",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Cuál de estos es un ladrón de tiempo?",
-          options: [
-            "Planificar el día",
-            "Interrupciones frecuentes",
-            "Establecer prioridades",
-            "Descansar adecuadamente",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Cuál es la diferencia entre eficiencia y eficacia?",
-          options: [
-            "Son conceptos exactamente iguales",
-            "La eficiencia hace bien lo que se hace; la eficacia hace lo que se debe hacer",
-            "La eficacia se centra en el método; la eficiencia en el fin",
-            "La eficiencia es más importante que la eficacia",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Qué dice la Ley de Parkinson sobre las tareas?",
-          options: [
-            "Las tareas se completan más rápido de lo esperado",
-            "Toda tarea se dilata indefinidamente hasta ocupar todo el tiempo disponible",
-            "Las tareas importantes siempre se hacen primero",
-            "El tiempo no afecta la calidad del trabajo",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Cuál es el porcentaje máximo de tiempo que se recomienda programar?",
-          options: ["El 100% del tiempo", "El 50% del tiempo", "El 70% del tiempo", "El 90% del tiempo"],
           correct: 2,
         },
         {
-          question: "¿Cuál es el criterio correcto para establecer prioridades?",
-          options: ["Lo más fácil de hacer", "Lo más corto", "Lo más urgente", "Lo más importante"],
-          correct: 3,
+          question: "¿Qué tipo de comunicación fluye de los superiores a los subordinados?",
+          options: [
+            "Comunicación ascendente",
+            "Comunicación lateral",
+            "Comunicación descendente",
+            "Comunicación informal",
+          ],
+          correct: 2,
+        },
+        {
+          question: "¿Cómo se define el liderazgo en el manual?",
+          options: [
+            "El cargo o posición jerárquica que una persona ocupa",
+            "El proceso de dirigir la conducta de otros hacia el alcance de algún objetivo",
+            "La capacidad de dar órdenes sin cuestionamientos",
+            "Un conjunto de habilidades innatas que no se pueden aprender",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Cuál de las siguientes NO es una de las 10 habilidades que todo buen líder debe tener?",
+          options: ["Compromiso", "Persuasión", "Autoritarismo", "Empatía"],
+          correct: 2,
+        },
+        {
+          question: "¿En qué consiste la proactividad?",
+          options: [
+            "Esperar a que otros resuelvan los problemas",
+            "Anticiparse de forma activa a los eventos o problemas futuros",
+            "Reaccionar únicamente cuando ocurre un problema",
+            "Seguir las instrucciones sin cuestionar",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Qué es un problema según la definición administrativa?",
+          options: [
+            "Una situación que nunca tiene solución",
+            "La brecha existente entre el Estado Actual y el Estado Deseado",
+            "Un error que cometió un empleado",
+            "Algo que solo afecta a los subordinados",
+          ],
+          correct: 1,
         },
       ],
     },
   },
 
-  "Tolerancia a la Frustración": {
+  "Resistencia a la Frustracion": {
     description:
       "Fortalece tu capacidad para superar la adversidad, adaptarte a los cambios y crecer a partir de las dificultades.",
     icon: "shield",
@@ -1052,191 +1010,135 @@ export const COURSES_DATA: CoursesData = {
     },
   },
 
-  "Argumentación": {
+  "Resolucion de Conflictos": {
     description:
-      "Desarrolla la capacidad de construir argumentos sólidos, defender posturas con lógica y evidencia, y comunicar ideas de manera persuasiva y estructurada.",
-    icon: "chat",
-    color: "course-blue",
+      "Mejora tu capacidad de análisis, evaluación y toma de decisiones basada en evidencia y razonamiento lógico.",
+    icon: "brain",
+    color: "course-green",
     content: {
       title: "Contenido del Curso",
       sections: [
         {
-          heading: "¿Qué es argumentar?",
-          text: "Argumentar es la capacidad de ofrecer razones válidas para defender una posición o refutar la de otro. Un buen argumento está compuesto por una tesis clara, premisas relevantes y una conclusión lógica. La argumentación efectiva va más allá de la opinión: requiere evidencia, coherencia y respeto por el interlocutor.",
+          heading: "Gestión y Resolución de Conflictos",
+          text: "Encarar los conflictos de manera creativa y propositiva o destructiva depende de cómo nos hayamos preparado. La comprensión tradicional se refleja en disposiciones directivas que atañen al arbitraje o juicio, dejando poco espacio al desarrollo de habilidades para negociar y resolver autogestivamente nuestras diferencias.",
         },
         {
-          heading: "Tipos de argumentos",
-          text: "Existen varios tipos de argumentos: argumentos de autoridad (basados en fuentes expertas), argumentos causales (causa-efecto), argumentos inductivos (de lo específico a lo general) y deductivos (de lo general a lo específico). Cada tipo tiene su aplicación según el contexto y el público al que va dirigido.",
+          heading: "Capacidades Personales e Interpersonales",
+          text: "El desarrollo de capacidades personales, interpersonales e interinstitucionales permite la búsqueda y el logro de soluciones autogestionadas de los conflictos. Esto implica aprender a analizar situaciones, evaluar argumentos, identificar sesgos cognitivos y tomar decisiones fundamentadas.",
         },
         {
-          heading: "Falacias y errores comunes",
-          text: "Una falacia es un razonamiento incorrecto que parece válido pero no lo es. Las más comunes son: el ad hominem (atacar a la persona), el hombre de paja (distorsionar el argumento contrario), la falsa dicotomía (presentar solo dos opciones cuando hay más) y la apelación a la emoción. Identificarlas fortalece la capacidad crítica.",
+          heading: "Identificación de Sesgos Cognitivos",
+          text: "Los sesgos cognitivos son patrones sistemáticos de desviación del juicio racional. Entre los más comunes están el sesgo de confirmación (buscar información que confirme nuestras creencias), el efecto ancla (depender excesivamente de la primera información recibida) y la falacia del superviviente.",
         },
         {
-          heading: "Argumentación en entornos profesionales",
-          text: "En el mundo laboral, argumentar bien es esencial para negociar, liderar reuniones, presentar proyectos y resolver conflictos. Un profesional que argumenta con claridad genera confianza y credibilidad. La práctica incluye estructurar exposiciones orales, redactar informes persuasivos y participar en debates constructivos.",
+          heading: "Técnicas de Análisis y Argumentación",
+          text: "La argumentación lógica, el análisis DAFO (Debilidades, Amenazas, Fortalezas, Oportunidades), el pensamiento lateral y la resolución creativa de conflictos son herramientas fundamentales. Un argumento válido requiere premises verdaderas, razonamiento válido y evidencia que lo respalde.",
         },
         {
-          heading: "Escucha activa y contraargumentación",
-          text: "Saber argumentar implica también saber escuchar. La escucha activa permite entender la posición del otro antes de responder. La contraargumentación efectiva no busca ganar sino encontrar la verdad o la mejor solución. Responder con respeto y precisión a los argumentos del otro es una señal de madurez comunicativa.",
-        },
-      ],
-    },
-    resources: [
-      {
-        type: "youtube",
-        name: "Cómo argumentar mejor — Técnicas clave",
-        url: "https://www.youtube.com/watch?v=NJSMIsRX3Fw",
-      },
-    ],
-    evaluation: {
-      title: "Evaluación de Argumentación",
-      passScore: 70,
-      questions: [
-        {
-          question: "¿Qué estructura básica tiene un argumento sólido?",
-          options: [
-            "Emoción, intuición y reacción",
-            "Tesis, premisas y conclusión",
-            "Pregunta, respuesta y silencio",
-            "Datos, rumores y suposiciones",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Qué es una falacia ad hominem?",
-          options: [
-            "Atacar el argumento con datos concretos",
-            "Presentar solo dos opciones posibles",
-            "Atacar a la persona en lugar de su argumento",
-            "Usar demasiados ejemplos para ilustrar una idea",
-          ],
-          correct: 2,
-        },
-        {
-          question: "¿Cuál es la diferencia entre un argumento inductivo y uno deductivo?",
-          options: [
-            "El inductivo parte de lo general y el deductivo de lo específico",
-            "El deductivo parte de lo general y el inductivo de lo específico",
-            "No existe diferencia real entre ambos",
-            "El inductivo siempre es más válido que el deductivo",
-          ],
-          correct: 1,
-        },
-        {
-          question: "¿Por qué es importante la escucha activa en la argumentación?",
-          options: [
-            "Para poder interrumpir al oponente en el momento justo",
-            "Para ganar tiempo mientras se piensa en la respuesta",
-            "Porque argumentar bien incluye entender la posición del otro",
-            "No tiene relación con la argumentación",
-          ],
-          correct: 2,
-        },
-        {
-          question: "¿Cuál de estas es una buena práctica al argumentar en un entorno profesional?",
-          options: [
-            "Imponer la propia opinión sin permitir debate",
-            "Usar solo argumentos emocionales para persuadir",
-            "Estructurar las ideas con claridad y respaldarlas con evidencia",
-            "Evitar dar razones para no generar conflicto",
-          ],
-          correct: 2,
-        },
-      ],
-    },
-  },
-
-  "Desarrollo de Sí mismo": {
-    description:
-      "Explora el autoconocimiento, la autoestima y el crecimiento personal como base para el desempeño profesional y el bienestar integral.",
-    icon: "user",
-    color: "course-teal",
-    content: {
-      title: "Contenido del Curso",
-      sections: [
-        {
-          heading: "Autoconocimiento: el punto de partida",
-          text: "El autoconocimiento es la capacidad de reconocer nuestras emociones, pensamientos, fortalezas, debilidades, valores y motivaciones. Es la base del desarrollo personal y profesional. Conocerse a uno mismo permite tomar decisiones más alineadas con quiénes somos y qué queremos, y nos hace más auténticos en las relaciones.",
-        },
-        {
-          heading: "Autoestima y autoimagen",
-          text: "La autoestima es la valoración que hacemos de nosotros mismos. Una autoestima saludable no significa creer que somos perfectos, sino aceptarnos con nuestras virtudes y áreas de mejora. La autoimagen influye en cómo nos relacionamos, cómo enfrentamos retos y cómo respondemos a la crítica. Cultivarla requiere práctica y autocompasión.",
-        },
-        {
-          heading: "Valores y propósito personal",
-          text: "Los valores son los principios que guían nuestras decisiones y comportamientos. Identificar los propios valores ayuda a vivir de forma coherente y a encontrar sentido en el trabajo y la vida. El propósito personal —el 'para qué' de lo que hacemos— es un motor de motivación profunda y sostenida que va más allá de los objetivos inmediatos.",
-        },
-        {
-          heading: "Hábitos y disciplina personal",
-          text: "El desarrollo personal requiere constancia. Los hábitos son rutinas automatizadas que, bien elegidas, nos llevan gradualmente hacia nuestros objetivos. La disciplina no es rigidez: es la capacidad de mantener el rumbo incluso cuando la motivación fluctúa. La planificación, el autocuidado y la gestión del tiempo son pilares de la disciplina personal.",
-        },
-        {
-          heading: "Crecimiento continuo y mentalidad de desarrollo",
-          text: "La mentalidad de crecimiento (growth mindset) es la creencia de que nuestras habilidades pueden desarrollarse con esfuerzo y aprendizaje. Contrasta con la mentalidad fija, que asume que las capacidades son estáticas. Adoptar una mentalidad de crecimiento nos hace más resilientes ante el fracaso, más curiosos ante los retos y más abiertos al aprendizaje permanente.",
+          heading: "Toma de Decisiones Basada en Evidencia",
+          text: "La toma de decisiones informada requiere recopilar evidencia, evaluar alternativas y prever consecuencias. En el ámbito organizacional, las decisiones basadas en datos reducen el riesgo y mejoran los resultados. El proceso incluye: definir el problema, generar alternativas, evaluar opciones, elegir la mejor alternativa y planificar la implementación.",
         },
       ],
     },
     resources: [
-      {
-        type: "youtube",
-        name: "Cómo desarrollarte como persona — Claves prácticas",
-        url: "https://www.youtube.com/watch?v=M1CHPnZfFmU",
-      },
+      { type: "pdf", name: "Manual de Gestión y Resolución de Conflictos", file: "curso_resolucion_de_conflictos.pdf" },
+      { type: "youtube", name: "¿Qué es el Pensamiento Crítico?", url: "https://www.youtube.com/watch?v=eP1TKLjsE5g" },
+      { type: "youtube", name: "Sesgos Cognitivos Explicados", url: "https://www.youtube.com/watch?v=kF_X1M_kC_Y" },
+      { type: "youtube", name: "Resolución de Conflictos Laborales", url: "https://www.youtube.com/watch?v=3aCChRGyWbI" },
     ],
     evaluation: {
-      title: "Evaluación de Desarrollo de Sí mismo",
+      title: "Evaluación de Pensamiento Crítico",
       passScore: 70,
       questions: [
         {
-          question: "¿Qué es el autoconocimiento?",
+          question: "¿Qué es el pensamiento crítico?",
           options: [
-            "Conocer las debilidades de los demás para compararlas con las propias",
-            "La capacidad de reconocer nuestras emociones, fortalezas y valores",
-            "El proceso de imitar a personas exitosas",
-            "Memorizar teorías psicológicas sobre la personalidad",
+            "Ser negativo con todo",
+            "Analizar información de manera objetiva y tomar decisiones fundamentadas",
+            "No estar de acuerdo con nadie",
+            "Pensar rápido",
           ],
           correct: 1,
         },
         {
-          question: "Una autoestima saludable implica:",
+          question: "¿Qué es el sesgo de confirmación?",
           options: [
-            "Creer que uno es superior a los demás",
-            "Nunca cometer errores ni tener dudas",
-            "Aceptarse con virtudes y áreas de mejora",
-            "Depender de la validación externa para sentirse bien",
-          ],
-          correct: 2,
-        },
-        {
-          question: "¿Qué es la mentalidad de crecimiento (growth mindset)?",
-          options: [
-            "Creer que el talento es innato y no se puede cambiar",
-            "Enfocarse solo en las metas económicas",
-            "La creencia de que las habilidades se desarrollan con esfuerzo y aprendizaje",
-            "Evitar todo tipo de fracaso para proteger la autoestima",
-          ],
-          correct: 2,
-        },
-        {
-          question: "¿Para qué sirve identificar los propios valores?",
-          options: [
-            "Para imponerlos a los demás",
-            "Para vivir de forma coherente y encontrar sentido en lo que hacemos",
-            "Para evitar tomar decisiones difíciles",
-            "No tienen impacto en el desarrollo profesional",
+            "Confirmar que tenemos razón",
+            "Buscar solo información que confirme nuestras creencias previas",
+            "Preguntar para confirmar datos",
+            "Un tipo de análisis estadístico",
           ],
           correct: 1,
         },
         {
-          question: "¿Cuál es la diferencia entre disciplina y rigidez?",
+          question: "¿Qué significa DAFO?",
           options: [
-            "No existe diferencia, ambas implican seguir reglas estrictas",
-            "La disciplina requiere ausencia total de descanso",
-            "La disciplina es mantener el rumbo con flexibilidad; la rigidez no se adapta al cambio",
-            "La rigidez es más efectiva para lograr objetivos a largo plazo",
+            "Debilidades, Amenazas, Fortalezas, Oportunidades",
+            "Datos, Análisis, Factores, Objetivos",
+            "Derechos, Actitudes, Funciones, Opciones",
+            "Ninguna de las anteriores",
+          ],
+          correct: 0,
+        },
+        {
+          question: "¿Cuál es el primer paso en la toma de decisiones basada en evidencia?",
+          options: [
+            "Elegir la opción más fácil",
+            "Recopilar toda la información disponible",
+            "Definir y comprender el problema",
+            "Consultar con un superior",
           ],
           correct: 2,
+        },
+        {
+          question: "¿Qué es la falacia del superviviente?",
+          options: [
+            "Cuando alguien se rinde fácilmente",
+            "Generalizar basándose solo en casos exitosos ignorando los fracasos",
+            "Un error de razonamiento lógico",
+            "Una táctica de debate",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Qué es el conflicto según la definición presentada en el manual?",
+          options: [
+            "Una pelea física entre dos o más personas",
+            "Cualquier situación en la que dos o más entidades sociales perciben que tienen objetivos incompatibles",
+            "Un desacuerdo que siempre termina en violencia",
+            "Un problema que solo se resuelve con arbitraje externo",
+          ],
+          correct: 1,
+        },
+        {
+          question: "¿Cuáles son los cinco estilos para responder al conflicto según el modelo de Ron Kraybill?",
+          options: [
+            "Directivo, Evitador, Negociador, Armonizador, Cooperador",
+            "Pasivo, Agresivo, Asertivo, Colaborativo, Competitivo",
+            "Líder, Seguidor, Mediador, Arbitro, Observador",
+            "Racional, Emocional, Impulsivo, Reflexivo, Neutro",
+          ],
+          correct: 0,
+        },
+        {
+          question: "¿Qué tipo de conflicto se refiere a las diferencias de criterio al evaluar ideas o comportamientos?",
+          options: [
+            "Conflicto de datos",
+            "Conflicto de intereses",
+            "Conflicto de valores",
+            "Conflicto estructural",
+          ],
+          correct: 2,
+        },
+        {
+          question: "¿Cuál es el primer paso para comprender y manejar un conflicto?",
+          options: [
+            "Aplicar una sanción inmediata",
+            "Tomar distancia del problema para conocer sus componentes",
+            "Buscar un tercero que decida por las partes",
+            "Ignorar el conflicto hasta que desaparezca",
+          ],
+          correct: 1,
         },
       ],
     },

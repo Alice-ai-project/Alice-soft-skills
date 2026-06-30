@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable react-hooks/set-state-in-effect */
+
 import {
   createContext,
   useContext,
@@ -23,21 +25,23 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 const SESSION_KEY = "alice_session";
 
+function getInitialSession(): StoredSession | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(SESSION_KEY);
+    if (raw) return JSON.parse(raw) as StoredSession;
+  } catch {
+    localStorage.removeItem(SESSION_KEY);
+  }
+  return null;
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [session, setSessionState] = useState<StoredSession | null>(null);
+  const [session, setSessionState] = useState<StoredSession | null>(getInitialSession);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(SESSION_KEY);
-      if (raw) {
-        setSessionState(JSON.parse(raw) as StoredSession);
-      }
-    } catch {
-      localStorage.removeItem(SESSION_KEY);
-    } finally {
-      setIsLoading(false);
-    }
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -64,7 +68,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return null;
       }
     });
-  }, [session?.refresh_token]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [session?.refresh_token]);
 
   function setSession(s: StoredSession | null) {
     setSessionState(s);

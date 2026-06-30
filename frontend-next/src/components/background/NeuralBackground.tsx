@@ -263,7 +263,7 @@ class WebGLBoundary extends Component<
 // ─── Public component ──────────────────────────────────────────────────────
 
 export default function NeuralBackground() {
-  const { nodes, threshold, dpr } = useMemo(resolveConfig, []);
+  const { nodes, threshold, dpr } = useMemo(() => resolveConfig(), []);
 
   return (
     <WebGLBoundary fallback={null}>

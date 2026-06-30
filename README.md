@@ -12,40 +12,38 @@ Alice-soft-skills/
 │   │   ├── api/               # Endpoints REST
 │   │   │   ├── auth.py        # Autenticación (login/register/me)
 │   │   │   ├── diagnostics.py # API de diagnósticos
-│   │   │   └── endpoints/     # Endpoints de cursos y perfiles
+│   │   │   └── endpoints/     # Endpoints de cursos, perfiles, chat y roadmap
 │   │   ├── core/              # Configuración y utilidades
-│   │   │   ├── config.py      # Settings con pydantic-settings
-│   │   │   ├── supabase_client.py # Cliente Supabase
-│   │   │   ├── auth.py        # Middleware de autenticación JWT
-│   │   │   ├── errors.py      # Manejo centralizado de errores
-│   │   │   └── request_id.py  # Middleware de request tracking
 │   │   ├── schemas/           # Modelos Pydantic
 │   │   ├── services/          # Lógica de negocio
 │   │   └── repositories/      # Acceso a datos
 │   ├── Dockerfile
 │   └── requirements.txt
-├── frontend/                   # Cliente web SPA
-│   ├── index.html             # Página principal
+├── frontend-next/              # Frontend principal (Next.js 16 / React 19)
+│   ├── src/
+│   │   ├── app/               # App Router (rutas de páginas)
+│   │   ├── components/        # Componentes React
+│   │   ├── services/          # Servicios API
+│   │   ├── types/             # Tipos TypeScript
+│   │   ├── utils/             # Utilidades
+│   │   └── data/              # Datos estáticos
 │   ├── Dockerfile
-│   ├── css/                   # Estilos modulares
-│   ├── js/                    # Arquitectura MVC
-│   │   ├── models/            # Modelos de estado
-│   │   ├── views/             # Renderizado del DOM
-│   │   ├── controllers/       # Orquestación
-│   │   └── data/              # Datos estáticos (cursos, diagnósticos)
-│   ├── docs/                  # Documentación y cursos PDF
-│   └── assets/                # Recursos estáticos
-└── supabase/                   # Migraciones de base de datos
+│   └── package.json
+├── frontend/                   # Frontend legacy (HTML/JS vanilla)
+├── n8n-workflows/              # Workflows de automatización
+│   └── roadmap-recommender.json  # Workflow de roadmap con OpenAI
+├── supabase/                   # Migraciones de base de datos
+└── docker-compose.yml          # Orquestación de servicios
 ```
 
 ## Stack Tecnológico
 
 | Componente | Tecnología |
 |---|---|
-| **Frontend** | HTML5 + JavaScript ES Modules + CSS3 |
+| **Frontend** | Next.js 16 + React 19 + TypeScript + Tailwind CSS v4 |
 | **Backend** | Python 3.11 + FastAPI + Uvicorn |
-| **Base de datos** | Supabase (PostgreSQL + Auth + RLS) |
-| **Automatización** | n8n (orquestación de workflows IA) |
+| **Base de datos** | PostgreSQL 16 + Supabase |
+| **IA / Automatización** | n8n + OpenAI GPT-4o-mini |
 | **Contenedores** | Docker + Docker Compose |
 
 ## Funcionalidades
@@ -54,34 +52,40 @@ Alice-soft-skills/
 - Registro de usuarios con email y contraseña
 - Login con JWT de Supabase
 - Endpoints protegidos con Bearer token
-- Manejo de sesiones
+- Manejo de sesiones con refresh token
 
-### Dashboard
-- Panel principal con estadísticas
-- Vista de cursos disponibles (11 cursos de soft skills)
-- Conversación con avatar de IA
+### Dashboard de Usuario
+- Panel principal con avatar de IA
+- Vista de cursos disponibles
+- Chat con asistente de IA
+- Configuración de perfil
 - Estadísticas de progreso
-- Configuración de usuario
 
 ### Sistema de Diagnóstico
-- Cuestionarios parametrizables
-- Scoring por dimensiones conductuales
-- Interpretación y recomendaciones personalizadas
-- Persistencia de resultados
+- Cuestionario de 24 preguntas (6 dimensiones × 4 preguntas)
+- Basado en el modelo de Inteligencia Emocional de Daniel Goleman
+- Dimensiones: Autoconocimiento, Autorregulación, Motivación, Empatía, Habilidades Sociales, Conexión Emocional
+- Scoring de 1-4 por pregunta (máximo 96 puntos)
+- Interpretación automática: Muy Baja, Baja, Media, Alta
+
+### Roadmap Personalizado con IA
+- Generación de ruta de aprendizaje vía OpenAI GPT-4o-mini
+- Recomendaciones basadas en resultados del diagnóstico
+- Cursos priorizados con razón y semanas estimadas
+- Posibilidad de regenerar el roadmap desde la interfaz
 
 ### Cursos de Soft Skills
-- 11 cursos en PDF:
+- 9 cursos interactivos con evaluaciones:
   - Comunicación Asertiva
   - Construcción Colectiva
   - Desarrollo de Sí Mismo
-  - El Arte de la Guerra (Sun Tzu)
   - Flexibilidad y Adaptabilidad
   - Gestión del Tiempo
   - Gestión Emocional
-  - Inteligencia Emocional (Goleman)
   - Liderazgo
   - Resistencia a la Frustración
   - Resolución de Conflictos
+- Cada curso incluye: contenido, recursos PDF, videos y evaluación
 
 ## Instalación
 
@@ -99,32 +103,48 @@ cd Alice-soft-skills
 
 # 2. Configurar variables de entorno
 cp .env.example .env
-# Editar .env con tus credenciales de Supabase
+# Editar .env con tus credenciales
 
 # 3. Levantar servicios
 docker compose up --build
 
 # 4. Verificar
 curl http://localhost:8000/health
-# Abrir http://localhost:8080 en el navegador
 ```
+
+### URLs de los servicios
+
+| Servicio | URL |
+|----------|-----|
+| Frontend Next.js | http://localhost:3000 |
+| Frontend Legacy | http://localhost:8080 |
+| Backend API | http://localhost:8000 |
+| n8n | http://localhost:5678 |
+| PostgreSQL | localhost:5433 |
 
 ## Endpoints API
 
 ### Autenticación
-- `POST /auth/register` - Registrar usuario
 - `POST /auth/login` - Iniciar sesión
+- `POST /auth/register` - Registrar usuario
+- `POST /auth/refresh` - Refrescar token
 - `GET /auth/me` - Obtener usuario actual
 
 ### Diagnósticos
 - `POST /api/v1/diagnostics` - Crear diagnóstico
 - `GET /api/v1/diagnostics/{user_id}` - Obtener diagnóstico de usuario
 
+### Roadmap
+- `POST /api/v1/roadmap/recommend` - Generar roadmap personalizado con IA
+
 ### Cursos y Perfiles
 - `GET /api/v1/courses/` - Listar cursos
 - `GET /api/v1/courses/user/{profile_id}` - Ruta de aprendizaje
 - `GET /api/v1/profiles/{profile_id}` - Obtener perfil
 - `PUT /api/v1/profiles/{profile_id}` - Actualizar perfil
+
+### Chat
+- `POST /api/v1/chat/message` - Enviar mensaje al asistente de IA
 
 ### Salud
 - `GET /health` - Health check
@@ -146,10 +166,7 @@ SUPABASE_SERVICE_KEY=your_service_role_key
 # n8n
 N8N_HOST=localhost
 N8N_WEBHOOK_URL=http://localhost:5678/
-
-# RAG
-RAG_COLLECTION_NAME=softskills_docs
-RAG_TOP_K=4
+N8N_ROADMAP_WEBHOOK_URL=http://localhost:5678/webhook/roadmap-recommend
 ```
 
 ## Desarrollo
@@ -160,8 +177,9 @@ RAG_TOP_K=4
 # Levantar en segundo plano
 docker compose up --build -d
 
-# Ver logs
-docker compose logs -f
+# Ver logs de un servicio específico
+docker compose logs -f frontend-next
+docker compose logs -f backend
 
 # Detener servicios
 docker compose down
@@ -169,37 +187,25 @@ docker compose down
 # Detener y borrar datos
 docker compose down -v
 
-# Reconstruir solo backend
-docker compose build backend
+# Reconstruir solo un servicio
+docker compose up -d --build backend
+docker compose up -d --build frontend-next
 ```
 
-### Ejecutar tests
+## Workflow de n8n
 
-```bash
-# Dentro del contenedor backend
-docker compose exec backend pytest
+El workflow `roadmap-recommender.json` implementa el siguiente flujo:
 
-# O localmente
-cd backend
-pip install -r requirements.txt
-pytest
+```
+Webhook POST → Validate Input → Prepare Prompt → OpenAI API → Parse Response → Send Response
 ```
 
-## Estructura de Ramas
-
-- `main` - Producción estable
-- `develop` - Desarrollo principal
-- `feature/combined` - Versión combinada de todas las features
-- `feature/cursos` - Sistema de cursos y dashboard
-- `feature/diagnosis` - Módulo de diagnóstico
-- `feature/diagnostics-completion` - API de diagnósticos completa
-- `feature/login-register` - Sistema de autenticación
-- `feature/conexionSupabase` - Integración con Supabase
-
-## Documentación
-
-- `frontend/docs/diagnostico_guia.md` - Instrumento de diagnóstico Goleman
-- `frontend/docs/preguntas_cursos.md` - Preguntas por curso
+### Para importar el workflow:
+1. Abrir n8n en `http://localhost:5678`
+2. Ir a **Workflows** → **Import from File**
+3. Seleccionar `n8n-workflows/roadmap-recommender.json`
+4. Configurar la variable `OPENAI_API_KEY` en Settings → Variables
+5. Activar el workflow
 
 ## Licencia
 

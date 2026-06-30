@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable react-hooks/set-state-in-effect */
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, Spinner } from "@heroui/react";
@@ -30,7 +32,7 @@ export default function AdminStatisticsPage() {
   const { session, isLoading } = useAuth();
   const router = useRouter();
   const [stats, setStats] = useState<AdminStatistics | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

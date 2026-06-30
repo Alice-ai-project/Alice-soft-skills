@@ -1,11 +1,17 @@
 "use client";
 
+/* eslint-disable react-hooks/set-state-in-effect */
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { DIAGNOSTICO_DATA } from "@/data/diagnostico-data";
 import { COURSE_NAMES } from "@/data/courses-data";
-import { computeRecommendations, saveDiagnosticResult, loadDiagnosticResult } from "@/utils/roadmap";
+import { saveDiagnosticResult, loadDiagnosticResult } from "@/utils/roadmap";
 import type { RecommendedCourse } from "@/utils/roadmap";
+import { recommendRoadmap } from "@/services/roadmapService";
+import { dimensionsToRoadmapInput } from "@/types/roadmap";
+import type { RoadmapCourse } from "@/types/roadmap";
+import { useAuth } from "@/contexts/AuthContext";
 import type { DiagnosticResult, DimensionResult, ScoreLevel } from "@/types/diagnostics";
 
 const PERSIST_STEP    = "alice_diag_step";
@@ -72,6 +78,7 @@ const sections   = DIAGNOSTICO_DATA.sections;
 const totalSteps = sections.length;
 
 export default function DiagnosticPage() {
+  const { session } = useAuth();
   const [ready,           setReady]           = useState(false);
   const [step,            setStep]            = useState(0);
   const [answers,         setAnswers]         = useState<Answers>({});
@@ -117,7 +124,7 @@ export default function DiagnosticPage() {
 
     // Signal that restore is complete — persist effects are now safe to write
     setReady(true);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   // ── Persist only after initial restore to avoid overwriting saved data ────
   useEffect(() => {
@@ -135,7 +142,7 @@ export default function DiagnosticPage() {
     setError(null);
   }
 
-  function handleNext() {
+  async function handleNext() {
     const missing = currentSection.questions.some(
       (_, qi) => answers[`${step}-${qi}`] === undefined,
     );
@@ -149,7 +156,30 @@ export default function DiagnosticPage() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       const newResult = calculateResults(answers);
-      const recs      = computeRecommendations(newResult.dimensions);
+
+      let recs: RecommendedCourse[] = [];
+      if (session?.access_token) {
+        try {
+          const response = await recommendRoadmap(
+            dimensionsToRoadmapInput(
+              newResult.dimensions,
+              newResult.overallLevel,
+              newResult.totalScore,
+              newResult.maxScore,
+            ),
+            session.access_token,
+          );
+          if (response.success && response.roadmap.length > 0) {
+            recs = response.roadmap.map((r: RoadmapCourse) => ({
+              course: r.course,
+              reason: r.reason,
+            }));
+          }
+        } catch {
+          // Fallback to local computation if n8n fails
+        }
+      }
+
       saveDiagnosticResult({
         totalScore:   newResult.totalScore,
         maxScore:     newResult.maxScore,

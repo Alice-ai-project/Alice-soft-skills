@@ -40,24 +40,6 @@ function EvaluationQuiz({ evaluation }: { evaluation: CourseEvaluation }) {
 
   return (
     <div className="space-y-4">
-      {submitted && (
-        <div
-          className="rounded-xl p-4"
-          style={
-            passed
-              ? { background: "rgba(90,204,164,0.1)", border: "1px solid rgba(90,204,164,0.35)" }
-              : { background: "rgba(254,101,79,0.1)", border: "1px solid rgba(254,101,79,0.35)" }
-          }
-        >
-          <p className="font-semibold text-sm" style={{ color: passed ? "#5ACCA4" : "#FE654F" }}>
-            {passed ? "¡Aprobado!" : "No aprobado"} — {score}/{totalQ} correctas ({pct}%)
-          </p>
-          <p className="text-xs mt-0.5" style={{ color: "rgba(249,250,252,0.4)" }}>
-            Puntaje mínimo para aprobar: {evaluation.passScore}%
-          </p>
-        </div>
-      )}
-
       {evaluation.questions.map((q, qi) => (
         <div key={qi} className="rounded-xl p-4" style={card}>
           <p className="text-sm font-semibold mb-3" style={{ color: "#F9FAFC" }}>
@@ -134,17 +116,34 @@ function EvaluationQuiz({ evaluation }: { evaluation: CourseEvaluation }) {
           Enviar evaluación
         </button>
       ) : (
-        <button
-          onClick={handleReset}
-          className="px-4 py-2 rounded-lg text-sm font-medium transition-opacity hover:opacity-75"
-          style={{
-            background: "rgba(107,92,255,0.1)",
-            border:     "1px solid rgba(107,92,255,0.25)",
-            color:      "rgba(249,250,252,0.75)",
-          }}
-        >
-          Intentar de nuevo
-        </button>
+        <>
+          <div
+            className="rounded-xl p-4"
+            style={
+              passed
+                ? { background: "rgba(90,204,164,0.1)", border: "1px solid rgba(90,204,164,0.35)" }
+                : { background: "rgba(254,101,79,0.1)", border: "1px solid rgba(254,101,79,0.35)" }
+            }
+          >
+            <p className="font-semibold text-sm" style={{ color: passed ? "#5ACCA4" : "#FE654F" }}>
+              {passed ? "¡Aprobado!" : "No aprobado"} — {score}/{totalQ} correctas ({pct}%)
+            </p>
+            <p className="text-xs mt-0.5" style={{ color: "rgba(249,250,252,0.4)" }}>
+              Puntaje mínimo para aprobar: {evaluation.passScore}%
+            </p>
+          </div>
+          <button
+            onClick={handleReset}
+            className="px-4 py-2 rounded-lg text-sm font-medium transition-opacity hover:opacity-75"
+            style={{
+              background: "rgba(107,92,255,0.1)",
+              border:     "1px solid rgba(107,92,255,0.25)",
+              color:      "rgba(249,250,252,0.75)",
+            }}
+          >
+            Intentar de nuevo
+          </button>
+        </>
       )}
     </div>
   );

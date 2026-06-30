@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.admin import router as admin_router
 from app.api.auth import router as auth_router
 from app.api.diagnostics import router as diagnostics_router
-from app.api.endpoints import profiles, courses, chat as chat_endpoint
+from app.api.endpoints import profiles, courses, chat as chat_endpoint, roadmap as roadmap_endpoint
 from app.core.errors import AppError, app_error_handler, http_exception_handler, validation_exception_handler
 from app.core.request_id import RequestIdMiddleware
 from app.core.supabase_client import supabase_client, supabase_auth_client
@@ -34,6 +34,7 @@ app.include_router(diagnostics_router, prefix="/api/v1")
 app.include_router(profiles.router, prefix="/api/v1/profiles", tags=["Profiles"])
 app.include_router(courses.router, prefix="/api/v1/courses", tags=["Courses"])
 app.include_router(chat_endpoint.router, prefix="/api/v1/chat", tags=["Chat"])
+app.include_router(roadmap_endpoint.router, prefix="/api/v1/roadmap", tags=["Roadmap"])
 app.include_router(admin_router)
 
 

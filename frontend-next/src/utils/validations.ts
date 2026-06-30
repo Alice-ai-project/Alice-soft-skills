@@ -1,6 +1,6 @@
-export const NAME_MAX = 50;
-export const EMAIL_MAX = 50;
-export const PASSWORD_MIN = 8;
+const NAME_MAX = 50;
+const EMAIL_MAX = 50;
+const PASSWORD_MIN = 8;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
