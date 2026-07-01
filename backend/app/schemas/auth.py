@@ -7,13 +7,6 @@ class AuthLogin(BaseModel):
     password: str = Field(min_length=6, max_length=128)
 
 
-class AuthRegister(BaseModel):
-    email: EmailStr
-    password: str = Field(min_length=8, max_length=128)
-    first_name: str = Field(min_length=1, max_length=80)
-    last_name: str = Field(min_length=1, max_length=80)
-
-
 class AuthUserRead(BaseModel):
     user_id: str
     email: EmailStr

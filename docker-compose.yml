@@ -68,6 +68,7 @@ services:
       N8N_PORT: 5678
       WEBHOOK_URL: ${N8N_WEBHOOK_URL}
       N8N_PROTOCOL: http
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
     ports:
       - "5678:5678"
     depends_on:

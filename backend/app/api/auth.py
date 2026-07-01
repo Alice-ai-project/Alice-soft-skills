@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.core.auth import get_current_user
 from app.core.supabase_client import supabase_auth_client
-from app.schemas.auth import AuthLogin, AuthMeResponse, AuthRefresh, AuthRegister, AuthSessionRead, AuthUserRead
+from app.schemas.auth import AuthLogin, AuthMeResponse, AuthRefresh, AuthSessionRead, AuthUserRead
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -70,33 +70,6 @@ async def login(payload: AuthLogin) -> AuthSessionRead:
             detail="Email confirmation is required before login",
         )
     return session_read
-
-
-@router.post("/register", response_model=AuthSessionRead, status_code=status.HTTP_201_CREATED)
-async def register(payload: AuthRegister) -> AuthSessionRead:
-    """
-    Register a user with Supabase Auth.
-    """
-    try:
-        response = _auth_client().auth.sign_up(
-            {
-                "email": payload.email,
-                "password": payload.password,
-                "options": {
-                    "data": {
-                        "first_name": payload.first_name,
-                        "last_name": payload.last_name,
-                    }
-                },
-            }
-        )
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Could not register user",
-        )
-
-    return _build_session_read(response)
 
 
 @router.post("/refresh", response_model=AuthSessionRead)

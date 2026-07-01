@@ -10,7 +10,7 @@ Alice-soft-skills/
 │   ├── app/
 │   │   ├── main.py            # Entrada FastAPI
 │   │   ├── api/               # Endpoints REST
-│   │   │   ├── auth.py        # Autenticación (login/register/me)
+│   │   │   ├── auth.py        # Autenticación (login/me/refresh)
 │   │   │   ├── diagnostics.py # API de diagnósticos
 │   │   │   └── endpoints/     # Endpoints de cursos, perfiles, chat y roadmap
 │   │   ├── core/              # Configuración y utilidades
@@ -31,7 +31,8 @@ Alice-soft-skills/
 │   └── package.json
 ├── frontend/                   # Frontend legacy (HTML/JS vanilla)
 ├── n8n-workflows/              # Workflows de automatización
-│   └── roadmap-recommender.json  # Workflow de roadmap con OpenAI
+│   ├── roadmap-recommender.json         # Workflow original (HTTP Request a OpenAI)
+│   └── roadmap-recommender-agent.json   # Workflow con AI Agent (activo)
 ├── supabase/                   # Migraciones de base de datos
 └── docker-compose.yml          # Orquestación de servicios
 ```
@@ -49,7 +50,6 @@ Alice-soft-skills/
 ## Funcionalidades
 
 ### Autenticación
-- Registro de usuarios con email y contraseña
 - Login con JWT de Supabase
 - Endpoints protegidos con Bearer token
 - Manejo de sesiones con refresh token
@@ -69,7 +69,7 @@ Alice-soft-skills/
 - Interpretación automática: Muy Baja, Baja, Media, Alta
 
 ### Roadmap Personalizado con IA
-- Generación de ruta de aprendizaje vía OpenAI GPT-4o-mini
+- Generación de ruta de aprendizaje vía n8n AI Agent + OpenAI GPT-4o-mini
 - Recomendaciones basadas en resultados del diagnóstico
 - Cursos priorizados con razón y semanas estimadas
 - Posibilidad de regenerar el roadmap desde la interfaz
@@ -126,7 +126,6 @@ curl http://localhost:8000/health
 
 ### Autenticación
 - `POST /auth/login` - Iniciar sesión
-- `POST /auth/register` - Registrar usuario
 - `POST /auth/refresh` - Refrescar token
 - `GET /auth/me` - Obtener usuario actual
 
@@ -166,7 +165,10 @@ SUPABASE_SERVICE_KEY=your_service_role_key
 # n8n
 N8N_HOST=localhost
 N8N_WEBHOOK_URL=http://localhost:5678/
-N8N_ROADMAP_WEBHOOK_URL=http://localhost:5678/webhook/roadmap-recommend
+N8N_ROADMAP_WEBHOOK_URL=http://n8n:5678/webhook/roadmap-recommend-agent
+
+# OpenAI (requerido para n8n AI Agent)
+OPENAI_API_KEY=sk-your-openai-api-key
 ```
 
 ## Desarrollo
@@ -194,17 +196,25 @@ docker compose up -d --build frontend-next
 
 ## Workflow de n8n
 
-El workflow `roadmap-recommender.json` implementa el siguiente flujo:
+### Workflow Activo: AI Agent (`roadmap-recommender-agent.json`)
 
 ```
-Webhook POST → Validate Input → Prepare Prompt → OpenAI API → Parse Response → Send Response
+Webhook POST → Validate and Parse → Check Error → Prepare Prompt → AI Agent → Parse Response → Send Response
+                                           ↑                                    ↓
+                                    Error Response              [OpenAI Chat Model] + [Code Tool]
+```
+
+### Workflow Original (`roadmap-recommender.json`)
+
+```
+Webhook POST → Validate and Parse → Check Error → Prepare Prompt → OpenAI API (HTTP) → Parse Response → Send Response
 ```
 
 ### Para importar el workflow:
 1. Abrir n8n en `http://localhost:5678`
 2. Ir a **Workflows** → **Import from File**
-3. Seleccionar `n8n-workflows/roadmap-recommender.json`
-4. Configurar la variable `OPENAI_API_KEY` en Settings → Variables
+3. Seleccionar el archivo JSON de `n8n-workflows/`
+4. Configurar la credencial de OpenAI (ya existe como "OpenAI account")
 5. Activar el workflow
 
 ## Licencia

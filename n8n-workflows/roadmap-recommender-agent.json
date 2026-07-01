@@ -1,0 +1,279 @@
+{
+  "name": "Alice - Roadmap Recommender (AI Agent)",
+  "id": "alice-roadmap-agent",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "roadmap-recommend-agent",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "alice-roadmap-agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first();\nconst json = item.json;\n\nlet body = json.body;\nif (typeof body === 'string') {\n  try { body = JSON.parse(body); } catch (e) { body = null; }\n}\nif (!body || typeof body !== 'object') {\n  body = json;\n}\n\nconst dimensions = body.dimensions;\n\nif (!dimensions || !Array.isArray(dimensions) || dimensions.length === 0) {\n  return [{\n    json: {\n      _error: true,\n      statusCode: 400,\n      body: { error: 'Missing required field: dimensions' }\n    }\n  }];\n}\n\nreturn [{\n  json: {\n    _error: false,\n    dimensions: dimensions,\n    overallLevel: body.overallLevel || 'No evaluado',\n    totalScore: body.totalScore || 0,\n    maxScore: body.maxScore || 96\n  }\n}];"
+      },
+      "id": "validate-and-parse",
+      "name": "Validate and Parse",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nif (data._error) {\n  return [{ json: { statusCode: data.statusCode, body: data.body } }];\n}\nreturn [$input.first()];"
+      },
+      "id": "check-error",
+      "name": "Check Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json.body) }}",
+        "options": {
+          "responseCode": "={{ $json.statusCode }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "error-response",
+      "name": "Error Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [900, 420]
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst dimensions = data.dimensions;\nconst overallLevel = data.overallLevel;\nconst totalScore = data.totalScore;\nconst maxScore = data.maxScore;\n\nconst weakAreas = dimensions\n  .filter(d => d.level === 'Muy Baja' || d.level === 'Baja')\n  .map(d => `${d.name}: ${d.score}/${d.maxScore} (${d.level})`)\n  .join('\\n');\n\nconst strongAreas = dimensions\n  .filter(d => d.level === 'Alta')\n  .map(d => `${d.name}: ${d.score}/${d.maxScore} (${d.level})`)\n  .join('\\n');\n\nconst mediumAreas = dimensions\n  .filter(d => d.level === 'Media')\n  .map(d => `${d.name}: ${d.score}/${d.maxScore} (${d.level})`)\n  .join('\\n');\n\nconst courses = [\n  { name: 'Comunicacion Asertiva', description: 'Domina el arte de expresar tus ideas con claridad, respeto y confianza.' },\n  { name: 'Construccion Colectiva', description: 'Colabora de manera efectiva para alcanzar objetivos comunes.' },\n  { name: 'Desarrollo de Si mismo', description: 'Explora el autoconocimiento, la autoestima y el crecimiento personal.' },\n  { name: 'Flexibilidad y Adaptabilidad', description: 'Desbloquea tu potencial creativo para resolver problemas de forma innovadora.' },\n  { name: 'Gestion del Tiempo', description: 'Optimiza tu productividad y reduce el estrés laboral.' },\n  { name: 'Gestion Emocional', description: 'Gestiona tus emociones para un mejor bienestar personal y profesional.' },\n  { name: 'Liderazgo', description: 'Desarrolla habilidades de liderazgo basadas en la empatía y la comunicación efectiva.' },\n  { name: 'Resistencia a la Frustracion', description: 'Fortalece tu capacidad para superar la adversidad y crecer a partir de las dificultades.' },\n  { name: 'Resolucion de Conflictos', description: 'Mejora tu capacidad de análisis, evaluación y toma de decisiones.' }\n];\n\nconst coursesList = courses.map(c => `- ${c.name}: ${c.description}`).join('\\n');\n\nconst prompt = `Basado en el siguiente diagnóstico de un usuario, recomienda un roadmap personalizado de cursos.\n\n## Resultado del Diagnóstico\n- Nivel general: ${overallLevel}\n- Puntuación: ${totalScore}/${maxScore}\n\n## Áreas Débiles (que necesitan mejorar)\n${weakAreas || 'No hay áreas débiles identificadas'}\n\n## Áreas Medias (con potencial de mejora)\n${mediumAreas || 'No hay áreas medias'}\n\n## Áreas Fuertes (fortalezas)\n${strongAreas || 'No hay áreas fuertes identificadas'}\n\n## Cursos Disponibles\n${coursesList}\n\n## Instrucciones\n1. Analiza las áreas débiles y medias del usuario\n2. Recomienda entre 3 y 5 cursos en orden de prioridad\n3. Para cada curso, explica brevemente por qué es relevante para el usuario\n4. Sugiere un orden de estudio lógico\n5. Incluye una estimación de tiempo sugerida para cada curso\n\nResponde EXACTAMENTE en este formato JSON (sin texto adicional):\n{\n  \"roadmap\": [\n    {\n      \"course\": \"Nombre del Curso\",\n      \"priority\": 1,\n      \"reason\": \"Breve explicación\",\n      \"estimatedWeeks\": 2\n    }\n  ],\n  \"summary\": \"Resumen general del roadmap\"\n}`;\n\nreturn [{\n  json: {\n    chatInput: prompt,\n    overallLevel,\n    totalScore,\n    maxScore\n  }\n}];"
+      },
+      "id": "prepare-prompt",
+      "name": "Prepare Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 180]
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Eres un asesor educativo experto en desarrollo de habilidades blandas.\n\nTu tarea es analizar el diagnóstico del usuario y recomendar un roadmap personalizado de cursos.\n\nREGLAS IMPORTANTES:\n1. Analiza las áreas débiles (nivel 'Muy Baja' o 'Baja') y medias del usuario\n2. Recomienda entre 3 y 5 cursos en orden de prioridad\n3. Para cada curso explica brevemente por qué es relevante\n4. Sugiere un orden de estudia lógico\n5. Incluye estimación de tiempo para cada curso\n6. USA la herramienta format_roadmap_json UNA SOLA VEZ para entregar tu respuesta final\n\nEl JSON de respuesta debe tener esta estructura exacta:\n{\"roadmap\": [{\"course\": \"Nombre\", \"priority\": 1, \"reason\": \"Razón\", \"estimatedWeeks\": 2}], \"summary\": \"Resumen\"}"
+        },
+        "maxIterations": 5
+      },
+      "id": "ai-agent",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [1120, 180]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {
+          "temperature": 0.7,
+          "maxTokens": 1500
+        }
+      },
+      "id": "openai-chat-model",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [1020, 380],
+      "credentials": {
+        "openAiApi": {
+          "id": "HCOwAOqthsQzPg9f",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "format_roadmap_json",
+        "description": "Use this tool to save the final roadmap result. Call this tool ONCE with the complete JSON roadmap when you have finished analyzing the diagnostic data. Input must be a JSON string with 'roadmap' array and 'summary' field.",
+        "language": "javaScript",
+        "jsCode": "return query;"
+      },
+      "id": "code-tool",
+      "name": "Format JSON Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolCode",
+      "typeVersion": 1.2,
+      "position": [1220, 380]
+    },
+    {
+      "parameters": {
+        "jsCode": "const agentOutput = $input.first().json;\nconst previousData = $('Prepare Prompt').first().json;\n\ntry {\n  let content = agentOutput.output || agentOutput.text || '';\n\n  // If the output is an object, use it directly\n  if (typeof agentOutput === 'object' && agentOutput.output) {\n    try {\n      const parsed = JSON.parse(agentOutput.output);\n      return [{\n        json: {\n          success: true,\n          roadmap: parsed.roadmap || [],\n          summary: parsed.summary || '',\n          diagnostic: {\n            overallLevel: previousData.overallLevel,\n            totalScore: previousData.totalScore,\n            maxScore: previousData.maxScore\n          }\n        }\n      }];\n    } catch (e) {\n      // Not JSON, continue with string parsing\n    }\n  }\n\n  // Try to parse as JSON\n  let roadmap;\n  try {\n    roadmap = JSON.parse(content);\n  } catch (e) {\n    const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n    if (jsonMatch) {\n      roadmap = JSON.parse(jsonMatch[0]);\n    } else {\n      throw new Error('Could not parse AI Agent response as JSON');\n    }\n  }\n\n  return [{\n    json: {\n      success: true,\n      roadmap: roadmap.roadmap || [],\n      summary: roadmap.summary || '',\n      diagnostic: {\n        overallLevel: previousData.overallLevel,\n        totalScore: previousData.totalScore,\n        maxScore: previousData.maxScore\n      }\n    }\n  }];\n} catch (error) {\n  return [{\n    json: {\n      success: false,\n      error: error.message,\n      rawResponse: agentOutput\n    }\n  }];\n}"
+      },
+      "id": "parse-response",
+      "name": "Parse Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 180]
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\nif (data.success) {\n  return [{\n    json: {\n      statusCode: 200,\n      body: {\n        success: true,\n        roadmap: data.roadmap,\n        summary: data.summary,\n        diagnostic: data.diagnostic\n      }\n    }\n  }];\n} else {\n  return [{\n    json: {\n      statusCode: 500,\n      body: {\n        success: false,\n        error: data.error || 'Failed to generate roadmap'\n      }\n    }\n  }];\n}"
+      },
+      "id": "prepare-response",
+      "name": "Prepare Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1560, 180]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json.body) }}",
+        "options": {
+          "responseCode": "={{ $json.statusCode }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "POST, OPTIONS"
+              },
+              {
+                "name": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Authorization"
+              }
+            ]
+          }
+        }
+      },
+      "id": "send-response",
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1780, 180]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate and Parse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate and Parse": {
+      "main": [
+        [
+          {
+            "node": "Check Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Error": {
+      "main": [
+        [
+          {
+            "node": "Prepare Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Prompt": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Parse Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Response": {
+      "main": [
+        [
+          {
+            "node": "Prepare Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Response": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format JSON Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
