@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
       args:
         # NEXT_PUBLIC_* vars are baked in at build time; use the host-accessible URL
-        NEXT_PUBLIC_API_URL: http://localhost:8000
+        NEXT_PUBLIC_API_URL: http://167.233.41.7:8000
     container_name: alice-frontend-next
     ports:
       - "3000:3000"
