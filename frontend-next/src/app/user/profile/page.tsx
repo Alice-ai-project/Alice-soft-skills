@@ -10,7 +10,7 @@ import type { UserProfile } from "@/types/user";
 
 const card: React.CSSProperties = {
   background:   "rgba(255,255,255,0.08)",
-  border:       "1px solid rgba(107,92,255,0.25)",
+  border:       "1px solid rgba(124,58,237,0.25)",
   borderRadius: 16,
 };
 
@@ -65,7 +65,7 @@ export default function ProfilePage() {
       <div className="p-6 rounded-2xl flex items-center gap-5" style={card}>
         <div
           className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0"
-          style={{ background: "linear-gradient(135deg,#6B5CFF,#9c85ff)" }}
+          style={{ background: "linear-gradient(135deg,#7c3aed,#a78bfa)" }}
         >
           <span className="text-white text-2xl font-bold">{avatar}</span>
         </div>
@@ -81,9 +81,9 @@ export default function ProfilePage() {
           <span
             className="inline-block mt-2 px-2.5 py-0.5 rounded-full text-xs font-semibold capitalize"
             style={{
-              background: "rgba(107,92,255,0.2)",
-              color:      "#c4b8ff",
-              border:     "1px solid rgba(107,92,255,0.35)",
+              background: "rgba(124,58,237,0.2)",
+              color:      "#d8b4fe",
+              border:     "1px solid rgba(124,58,237,0.35)",
             }}
           >
             {user?.role ?? "estudiante"}
@@ -99,7 +99,7 @@ export default function ProfilePage() {
             className="flex items-start justify-between gap-4 px-5 py-4"
             style={
               i !== 0
-                ? { borderTop: "1px solid rgba(107,92,255,0.1)" }
+                ? { borderTop: "1px solid rgba(124,58,237,0.1)" }
                 : undefined
             }
           >
@@ -145,7 +145,7 @@ export default function ProfilePage() {
         <Link
           href="/user/diagnostic"
           className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
-          style={{ background: "#6B5CFF", color: "#F9FAFC" }}
+          style={{ background: "#7c3aed", color: "#F9FAFC" }}
         >
           Realizar diagnóstico
         </Link>
@@ -153,8 +153,8 @@ export default function ProfilePage() {
           href="/user"
           className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
           style={{
-            background: "rgba(107,92,255,0.1)",
-            border:     "1px solid rgba(107,92,255,0.25)",
+            background: "rgba(124,58,237,0.1)",
+            border:     "1px solid rgba(124,58,237,0.25)",
             color:      "rgba(249,250,252,0.75)",
           }}
         >

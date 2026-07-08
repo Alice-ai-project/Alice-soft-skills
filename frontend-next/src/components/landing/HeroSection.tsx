@@ -3,7 +3,6 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Button } from "@heroui/react";
-import AliceLogoMark from "@/components/ui/AliceLogoMark";
 
 // Client-only: WebGL Canvas must never SSR
 const AiParticleWormholeBackground = dynamic(
@@ -62,12 +61,11 @@ export default function HeroSection() {
           {/* ── Navbar ────────────────────────────────────────────────────── */}
           <header className="max-w-6xl mx-auto w-full px-5 sm:px-8 py-5 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-2.5">
-              <div
-                className="w-9 h-9 rounded-xl flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg,#6B5CFF,#9c85ff)" }}
-              >
-                <AliceLogoMark />
-              </div>
+              <img
+                src="/logo.png"
+                alt="Alice logo"
+                className="w-9 h-9 rounded-xl object-contain"
+              />
               <span className="text-white font-semibold text-lg tracking-tight">Alice</span>
             </div>
 
@@ -94,8 +92,8 @@ export default function HeroSection() {
             <div
               className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide uppercase mb-8 select-none"
               style={{
-                background: "rgba(107,92,255,0.14)",
-                border: "1px solid rgba(107,92,255,0.38)",
+                background: "rgba(124,58,237,0.14)",
+                border: "1px solid rgba(124,58,237,0.38)",
                 color: "#a99cff",
               }}
             >
@@ -117,7 +115,7 @@ export default function HeroSection() {
                 className="bg-clip-text text-transparent"
                 style={{
                   backgroundImage:
-                    "linear-gradient(90deg,#6B5CFF 0%,#EAA2FC 50%,#5ACCA4 100%)",
+                    "linear-gradient(90deg,#7c3aed 0%,#c084fc 50%,#5ACCA4 100%)",
                 }}
               >
                 orientación inteligente
@@ -141,8 +139,8 @@ export default function HeroSection() {
                   size="lg"
                   className="w-full sm:w-auto px-8 font-semibold text-white shadow-lg"
                   style={{
-                    background: "linear-gradient(135deg,#6B5CFF 0%,#8b7bff 100%)",
-                    boxShadow: "0 0 24px rgba(107,92,255,0.35)",
+                    background: "linear-gradient(135deg,#7c3aed 0%,#8b7bff 100%)",
+                    boxShadow: "0 0 24px rgba(124,58,237,0.35)",
                   }}
                   aria-label="Comenzar ahora"
                 >
@@ -176,12 +174,12 @@ export default function HeroSection() {
                 className="rounded-2xl p-6"
                 style={{
                   background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(107,92,255,0.15)",
+                  border: "1px solid rgba(124,58,237,0.15)",
                 }}
               >
                 <div
                   className="text-3xl mb-4 w-12 h-12 rounded-xl flex items-center justify-center"
-                  style={{ background: "rgba(107,92,255,0.12)" }}
+                  style={{ background: "rgba(124,58,237,0.12)" }}
                   aria-hidden="true"
                 >
                   {f.icon}

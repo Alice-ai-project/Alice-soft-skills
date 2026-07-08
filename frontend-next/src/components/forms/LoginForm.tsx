@@ -113,7 +113,7 @@ export default function LoginForm() {
         type="submit"
         disabled={isSubmitting}
         className="w-full py-2.5 rounded-lg text-sm font-semibold transition-opacity disabled:opacity-50"
-        style={{ background: "#6B5CFF", color: "#F9FAFC" }}
+        style={{ background: "#7c3aed", color: "#F9FAFC" }}
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">
@@ -172,6 +172,6 @@ function inputCls(hasError: boolean) {
     "disabled:opacity-40 disabled:cursor-not-allowed",
     hasError
       ? "bg-[rgba(254,101,79,0.08)] border border-[rgba(254,101,79,0.4)] focus:ring-[rgba(254,101,79,0.3)] focus:border-[rgba(254,101,79,0.5)]"
-      : "bg-[rgba(107,92,255,0.07)] border border-[rgba(107,92,255,0.22)] focus:ring-[rgba(107,92,255,0.2)] focus:border-[rgba(107,92,255,0.5)]",
+      : "bg-[rgba(124,58,237,0.07)] border border-[rgba(124,58,237,0.22)] focus:ring-[rgba(124,58,237,0.2)] focus:border-[rgba(124,58,237,0.5)]",
   ].join(" ");
 }

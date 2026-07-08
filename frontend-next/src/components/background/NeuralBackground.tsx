@@ -18,8 +18,8 @@ function resolveConfig() {
 // ─── RIWI palette ──────────────────────────────────────────────────────────
 
 const PALETTE = [
-  { c: new THREE.Color("#6B5CFF"), weight: 0.60 }, // primary  — 60 %
-  { c: new THREE.Color("#EAA2FC"), weight: 0.88 }, // secondary — 28 %
+  { c: new THREE.Color("#7c3aed"), weight: 0.60 }, // primary  — 60 %
+  { c: new THREE.Color("#c084fc"), weight: 0.88 }, // secondary — 28 %
   { c: new THREE.Color("#5ACCA4"), weight: 0.98 }, // accent   — 10 %
   { c: new THREE.Color("#E6CA52"), weight: 1.00 }, // rare     —  2 %
 ];

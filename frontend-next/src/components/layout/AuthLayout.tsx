@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import AliceLogoMark from "@/components/ui/AliceLogoMark";
 
 interface AuthLayoutProps {
   title: string;
@@ -13,20 +12,19 @@ export default function AuthLayout({ title, subtitle, children }: AuthLayoutProp
       className="min-h-screen flex items-center justify-center p-4"
       style={{
         background: [
-          "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(107,92,255,0.18), transparent 60%)",
-          "#050816",
+          "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(124,58,237,0.22), transparent 60%)",
+          "#060311",
         ].join(", "),
       }}
     >
       <div className="w-full max-w-md">
         {/* Logo + heading */}
         <div className="text-center mb-8">
-          <div
-            className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5 shadow-lg"
-            style={{ background: "linear-gradient(135deg,#6B5CFF,#9c85ff)" }}
-          >
-            <AliceLogoMark />
-          </div>
+          <img
+            src="/logo.png"
+            alt="Alice logo"
+            className="mx-auto mb-5 w-20 h-20 object-contain"
+          />
           <h1 className="text-2xl font-bold" style={{ color: "#F9FAFC" }}>
             {title}
           </h1>
@@ -42,7 +40,7 @@ export default function AuthLayout({ title, subtitle, children }: AuthLayoutProp
           className="rounded-2xl p-7"
           style={{
             background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(107,92,255,0.2)",
+            border: "1px solid rgba(124,58,237,0.25)",
             backdropFilter: "blur(12px)",
           }}
         >

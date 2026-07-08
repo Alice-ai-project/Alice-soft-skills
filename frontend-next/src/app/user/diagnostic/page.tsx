@@ -59,7 +59,7 @@ function calculateResults(answers: Answers): DiagnosticResult {
 
 const LEVEL_STYLE: Record<ScoreLevel, { color: string; bg: string; border: string; bar: string }> = {
   Alta:      { color: "#5ACCA4", bg: "rgba(90,204,164,0.12)",  border: "rgba(90,204,164,0.3)",  bar: "#5ACCA4" },
-  Media:     { color: "#6B5CFF", bg: "rgba(107,92,255,0.12)", border: "rgba(107,92,255,0.3)",  bar: "#6B5CFF" },
+  Media:     { color: "#7c3aed", bg: "rgba(124,58,237,0.12)", border: "rgba(124,58,237,0.3)",  bar: "#7c3aed" },
   Baja:      { color: "#E6CA52", bg: "rgba(230,202,82,0.12)", border: "rgba(230,202,82,0.3)",  bar: "#E6CA52" },
   "Muy Baja":{ color: "#FE654F", bg: "rgba(254,101,79,0.12)", border: "rgba(254,101,79,0.3)",  bar: "#FE654F" },
 };
@@ -68,7 +68,7 @@ const LEVEL_STYLE: Record<ScoreLevel, { color: string; bg: string; border: strin
 
 const card: React.CSSProperties = {
   background:   "rgba(255,255,255,0.08)",
-  border:       "1px solid rgba(107,92,255,0.25)",
+  border:       "1px solid rgba(124,58,237,0.25)",
   borderRadius: 14,
 };
 
@@ -287,8 +287,8 @@ export default function DiagnosticPage() {
           <div
             className="p-5 rounded-2xl"
             style={{
-              background:   "rgba(107,92,255,0.1)",
-              border:       "1px solid rgba(107,92,255,0.25)",
+              background:   "rgba(124,58,237,0.1)",
+              border:       "1px solid rgba(124,58,237,0.25)",
               borderRadius: 16,
             }}
           >
@@ -310,7 +310,7 @@ export default function DiagnosticPage() {
                     <div className="flex items-center gap-3 min-w-0">
                       <span
                         className="w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center flex-shrink-0"
-                        style={{ background: "rgba(107,92,255,0.3)", color: "#c4b8ff" }}
+                        style={{ background: "rgba(124,58,237,0.3)", color: "#d8b4fe" }}
                       >
                         {i + 1}
                       </span>
@@ -327,7 +327,7 @@ export default function DiagnosticPage() {
                       <Link
                         href={`/user/courses/${courseIdx}`}
                         className="flex-shrink-0 px-3 py-1 rounded-lg text-xs font-semibold transition-all"
-                        style={{ background: "#6B5CFF", color: "#F9FAFC" }}
+                        style={{ background: "#7c3aed", color: "#F9FAFC" }}
                       >
                         Ver →
                       </Link>
@@ -347,8 +347,8 @@ export default function DiagnosticPage() {
             onClick={handleRestart}
             className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
             style={{
-              background: "rgba(107,92,255,0.1)",
-              border:     "1px solid rgba(107,92,255,0.25)",
+              background: "rgba(124,58,237,0.1)",
+              border:     "1px solid rgba(124,58,237,0.25)",
               color:      "rgba(249,250,252,0.75)",
             }}
           >
@@ -357,7 +357,7 @@ export default function DiagnosticPage() {
           <Link
             href="/user/roadmap"
             className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
-            style={{ background: "#6B5CFF", color: "#F9FAFC" }}
+            style={{ background: "#7c3aed", color: "#F9FAFC" }}
           >
             Ver mi roadmap →
           </Link>
@@ -369,6 +369,17 @@ export default function DiagnosticPage() {
   // ── Stepper view ─────────────────────────────────────────────────────────────
   return (
     <div className="max-w-2xl space-y-6">
+      <style>{`
+        .diag-option:not([data-selected="true"]):hover {
+          background: rgba(124,58,237,0.28) !important;
+          border-color: rgba(124,58,237,0.55) !important;
+          transform: translateX(4px);
+        }
+        .diag-option[data-selected="true"]:hover {
+          background: rgba(124,58,237,0.32) !important;
+          border-color: rgba(124,58,237,0.6) !important;
+        }
+      `}</style>
       <div>
         <h1 className="text-2xl font-bold" style={{ color: "#F9FAFC" }}>
           {DIAGNOSTICO_DATA.title}
@@ -391,8 +402,8 @@ export default function DiagnosticPage() {
               className="flex-1 h-1.5 rounded-full transition-all duration-300"
               style={{
                 background:
-                  i < step   ? "#6B5CFF" :
-                  i === step ? "rgba(107,92,255,0.45)" :
+                  i < step   ? "#7c3aed" :
+                  i === step ? "rgba(124,58,237,0.45)" :
                                "rgba(255,255,255,0.08)",
               }}
             />
@@ -404,8 +415,8 @@ export default function DiagnosticPage() {
       <div
         className="p-4 rounded-xl"
         style={{
-          background: "rgba(107,92,255,0.1)",
-          border:     "1px solid rgba(107,92,255,0.25)",
+          background: "rgba(124,58,237,0.1)",
+          border:     "1px solid rgba(124,58,237,0.25)",
           borderRadius: 14,
         }}
       >
@@ -430,16 +441,17 @@ export default function DiagnosticPage() {
                 {q.options.map((opt, oi) => (
                   <label
                     key={oi}
-                    className="flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-all duration-150"
+                    className="diag-option flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-all duration-150"
+                    data-selected={sel === oi}
                     style={
                       sel === oi
                         ? {
-                            background: "rgba(107,92,255,0.25)",
-                            border:     "1px solid rgba(107,92,255,0.5)",
+                            background: "rgba(124,58,237,0.25)",
+                            border:     "1px solid rgba(124,58,237,0.5)",
                           }
                         : {
                             background: "rgba(255,255,255,0.03)",
-                            border:     "1px solid rgba(107,92,255,0.12)",
+                            border:     "1px solid rgba(124,58,237,0.12)",
                           }
                     }
                   >
@@ -450,7 +462,7 @@ export default function DiagnosticPage() {
                       checked={sel === oi}
                       onChange={() => handleAnswer(qi, oi)}
                       className="mt-0.5 flex-shrink-0"
-                      style={{ accentColor: "#6B5CFF" }}
+                      style={{ accentColor: "#7c3aed" }}
                     />
                     <span className="text-sm leading-relaxed" style={{ color: "rgba(249,250,252,0.8)" }}>
                       {opt}
@@ -484,8 +496,8 @@ export default function DiagnosticPage() {
             onClick={handlePrev}
             className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
             style={{
-              background: "rgba(107,92,255,0.1)",
-              border:     "1px solid rgba(107,92,255,0.25)",
+              background: "rgba(124,58,237,0.1)",
+              border:     "1px solid rgba(124,58,237,0.25)",
               color:      "rgba(249,250,252,0.75)",
             }}
           >
@@ -495,7 +507,7 @@ export default function DiagnosticPage() {
         <button
           onClick={handleNext}
           className="ml-auto px-6 py-2 rounded-lg text-sm font-semibold transition-all"
-          style={{ background: "#6B5CFF", color: "#F9FAFC" }}
+          style={{ background: "#7c3aed", color: "#F9FAFC" }}
         >
           {step === totalSteps - 1 ? "Ver resultados" : "Siguiente →"}
         </button>

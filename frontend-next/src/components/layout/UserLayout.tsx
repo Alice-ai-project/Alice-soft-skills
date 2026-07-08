@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState, type ReactNode } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import BackgroundWrapper from "@/components/background/BackgroundWrapper";
-import AliceLogoMark from "@/components/ui/AliceLogoMark";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -117,6 +116,18 @@ export default function UserLayout({ children }: { children: ReactNode }) {
 
   return (
     <>
+      <style>{`
+        .sidebar-nav-item:not([data-active="true"]):hover {
+          background: rgba(124,58,237,0.18) !important;
+          color: rgba(255,255,255,0.9) !important;
+          border-left-color: rgba(124,58,237,0.55) !important;
+        }
+        .sidebar-nav-item[data-active="true"]:hover {
+          background: rgba(124,58,237,0.32) !important;
+          box-shadow: inset 0 0 24px rgba(124,58,237,0.14) !important;
+        }
+      `}</style>
+
       {/* Layer 1 — neural canvas, z-0 */}
       <BackgroundWrapper />
 
@@ -128,7 +139,7 @@ export default function UserLayout({ children }: { children: ReactNode }) {
           inset:         0,
           zIndex:        1,
           pointerEvents: "none",
-          background:    "rgba(9,11,28,0.72)",
+          background:    "rgba(6,3,17,0.72)",
         }}
       />
 
@@ -152,21 +163,20 @@ export default function UserLayout({ children }: { children: ReactNode }) {
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{
-          background: "#0E1240",
-          borderRight: "1px solid rgba(107,92,255,0.2)",
+          background: "#0a0418",
+          borderRight: "1px solid rgba(124,58,237,0.2)",
         }}
       >
         {/* Logo */}
         <div
           className="h-16 flex items-center gap-2.5 px-5 flex-shrink-0"
-          style={{ borderBottom: "1px solid rgba(107,92,255,0.15)" }}
+          style={{ borderBottom: "1px solid rgba(124,58,237,0.15)" }}
         >
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center shadow"
-            style={{ background: "linear-gradient(135deg,#6B5CFF,#9c85ff)" }}
-          >
-            <AliceLogoMark />
-          </div>
+          <img
+            src="/logo.png"
+            alt="Alice logo"
+            className="w-8 h-8 rounded-lg object-contain"
+          />
           <div>
             <span className="text-base font-bold leading-none" style={{ color: "#F9FAFC" }}>
               Alice
@@ -186,16 +196,17 @@ export default function UserLayout({ children }: { children: ReactNode }) {
                 key={item.href}
                 href={item.href}
                 onClick={() => setSidebarOpen(false)}
-                className="flex items-center gap-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150"
+                className="sidebar-nav-item flex items-center gap-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150"
+                data-active={active}
                 style={
                   active
                     ? {
-                        background: "rgba(107,92,255,0.2)",
-                        color: "#c4b8ff",
-                        borderLeft: "3px solid #6B5CFF",
+                        background: "rgba(124,58,237,0.22)",
+                        color: "#d8b4fe",
+                        borderLeft: "3px solid #7c3aed",
                         paddingLeft: 12,
                         paddingRight: 12,
-                        boxShadow: "inset 0 0 20px rgba(107,92,255,0.08)",
+                        boxShadow: "inset 0 0 20px rgba(124,58,237,0.08)",
                       }
                     : {
                         color: "rgba(249,250,252,0.5)",
@@ -215,14 +226,14 @@ export default function UserLayout({ children }: { children: ReactNode }) {
         {/* User + logout */}
         <div
           className="p-4 flex-shrink-0"
-          style={{ borderTop: "1px solid rgba(107,92,255,0.12)" }}
+          style={{ borderTop: "1px solid rgba(124,58,237,0.12)" }}
         >
           <div className="flex items-center gap-3 mb-3">
             <div
               className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-              style={{ background: "rgba(107,92,255,0.25)" }}
+              style={{ background: "rgba(124,58,237,0.28)" }}
             >
-              <span className="text-sm font-bold" style={{ color: "#c4b8ff" }}>
+              <span className="text-sm font-bold" style={{ color: "#d8b4fe" }}>
                 {avatar}
               </span>
             </div>
@@ -257,13 +268,13 @@ export default function UserLayout({ children }: { children: ReactNode }) {
         <header
           className="h-16 flex items-center px-4 gap-4 md:hidden flex-shrink-0"
           style={{
-            background: "#0E1240",
-            borderBottom: "1px solid rgba(107,92,255,0.2)",
+            background: "#0a0418",
+            borderBottom: "1px solid rgba(124,58,237,0.2)",
           }}
         >
           <button
             onClick={() => setSidebarOpen(true)}
-            className="p-1.5 rounded-lg transition-colors hover:bg-[rgba(107,92,255,0.12)]"
+            className="p-1.5 rounded-lg transition-colors hover:bg-[rgba(124,58,237,0.12)]"
             style={{ color: "rgba(249,250,252,0.65)" }}
             aria-label="Abrir menú"
           >
@@ -272,12 +283,11 @@ export default function UserLayout({ children }: { children: ReactNode }) {
             </svg>
           </button>
           <div className="flex items-center gap-2">
-            <div
-              className="w-7 h-7 rounded-md flex items-center justify-center"
-              style={{ background: "linear-gradient(135deg,#6B5CFF,#9c85ff)" }}
-            >
-              <AliceLogoMark />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Alice logo"
+              className="w-7 h-7 rounded-md object-contain"
+            />
             <span className="text-base font-bold" style={{ color: "#F9FAFC" }}>Alice</span>
           </div>
         </header>

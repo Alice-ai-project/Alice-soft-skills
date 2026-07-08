@@ -29,7 +29,7 @@ const RESOURCES = [
 
 const card: React.CSSProperties = {
   background:   "rgba(255,255,255,0.08)",
-  border:       "1px solid rgba(107,92,255,0.25)",
+  border:       "1px solid rgba(124,58,237,0.25)",
   borderRadius: 14,
   transition:   "border-color 0.15s, box-shadow 0.15s",
 };
@@ -65,7 +65,7 @@ export default function ResourcesPage() {
                   (e.currentTarget as HTMLElement).style.boxShadow   = "0 0 20px rgba(254,101,79,0.08)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(107,92,255,0.25)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(124,58,237,0.25)";
                   (e.currentTarget as HTMLElement).style.boxShadow   = "none";
                 }}
               >
@@ -115,11 +115,11 @@ export default function ResourcesPage() {
               className="group flex items-start gap-4 p-4"
               style={card}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(107,92,255,0.45)";
-                (e.currentTarget as HTMLElement).style.boxShadow   = "0 0 20px rgba(107,92,255,0.08)";
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(124,58,237,0.45)";
+                (e.currentTarget as HTMLElement).style.boxShadow   = "0 0 20px rgba(124,58,237,0.08)";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(107,92,255,0.25)";
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(124,58,237,0.25)";
                 (e.currentTarget as HTMLElement).style.boxShadow   = "none";
               }}
             >
@@ -154,7 +154,7 @@ export default function ResourcesPage() {
               {/* Download arrow */}
               <svg
                 className="w-4 h-4 flex-shrink-0 self-center"
-                style={{ color: "rgba(107,92,255,0.5)" }}
+                style={{ color: "rgba(124,58,237,0.5)" }}
                 fill="none" viewBox="0 0 24 24" stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}

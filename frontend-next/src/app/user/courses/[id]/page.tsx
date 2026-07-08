@@ -8,7 +8,7 @@ import type { CourseEvaluation } from "@/types/courses";
 
 const card: React.CSSProperties = {
   background:   "rgba(255,255,255,0.08)",
-  border:       "1px solid rgba(107,92,255,0.25)",
+  border:       "1px solid rgba(124,58,237,0.25)",
   borderRadius: 14,
 };
 
@@ -61,14 +61,14 @@ function EvaluationQuiz({ evaluation }: { evaluation: CourseEvaluation }) {
                   optStyle  = { background: "rgba(254,101,79,0.1)", border: "1px solid rgba(254,101,79,0.4)" };
                   textColor = "#FE654F";
                 } else {
-                  optStyle  = { background: "rgba(255,255,255,0.02)", border: "1px solid rgba(107,92,255,0.08)", opacity: 0.45 };
+                  optStyle  = { background: "rgba(255,255,255,0.02)", border: "1px solid rgba(124,58,237,0.08)", opacity: 0.45 };
                   textColor = "rgba(249,250,252,0.55)";
                 }
               } else {
                 optStyle  = isSelected
-                  ? { background: "rgba(107,92,255,0.25)", border: "1px solid rgba(107,92,255,0.5)" }
-                  : { background: "rgba(255,255,255,0.03)", border: "1px solid rgba(107,92,255,0.12)" };
-                textColor = isSelected ? "#c4b8ff" : "rgba(249,250,252,0.75)";
+                  ? { background: "rgba(124,58,237,0.25)", border: "1px solid rgba(124,58,237,0.5)" }
+                  : { background: "rgba(255,255,255,0.03)", border: "1px solid rgba(124,58,237,0.12)" };
+                textColor = isSelected ? "#d8b4fe" : "rgba(249,250,252,0.75)";
               }
 
               return (
@@ -84,7 +84,7 @@ function EvaluationQuiz({ evaluation }: { evaluation: CourseEvaluation }) {
                     checked={isSelected}
                     onChange={() => !submitted && setSelected((p) => ({ ...p, [qi]: oi }))}
                     disabled={submitted}
-                    className="mt-0.5 flex-shrink-0 accent-[#6B5CFF]"
+                    className="mt-0.5 flex-shrink-0 accent-[#7c3aed]"
                   />
                   <span className="text-sm" style={{ color: textColor }}>{opt}</span>
                 </label>
@@ -111,7 +111,7 @@ function EvaluationQuiz({ evaluation }: { evaluation: CourseEvaluation }) {
         <button
           onClick={handleSubmit}
           className="px-6 py-2 rounded-lg text-sm font-semibold transition-opacity hover:opacity-85"
-          style={{ background: "#6B5CFF", color: "#F9FAFC" }}
+          style={{ background: "#7c3aed", color: "#F9FAFC" }}
         >
           Enviar evaluación
         </button>
@@ -136,8 +136,8 @@ function EvaluationQuiz({ evaluation }: { evaluation: CourseEvaluation }) {
             onClick={handleReset}
             className="px-4 py-2 rounded-lg text-sm font-medium transition-opacity hover:opacity-75"
             style={{
-              background: "rgba(107,92,255,0.1)",
-              border:     "1px solid rgba(107,92,255,0.25)",
+              background: "rgba(124,58,237,0.1)",
+              border:     "1px solid rgba(124,58,237,0.25)",
               color:      "rgba(249,250,252,0.75)",
             }}
           >
@@ -163,7 +163,7 @@ export default function CourseDetailPage() {
         <Link
           href="/user/courses"
           className="text-sm mt-3 inline-block"
-          style={{ color: "#6B5CFF" }}
+          style={{ color: "#7c3aed" }}
         >
           ← Volver a cursos
         </Link>
@@ -180,7 +180,7 @@ export default function CourseDetailPage() {
       <nav className="flex items-center gap-2 text-sm" style={{ color: "rgba(249,250,252,0.38)" }}>
         <Link
           href="/user/courses"
-          className="transition-colors hover:text-[#6B5CFF]"
+          className="transition-colors hover:text-[#7c3aed]"
         >
           Cursos
         </Link>
@@ -205,7 +205,7 @@ export default function CourseDetailPage() {
               router.push("/user/chat");
             }}
             className="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-opacity hover:opacity-85"
-            style={{ background: "#6B5CFF", color: "#F9FAFC" }}
+            style={{ background: "#7c3aed", color: "#F9FAFC" }}
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -225,7 +225,7 @@ export default function CourseDetailPage() {
           {course.content.sections.map((sec, i) => (
             <details
               key={i}
-              className="rounded-xl group open:border-[rgba(107,92,255,0.35)]"
+              className="rounded-xl group open:border-[rgba(124,58,237,0.35)]"
               style={card}
             >
               <summary
@@ -235,7 +235,7 @@ export default function CourseDetailPage() {
                 <span>{sec.heading}</span>
                 <svg
                   className="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-180"
-                  style={{ color: "rgba(107,92,255,0.6)" }}
+                  style={{ color: "rgba(124,58,237,0.6)" }}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -245,7 +245,7 @@ export default function CourseDetailPage() {
               </summary>
               <div
                 className="px-4 pb-4 pt-3"
-                style={{ borderTop: "1px solid rgba(107,92,255,0.12)" }}
+                style={{ borderTop: "1px solid rgba(124,58,237,0.12)" }}
               >
                 <p className="text-sm leading-relaxed" style={{ color: "rgba(249,250,252,0.6)" }}>
                   {sec.text}
@@ -266,10 +266,10 @@ export default function CourseDetailPage() {
             {course.resources.map((res, i) => {
               const href = res.url ?? (res.file ? `/docs/${res.file}` : null);
               const isPdf = res.type === "pdf";
-              const accentColor = isPdf ? "#FE654F" : "#6B5CFF";
+              const accentColor = isPdf ? "#FE654F" : "#7c3aed";
               const iconBg = isPdf
                 ? { background: "rgba(254,101,79,0.12)", border: "1px solid rgba(254,101,79,0.25)" }
-                : { background: "rgba(107,92,255,0.12)", border: "1px solid rgba(107,92,255,0.25)" };
+                : { background: "rgba(124,58,237,0.12)", border: "1px solid rgba(124,58,237,0.25)" };
 
               const inner = (
                 <>
@@ -314,7 +314,7 @@ export default function CourseDetailPage() {
                     (e.currentTarget as HTMLElement).style.boxShadow   = `0 0 16px ${accentColor}12`;
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(107,92,255,0.25)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(124,58,237,0.25)";
                     (e.currentTarget as HTMLElement).style.boxShadow   = "none";
                   }}
                 >

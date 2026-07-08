@@ -13,16 +13,16 @@ import { useAuth } from "@/contexts/AuthContext";
 // RIWI-palette level styles
 const LEVEL_STYLE: Record<string, { color: string; bg: string; border: string }> = {
   Alta:      { color: "#5ACCA4", bg: "rgba(90,204,164,0.12)",  border: "rgba(90,204,164,0.3)"  },
-  Media:     { color: "#6B5CFF", bg: "rgba(107,92,255,0.12)", border: "rgba(107,92,255,0.3)"  },
+  Media:     { color: "#7c3aed", bg: "rgba(124,58,237,0.12)", border: "rgba(124,58,237,0.3)"  },
   Baja:      { color: "#E6CA52", bg: "rgba(230,202,82,0.12)", border: "rgba(230,202,82,0.3)"  },
   "Muy Baja":{ color: "#FE654F", bg: "rgba(254,101,79,0.12)", border: "rgba(254,101,79,0.3)"  },
 };
 
-const STEP_COLORS = ["#6B5CFF","#5ACCA4","#EAA2FC","#FE654F","#E6CA52","#6B5CFF"];
+const STEP_COLORS = ["#7c3aed","#5ACCA4","#c084fc","#FE654F","#E6CA52","#7c3aed"];
 
 const card: React.CSSProperties = {
   background:   "rgba(255,255,255,0.08)",
-  border:       "1px solid rgba(107,92,255,0.25)",
+  border:       "1px solid rgba(124,58,237,0.25)",
   borderRadius: 16,
 };
 
@@ -89,7 +89,7 @@ export default function RoadmapPage() {
           <Link
             href="/user/diagnostic"
             className="mt-6 px-5 py-2 rounded-lg text-sm font-semibold transition-all"
-            style={{ background: "#6B5CFF", color: "#F9FAFC" }}
+            style={{ background: "#7c3aed", color: "#F9FAFC" }}
           >
             Realizar diagnóstico →
           </Link>
@@ -159,7 +159,7 @@ export default function RoadmapPage() {
           {/* Vertical connector */}
           <div
             className="absolute left-3 top-3 bottom-3 w-px"
-            style={{ background: "rgba(107,92,255,0.25)" }}
+            style={{ background: "rgba(124,58,237,0.25)" }}
           />
 
           {result.recommendedCourses.map((rec, i) => {
@@ -191,9 +191,9 @@ export default function RoadmapPage() {
                         href={`/user/courses/${courseIdx}`}
                         className="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
                         style={{
-                          background: "rgba(107,92,255,0.25)",
-                          color:      "#c4b8ff",
-                          border:     "1px solid rgba(107,92,255,0.3)",
+                          background: "rgba(124,58,237,0.25)",
+              color:      "#d8b4fe",
+              border:     "1px solid rgba(124,58,237,0.3)",
                         }}
                       >
                         Ver curso →
@@ -211,27 +211,27 @@ export default function RoadmapPage() {
       <div
         className="flex items-center gap-6 p-4 rounded-2xl"
         style={{
-          background: "rgba(107,92,255,0.1)",
-          border:     "1px solid rgba(107,92,255,0.25)",
+          background: "rgba(124,58,237,0.1)",
+          border:     "1px solid rgba(124,58,237,0.25)",
           borderRadius: 16,
         }}
       >
         <div className="text-center">
-          <p className="text-2xl font-bold" style={{ color: "#6B5CFF" }}>
+          <p className="text-2xl font-bold" style={{ color: "#7c3aed" }}>
             {result.recommendedCourses.length}
           </p>
           <p className="text-xs mt-0.5" style={{ color: "rgba(249,250,252,0.45)" }}>cursos</p>
         </div>
-        <div className="w-px h-10" style={{ background: "rgba(107,92,255,0.3)" }} />
+        <div className="w-px h-10" style={{ background: "rgba(124,58,237,0.3)" }} />
         <div className="text-center">
-          <p className="text-2xl font-bold" style={{ color: "#6B5CFF" }}>
+          <p className="text-2xl font-bold" style={{ color: "#7c3aed" }}>
             {result.recommendedCourses.length * 2}
           </p>
           <p className="text-xs mt-0.5" style={{ color: "rgba(249,250,252,0.45)" }}>
             semanas estimadas
           </p>
         </div>
-        <div className="w-px h-10" style={{ background: "rgba(107,92,255,0.3)" }} />
+        <div className="w-px h-10" style={{ background: "rgba(124,58,237,0.3)" }} />
         <p className="text-xs leading-relaxed flex-1" style={{ color: "rgba(249,250,252,0.5)" }}>
           Completa estos cursos a tu propio ritmo para fortalecer tus habilidades socioemocionales.
         </p>
@@ -242,7 +242,7 @@ export default function RoadmapPage() {
         <Link
           href="/user/courses"
           className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
-          style={{ background: "#6B5CFF", color: "#F9FAFC" }}
+          style={{ background: "#7c3aed", color: "#F9FAFC" }}
         >
           Explorar todos los cursos
         </Link>
@@ -251,8 +251,8 @@ export default function RoadmapPage() {
           disabled={regenerating}
           className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
           style={{
-            background: regenerating ? "rgba(107,92,255,0.05)" : "rgba(107,92,255,0.1)",
-            border:     "1px solid rgba(107,92,255,0.25)",
+            background: regenerating ? "rgba(124,58,237,0.05)" : "rgba(124,58,237,0.1)",
+            border:     "1px solid rgba(124,58,237,0.25)",
             color:      regenerating ? "rgba(249,250,252,0.3)" : "rgba(249,250,252,0.75)",
             cursor:     regenerating ? "not-allowed" : "pointer",
           }}
@@ -263,8 +263,8 @@ export default function RoadmapPage() {
           href="/user/diagnostic"
           className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
           style={{
-            background: "rgba(107,92,255,0.1)",
-            border:     "1px solid rgba(107,92,255,0.25)",
+            background: "rgba(124,58,237,0.1)",
+            border:     "1px solid rgba(124,58,237,0.25)",
             color:      "rgba(249,250,252,0.75)",
           }}
         >

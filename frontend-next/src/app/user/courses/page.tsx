@@ -16,14 +16,14 @@ const COURSE_EMOJIS: Record<string, string> = {
 };
 
 const ACCENTS = [
-  { color: "#6B5CFF", bg: "rgba(107,92,255,0.14)" },
+  { color: "#7c3aed", bg: "rgba(124,58,237,0.14)" },
   { color: "#5ACCA4", bg: "rgba(90,204,164,0.12)"  },
-  { color: "#EAA2FC", bg: "rgba(234,162,252,0.12)" },
+  { color: "#c084fc", bg: "rgba(192,132,252,0.12)" },
   { color: "#FE654F", bg: "rgba(254,101,79,0.12)"  },
   { color: "#E6CA52", bg: "rgba(230,202,82,0.12)"  },
-  { color: "#6B5CFF", bg: "rgba(107,92,255,0.14)" },
+  { color: "#7c3aed", bg: "rgba(124,58,237,0.14)" },
   { color: "#5ACCA4", bg: "rgba(90,204,164,0.12)"  },
-  { color: "#EAA2FC", bg: "rgba(234,162,252,0.12)" },
+  { color: "#c084fc", bg: "rgba(192,132,252,0.12)" },
   { color: "#FE654F", bg: "rgba(254,101,79,0.12)"  },
   { color: "#E6CA52", bg: "rgba(230,202,82,0.12)"  },
 ];

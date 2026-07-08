@@ -6,13 +6,13 @@
 
 /* RIWI design tokens */
 :root {
-  --bg:     #181E4B;   /* Space Cadet — primary background */
-  --accent: #6B5CFF;   /* Slate Blue  — primary accent     */
+  --bg:     #0d0628;   /* Deep purple — primary background     */
+  --accent: #7c3aed;   /* Vibrant purple — primary accent      */
   --mint:   #5ACCA4;
-  --mauve:  #EAA2FC;
+  --mauve:  #c084fc;
   --tomato: #FE654F;
   --yellow: #E6CA52;
-  --text:   #F9FAFC;
+  --text:   #FFFFFF;
 }
 
 body {

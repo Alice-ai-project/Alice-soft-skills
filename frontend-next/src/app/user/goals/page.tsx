@@ -7,9 +7,9 @@ const GOALS = [
     target:  3,
     unit:    "cursos",
     icon:    "📚",
-    color:   "#6B5CFF",
-    bg:      "rgba(107,92,255,0.14)",
-    barBg:   "rgba(107,92,255,0.12)",
+    color:   "#7c3aed",
+    bg:      "rgba(124,58,237,0.14)",
+    barBg:   "rgba(124,58,237,0.12)",
   },
   {
     title:   "Dedicar 5 horas semanales al aprendizaje",
@@ -35,7 +35,7 @@ const GOALS = [
 
 const card: React.CSSProperties = {
   background:   "rgba(255,255,255,0.08)",
-  border:       "1px solid rgba(107,92,255,0.25)",
+  border:       "1px solid rgba(124,58,237,0.25)",
   borderRadius: 16,
 };
 
@@ -113,8 +113,8 @@ export default function GoalsPage() {
       <div
         className="p-5 rounded-2xl"
         style={{
-          background: "rgba(107,92,255,0.1)",
-          border:     "1px solid rgba(107,92,255,0.25)",
+          background: "rgba(124,58,237,0.1)",
+          border:     "1px solid rgba(124,58,237,0.25)",
           borderRadius: 16,
         }}
       >

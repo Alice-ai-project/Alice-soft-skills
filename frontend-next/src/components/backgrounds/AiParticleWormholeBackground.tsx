@@ -32,10 +32,10 @@ import * as THREE from "three";
 // ─── Tunable constants ────────────────────────────────────────────────────────
 
 const COLORS = {
-  blue:   "#6B5CFF",  // Slate Blue  — main energy stream
-  mint:   "#5ACCA4",  // Mint        — secondary stream
-  mauve:  "#EAA2FC",  // Mauve       — inner filaments
-  white:  "#FFFFFF",  // White       — bright tip sparks
+  blue:   "#7c3aed",  // Vibrant purple — main energy stream
+  mint:   "#5ACCA4",  // Mint           — secondary stream
+  mauve:  "#c084fc",  // Light purple   — inner filaments
+  white:  "#FFFFFF",  // White          — bright tip sparks
   yellow: "#E6CA52",  // Arylide Yellow — micro warm sparks (very subtle)
 };
 
@@ -338,10 +338,10 @@ export default function AiParticleWormholeBackground() {
       style={{
         // CSS gradient base — visible through the transparent canvas
         background: [
-          "radial-gradient(ellipse 75% 55% at 50% 47%, rgba(107,92,255,0.20), transparent 65%)",
+          "radial-gradient(ellipse 75% 55% at 50% 47%, rgba(124,58,237,0.22), transparent 65%)",
           "radial-gradient(ellipse 48% 42% at 26% 56%, rgba(90,204,164,0.11), transparent 60%)",
-          "radial-gradient(ellipse 48% 42% at 74% 56%, rgba(234,162,252,0.11), transparent 60%)",
-          "#050816",
+          "radial-gradient(ellipse 48% 42% at 74% 56%, rgba(192,132,252,0.11), transparent 60%)",
+          "#060311",
         ].join(", "),
       }}
     >

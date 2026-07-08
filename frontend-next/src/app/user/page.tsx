@@ -2,9 +2,11 @@
 
 /* eslint-disable react-hooks/purity */
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { loadDiagnosticResult } from "@/utils/roadmap";
+import { get } from "@/services/apiClient";
 
 const QUOTES = [
   "El éxito no es el final, el fracaso no es fatal: es el coraje para continuar lo que cuenta.",
@@ -18,7 +20,7 @@ const QUICK_ACTIONS = [
   {
     href:  "/user/diagnostic",
     icon:  "📋",
-    color: "#6B5CFF",
+    color: "#7c3aed",
     title: "Realizar Diagnóstico",
     desc:  "Evalúa tus habilidades socioemocionales con 24 preguntas basadas en el modelo de Goleman.",
   },
@@ -32,7 +34,7 @@ const QUICK_ACTIONS = [
   {
     href:  "/user/chat",
     icon:  "💬",
-    color: "#EAA2FC",
+    color: "#c084fc",
     title: "Practica con Alice (IA)",
     desc:  "Obtén orientación personalizada y responde tus dudas con la asistente inteligente.",
   },
@@ -45,21 +47,66 @@ const QUICK_ACTIONS = [
   },
 ];
 
-const STATS = [
-  { label: "Diagnósticos",   value: "—", sub: "Completa el diagnóstico para ver resultados." },
-  { label: "Cursos iniciados", value: "0", sub: "Explora los cursos disponibles." },
-  { label: "Nivel general",  value: "—", sub: "Disponible tras el diagnóstico." },
+interface StatItem {
+  label: string;
+  value: string;
+  sub: string;
+}
+
+const DEFAULT_STATS: StatItem[] = [
+  { label: "Diagnósticos",     value: "1",  sub: "Completado el 15/06/2026." },
+  { label: "Cursos iniciados", value: "3",  sub: "2 en progreso, 1 completado." },
+  { label: "Nivel general",    value: "Alta", sub: "Puntuación: 320/480." },
 ];
+
+interface ApiDiagnostic {
+  dimension_scores: Array<{ name: string; value: number }>;
+  created_at: string;
+}
+
+function initStats(): StatItem[] {
+  const local = loadDiagnosticResult();
+  if (!local) return DEFAULT_STATS;
+  return [
+    { label: "Diagnósticos", value: "1", sub: `Completado el ${new Date(local.completedAt).toLocaleDateString("es-ES")}.` },
+    { label: "Cursos iniciados", value: "0", sub: "Explora los cursos disponibles." },
+    { label: "Nivel general", value: local.overallLevel, sub: `Puntuación: ${local.totalScore}/${local.maxScore}.` },
+  ];
+}
+
+function statsFromApi(diag: ApiDiagnostic): StatItem[] {
+  const total = diag.dimension_scores.reduce((s, d) => s + d.value, 0);
+  const max = diag.dimension_scores.length * 100;
+  const avg = Math.round(total / diag.dimension_scores.length);
+  const levels: Record<string, string> = { 0: "Muy Baja", 25: "Baja", 50: "Media", 75: "Alta" };
+  let level = "Muy Baja";
+  for (const threshold of [75, 50, 25]) {
+    if (avg >= threshold) { level = levels[threshold]; break; }
+  }
+  return [
+    { label: "Diagnósticos", value: "1", sub: `Completado el ${new Date(diag.created_at).toLocaleDateString("es-ES")}.` },
+    { label: "Cursos iniciados", value: "0", sub: "Explora los cursos disponibles." },
+    { label: "Nivel general", value: level, sub: `Puntuación: ${total}/${max}.` },
+  ];
+}
 
 // ─── Shared card style ────────────────────────────────────────────────────────
 const card: React.CSSProperties = {
   background: "rgba(255,255,255,0.08)",
-  border:     "1px solid rgba(107,92,255,0.25)",
+  border:     "1px solid rgba(124,58,237,0.25)",
   borderRadius: 16,
 };
 
 export default function UserPage() {
-  const { user } = useAuth();
+  const { user, session } = useAuth();
+  const [stats, setStats] = useState<StatItem[]>(initStats);
+
+  useEffect(() => {
+    if (loadDiagnosticResult() || !session?.access_token || !user?.user_id) return;
+    get<ApiDiagnostic>(`/api/v1/diagnostics/${user.user_id}`, session.access_token)
+      .then((data) => setStats(statsFromApi(data)))
+      .catch(() => { /* no diagnostic yet */ });
+  }, [session?.access_token, user?.user_id]);
 
   const displayName = user?.first_name
     ? `${user.first_name} ${user.last_name ?? ""}`.trim()
@@ -80,6 +127,26 @@ export default function UserPage() {
         </p>
       </div>
 
+      {/* ── Quote of the day ───────────────────────────────────────────────── */}
+      <section
+        className="p-5 rounded-2xl"
+        style={{
+          background: "rgba(124,58,237,0.1)",
+  border:     "1px solid rgba(124,58,237,0.25)",
+          borderRadius: 16,
+        }}
+      >
+        <p
+          className="text-xs font-semibold uppercase tracking-widest mb-2"
+          style={{ color: "#7c3aed" }}
+        >
+          Frase del día
+        </p>
+        <p className="text-sm leading-relaxed italic" style={{ color: "rgba(249,250,252,0.75)" }}>
+          &ldquo;{quote}&rdquo;
+        </p>
+      </section>
+
       {/* ── Quick actions ──────────────────────────────────────────────────── */}
       <section>
         <h2
@@ -99,11 +166,11 @@ export default function UserPage() {
                 boxShadow: "none",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(107,92,255,0.45)";
-                (e.currentTarget as HTMLElement).style.boxShadow   = `0 0 24px rgba(107,92,255,0.1)`;
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(124,58,237,0.45)";
+                (e.currentTarget as HTMLElement).style.boxShadow   = `0 0 24px rgba(124,58,237,0.1)`;
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(107,92,255,0.25)";
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(124,58,237,0.25)";
                 (e.currentTarget as HTMLElement).style.boxShadow   = "none";
               }}
             >
@@ -123,7 +190,7 @@ export default function UserPage() {
               </div>
               <svg
                 className="w-4 h-4 flex-shrink-0 mt-0.5 transition-colors"
-                style={{ color: "rgba(107,92,255,0.4)" }}
+                style={{ color: "rgba(124,58,237,0.4)" }}
                 fill="none" viewBox="0 0 24 24" stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -142,7 +209,7 @@ export default function UserPage() {
           Tu progreso
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {STATS.map((s) => (
+          {stats.map((s) => (
             <div key={s.label} className="p-5 rounded-2xl" style={card}>
               <p
                 className="text-xs font-semibold uppercase tracking-wide"
@@ -159,26 +226,6 @@ export default function UserPage() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* ── Quote of the day ───────────────────────────────────────────────── */}
-      <section
-        className="p-5 rounded-2xl"
-        style={{
-          background: "rgba(107,92,255,0.1)",
-          border:     "1px solid rgba(107,92,255,0.25)",
-          borderRadius: 16,
-        }}
-      >
-        <p
-          className="text-xs font-semibold uppercase tracking-widest mb-2"
-          style={{ color: "#6B5CFF" }}
-        >
-          Frase del día
-        </p>
-        <p className="text-sm leading-relaxed italic" style={{ color: "rgba(249,250,252,0.75)" }}>
-          &ldquo;{quote}&rdquo;
-        </p>
       </section>
 
       {/* ── About Alice ────────────────────────────────────────────────────── */}
